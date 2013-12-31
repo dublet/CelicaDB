@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,15 +11,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +36,7 @@ public class CarFactory {
     private static Integer dbVersion = -1, correctionsVersion = -1;
     private static HashMap<String, List<CorrectableData<String>>> corrections = new HashMap<String, List<CorrectableData<String>>>();
 
-    private static final String CORRECTIONS_FILE = "_corrections.xml";
+    private static final String CORRECTIONS_FILE = "corrections.xml";
 
     public static CarFactory getInstance(Activity a) {
         _ctx = a;
@@ -237,7 +232,7 @@ public class CarFactory {
                 bis.close();
             }
             catch (IOException o) {
-                Log.e("Could not read _corrections", o.getMessage());
+                Log.e("Could not read corrections", o.getMessage());
             }
         }
     }
