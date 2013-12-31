@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="enable_imperial"
+        android:summary="Show Imperial measurement units?"
+        android:title="Enable Imperial"
+        android:defaultValue="false" />
+    <ListPreference
+	            android:key="decimal_places"
+	            android:title="Decimal places"
+	            android:summary="How many decimal places should there be in floating point numbers?"
+	            android:defaultValue="1"
+	            android:entries="@array/decimalPlaces"
+	            android:entryValues="@array/decimalPlaces"/>
+</PreferenceScreen>

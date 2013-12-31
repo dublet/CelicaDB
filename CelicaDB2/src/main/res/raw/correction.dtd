@@ -1,0 +1,9 @@
+<!DOCTYPE corrections [
+    <!ELEMENT corrections (version, correction+)>
+    <!ELEMENT correction_of_model (modelcode, correction+)>
+    <!ELEMENT correction (element, orig, value)>
+    <!ELEMENT version (#PCDATA)>
+    <!ELEMENT modelcode (#PCDATA)>
+    <!ELEMENT element (#PCDATA)>
+    <!ELEMENT orig (#PCDATA)>
+    <!ELEMENT value (#PCDATA)>]>

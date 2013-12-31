@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:columnCount="2">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_economy_header"
+              style="?android:attr/textAppearanceLarge" android:layout_columnSpan="2"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_economy"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_economy_overall_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/economy_overall"/>
+    <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:id="@+id/car_detail_economy_overall"
+                                       android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_economy_city_label" android:textIsSelectable="false"
+              android:text="@string/economy_city"/>
+    <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
+                                      android:id="@+id/car_detail_economy_city"
+                                      android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_economy_motorway_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/economy_motorway"/>
+    <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
+                                      android:id="@+id/car_detail_economy_motorway"
+                                      android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+</GridLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/correction_view"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/element" android:text="@string/default_string"/>
+    <TextView android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/original" android:text="@string/default_zero"/>
+    <EditText android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/corrected" android:text="@string/default_zero"/>
+</LinearLayout>

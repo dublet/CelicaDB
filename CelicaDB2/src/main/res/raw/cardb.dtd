@@ -1,0 +1,112 @@
+<!DOCTYPE database [
+    <!ELEMENT database (version, car+)>
+    <!ELEMENT version (#PCDATA)>
+    <!ELEMENT car (name, picture_url*,
+        picture_resource_name*,  picture_big_resource_name*,
+        generation, modelcode, chassiscode?,
+        release_date?, decease_date?, comments?,
+        engine?, drivetrain?,
+        performance?, economy?, measurements?, brakes?, tyres?,
+        suspension?, links?)>
+    <!ATTLIST celica
+        id ID #IMPLIED
+        >
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT modelcode (#PCDATA)>
+    <!ELEMENT chassiscode (#PCDATA)>
+    <!ELEMENT picture_url (#PCDATA)>
+    <!ELEMENT picture_resource_name (#PCDATA)>
+    <!ELEMENT picture_big_resource_name (#PCDATA)>
+    <!ATTLIST picture_url
+        big CDATA #IMPLIED
+        >
+    <!ELEMENT generation (#PCDATA)>
+    <!ELEMENT release_date (#PCDATA)>
+    <!ELEMENT decease_date (#PCDATA)>
+    <!ELEMENT comments (#PCDATA)>
+    <!ELEMENT engine (code, aspiration?, cylinders?, valves_per_cylinder?,
+        displacement?, bore?, stroke?, compression_ratio?,
+        power_output?, power_revs?,
+        torque_output?, torque_revs?, fuel?, alternator?, battery?,
+        head_material?, block_material?, ignition?, cooling?,
+        cams?, cam_drive?, injection?)>
+    <!ELEMENT code (#PCDATA)>
+    <!ELEMENT aspiration (#PCDATA)>
+    <!ELEMENT cylinders (#PCDATA)>
+    <!ELEMENT valves_per_cylinder (#PCDATA)>
+    <!ELEMENT displacement (#PCDATA)>
+    <!ELEMENT bore (#PCDATA)>
+    <!ELEMENT stroke (#PCDATA)>
+    <!ELEMENT compression_ratio (#PCDATA)>
+    <!ELEMENT power_output (#PCDATA)>
+    <!ELEMENT power_revs (#PCDATA)>
+    <!ELEMENT torque_output (#PCDATA)>
+    <!ELEMENT torque_revs (#PCDATA)>
+    <!ELEMENT fuel (#PCDATA)>
+    <!ELEMENT alternator (#PCDATA)>
+    <!ELEMENT battery (#PCDATA)>
+    <!ELEMENT head_material (#PCDATA)>
+    <!ELEMENT block_material (#PCDATA)>
+    <!ELEMENT ignition (#PCDATA)>
+    <!ELEMENT cooling (#PCDATA)>
+    <!ELEMENT cams (#PCDATA)>
+    <!ELEMENT cam_drive (#PCDATA)>
+    <!ELEMENT injection (#PCDATA)>
+    <!ELEMENT drivetrain (transmission, gears, drive, gear_ratio_1?, gear_ratio_2?,
+        gear_ratio_3?, gear_ratio_4?, gear_ratio_5?,
+        gear_ratio_6?, gear_ratio_R?, final_drive?)>
+    <!ELEMENT transmission (#PCDATA)>
+    <!ELEMENT gears (#PCDATA)>
+    <!ELEMENT drive (#PCDATA)>
+    <!ELEMENT gear_ratio_1 (#PCDATA)>
+    <!ELEMENT gear_ratio_2 (#PCDATA)>
+    <!ELEMENT gear_ratio_3 (#PCDATA)>
+    <!ELEMENT gear_ratio_4 (#PCDATA)>
+    <!ELEMENT gear_ratio_5 (#PCDATA)>
+    <!ELEMENT gear_ratio_6 (#PCDATA)>
+    <!ELEMENT gear_ratio_R (#PCDATA)>
+    <!ELEMENT final_drive (#PCDATA)>
+    <!ELEMENT performance (top_speed?, acceleration?)>
+    <!ELEMENT top_speed (#PCDATA)>
+    <!ELEMENT acceleration (#PCDATA)>
+    <!ELEMENT economy (city?, motorway?, overall?)>
+    <!ELEMENT city (#PCDATA)>
+    <!ELEMENT motorway (#PCDATA)>
+    <!ELEMENT overall (#PCDATA)>
+    <!ELEMENT measurements (length?, width?, height?, wheel_base?, track_width_front?, track_width_rear?, mass?, fuel_capacity?, oil_capacity?, coolant_capacity?, drag_coefficient?, steering_wheel_rotations?)>
+    <!ELEMENT length (#PCDATA)>
+    <!ELEMENT width (#PCDATA)>
+    <!ELEMENT height (#PCDATA)>
+    <!ELEMENT wheel_base (#PCDATA)>
+    <!ELEMENT track_width_front (#PCDATA)>
+    <!ELEMENT track_width_rear (#PCDATA)>
+    <!ELEMENT mass (#PCDATA)>
+    <!ELEMENT fuel_capacity (#PCDATA)>
+    <!ELEMENT oil_capacity (#PCDATA)>
+    <!ELEMENT coolant_capacity (#PCDATA)>
+    <!ELEMENT drag_coefficient (#PCDATA)>
+    <!ELEMENT steering_wheel_rotations (#PCDATA)>
+    <!ELEMENT brakes (additional?, front?, rear?)>
+    <!ELEMENT additional (#PCDATA)>
+    <!ELEMENT front (#PCDATA)>
+    <!ELEMENT rear (#PCDATA)>
+    <!ELEMENT tyres (rim_size?, tyre_size?)>
+    <!ELEMENT rim_size (#PCDATA)>
+    <!ELEMENT tyre_size (#PCDATA)>
+    <!ELEMENT suspension (front_mount?, rear_mount?, shock_absorbers?, stabilisers?)>
+    <!ELEMENT front_mount (#PCDATA)>
+    <!ELEMENT rear_mount (#PCDATA)>
+    <!ELEMENT shock_absorbers (#PCDATA)>
+    <!ELEMENT stabilisers (#PCDATA)>
+    <!ELEMENT links (howto*, diagram*)>
+    <!ELEMENT howto (EMPTY)>
+    <!ATTLIST howto
+        title CDATA #REQUIRED
+        url CDATA #REQUIRED
+        >
+    <!ELEMENT diagram (EMPTY)>
+    <!ATTLIST diagram
+        title CDATA #REQUIRED
+        url CDATA #REQUIRED
+        >
+    ]>

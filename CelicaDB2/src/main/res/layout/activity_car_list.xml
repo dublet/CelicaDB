@@ -1,0 +1,10 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/car_list"
+          android:name="com.dublet.celicadb2.CarListFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="4dp"
+          android:layout_marginRight="4dp"
+          tools:context=".CarListActivity"
+          tools:layout="@android:layout/list_content" />

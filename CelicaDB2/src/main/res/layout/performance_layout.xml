@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:columnCount="2">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_header"
+              style="?android:attr/textAppearanceLarge" android:layout_columnSpan="2"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_performance"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_top_speed_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/performance_top_speed"/>
+    <com.dublet.celicadb2.widgets.SpeedView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_top_speed" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="16dp"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_zero2hundred_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/performance_zero_to_hundred"/>
+    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_zero2hundred" android:textIsSelectable="true" android:layout_marginLeft="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_zero" />
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_power_per_weight_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/performance_power_per_weight"/>
+    <com.dublet.celicadb2.widgets.PowerPerWeightView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_power_per_weight" android:layout_marginLeft="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_weight_per_torque_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/performance_weight_per_torque"/>
+    <com.dublet.celicadb2.widgets.WeightPerTorqueView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_performance_weight_per_torque" android:layout_marginLeft="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+</GridLayout>

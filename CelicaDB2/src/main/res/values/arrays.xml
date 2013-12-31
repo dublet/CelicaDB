@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="decimalPlaces">
+        <item name="2">2</item>
+        <item name="3">3</item>
+        <item name="4">4</item>
+        <item name="5">5</item>
+        <item name="6">6</item>
+    </string-array>
+    <string-array name="sortingOptions">
+        <item name="age">By age</item>
+        <item name="alpha">By name</item>
+        <item name="code">By model code</item>
+        <item name="top_speed">By top speed</item>
+        <item name="acceleration">By acceleration</item>
+        <item name="power_to_weight">By power to weight ratio</item>
+    </string-array>
+</resources>

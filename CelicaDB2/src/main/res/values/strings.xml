@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CelicaDB2</string>
+    <string name="title_car_detail">Car Detail</string>
+    <string name="about">An Android database about Toyota Celicas.\n\n
+ Code &#169;2013 Wouter Klouwen.\n\n
+
+Data sourced by many people, including:\n
+- Uncle Bob\n
+- 77 Liftback\n
+- Steven Cowan\n
+- Chris Gough\n
+- Chris Wood\n\n
+
+Application testing:\n\n
+- Mitch\n
+- Dave\n\n
+
+While every effort is made to ensure correctness of data, no liability will be accepted for incorrect data.\n\n
+
+Some images taken from Toyota brochures and are used under the Fair use clause of the local copyright legislation. </string>
+    <string name="build_number_label">Build number:</string>
+    <string name="changelog">Changes in build 7:\n
+Changes in build 6:\n
+- Improved layout for large screens.\n
+- Added built in changelog\n
+- Corrected aspiration for ST185\n
+- Restore previous selection on start up\n
+- Introduction of editing mode, you can now make corrections to certain data\n
+- Introduction of the What\'s new? dialog.\n
+- Added the Celica Ultimate\n\n
+
+Changes in build 5:\n
+- Improved layout for small screens.\n
+- Improved unit display of power per weight and weight per torque.\n
+- Added some bigger pictures for the TA64 TTE and MA40.\n\n
+
+Changes in build 4:\n
+- Add sorting capability\n
+- Layout improvements</string>
+    <string name="whats_new">What\'s new?</string>
+    <string name="got_it">Got it!</string>
+    <string name="bigger">TAP FOR BIGGER</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_pound">lb</string>
+    <string name="unit_bag_of_cement">cwt</string>
+    <string name="unit_metres">m</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_rods">rods</string>
+    <string name="unit_kmph">km/h</string>
+    <string name="unit_mph">mph</string>
+    <string name="unit_furlong_per_fortnight">f/f</string>
+
+
+    <string name="unit_hogshead">hh</string>
+    <string name="unit_litres">l</string>
+    <string name="unit_gallon_us">gal (US)</string>
+    <string name="unit_gallon_uk">gal (UK)</string>
+
+    <string name="header_brakes">Brakes</string>
+    <string name="header_drivetrain">Drivetrain</string>
+    <string name="header_economy">Economy</string>
+    <string name="header_engine">Engine</string>
+    <string name="header_measurements">Measurements</string>
+    <string name="header_performance">Performance</string>
+    <string name="header_suspension">Suspension</string>
+    <string name="header_tyres">Tyres</string>
+    <string name="header_about">About</string>
+    <string name="header_changelog">Changelog</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_edit_done">Done</string>
+    <string name="menu_corrections">Corrections</string>
+
+    <string name="brakes_front">Front</string>
+    <string name="brakes_rear">Rear</string>
+    <string name="brakes_additional">Additional</string>
+
+    <string name="performance_top_speed">Top speed</string>
+    <string name="performance_top_speed_unit">km/h</string>
+    <string name="performance_zero_to_hundred">0&#8211;100km/h</string>
+    <string name="performance_power_per_weight">Power per weight</string>
+    <string name="performance_power_per_weight_unit_metric">kW/tonne</string>
+    <string name="performance_power_per_weight_unit_imperial">bhp/ton</string>
+    <string name="performance_weight_per_torque">Weight per torque</string>
+    <string name="performance_weight_per_torque_unit_metric">kg/Nm</string>
+    <string name="performance_weight_per_torque_unit_imperial">lb/lb ft</string>
+
+    <string name="economy_overall">Overall</string>
+    <string name="economy_city">City</string>
+    <string name="economy_motorway">Motorway</string>
+
+    <string name="unit_lphkm">l/100km</string>
+    <string name="unit_mpg_us">mpg (US)</string>
+    <string name="unit_mpg_uk">mpg (UK)</string>
+    <string name="unit_hogshead_to_rod">rod/hh</string>
+
+    <string name="suspension_front">Front</string>
+    <string name="suspension_rear">Rear</string>
+    <string name="suspension_shock">Shock absorbers</string>
+    <string name="suspension_stabilisers">Stabilisers</string>
+
+    <string name="default_zero">0</string>
+    <string name="default_string">Test string</string>
+</resources>
+
+
+
+
+

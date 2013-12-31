@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_release_date"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:text="@string/default_zero"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_dates_dash"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
+              android:textIsSelectable="true" android:text="-"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_decease_date" 
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:text="@string/default_zero"/>
+</LinearLayout>

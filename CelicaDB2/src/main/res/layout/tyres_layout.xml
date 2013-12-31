@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_tyres_header"
+              style="?android:attr/textAppearanceLarge"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_tyres"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_tyres_rim_size_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_tyres_header"
+              android:text="Rim size     "/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_tyres_rim_size" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/car_detail_tyres_rim_size_label"
+              android:layout_alignBaseline="@id/car_detail_tyres_rim_size_label"
+
+              android:text="4.5"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_tyres_size_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_tyres_rim_size_label"
+              android:text="Tyre size"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_tyres_size" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/car_detail_tyres_size_label"
+              android:layout_alignBaseline="@id/car_detail_tyres_size_label"
+              android:layout_alignLeft="@id/car_detail_tyres_rim_size"
+              android:text="4.5"/>
+</RelativeLayout>

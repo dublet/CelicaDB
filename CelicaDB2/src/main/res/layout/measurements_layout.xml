@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="2">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurements_header"
+              style="?android:attr/textAppearanceLarge"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_columnSpan="2" android:padding="16dp"
+              android:textIsSelectable="false" android:text="@string/header_measurements"/>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_length_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Length"/>
+    <com.dublet.celicadb2.widgets.LengthView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_length" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_width_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Width"/>
+    <com.dublet.celicadb2.widgets.LengthView  xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_width" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_height_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Height"/>
+    <com.dublet.celicadb2.widgets.LengthView  xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_height" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_wheel_base_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Wheel base"/>
+    <com.dublet.celicadb2.widgets.LengthView  xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_wheel_base" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_track_width_front_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Track width front"/>
+    <com.dublet.celicadb2.widgets.LengthView  xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_track_width_front" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_track_width_rear_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Track width rear"/>
+    <com.dublet.celicadb2.widgets.LengthView  xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_track_width_rear" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_mass_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Mass"/>
+    <com.dublet.celicadb2.widgets.WeightView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_mass" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_fuel_capacity_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Fuel capacity"/>
+    <com.dublet.celicadb2.widgets.VolumeView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_fuel_capacity" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_oil_capacity_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Oil capacity"/>
+    <com.dublet.celicadb2.widgets.VolumeView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_oil_capacity" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_coolant_capacity_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Coolant capacity"/>
+    <com.dublet.celicadb2.widgets.VolumeView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_coolant_capacity" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_drag_coefficient_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Drag coefficient (Cd)"/>
+    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_drag_coefficient" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_steering_wheel_rotations_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Steering wheel rotations"/>
+    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_measurement_steering_wheel_rotations" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+</GridLayout>

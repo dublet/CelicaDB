@@ -1,0 +1,90 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ScrollView01"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/car_detail"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:padding="16dp" android:textIsSelectable="true"
+                  android:text="@string/default_string" style="?android:attr/textAppearanceLarge"/>
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/car_detail_code" android:layout_below="@id/car_detail"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textIsSelectable="true" android:layout_marginRight="8dp"
+                  android:text="@string/default_string" />
+        <com.dublet.celicadb2.widgets.DateRangeView
+            android:id="@+id/car_detail_release_date_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/car_detail_code" android:layout_toRightOf="@id/car_detail_code"/>
+
+        <ImageView
+            android:contentDescription="@string/title_car_detail"
+            android:id="@+id/car_detail_picture"  android:adjustViewBounds="true"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignTop="@id/car_detail_code" android:layout_alignParentRight="true"
+            android:src="@drawable/cel91gt200"/>
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/car_detail_big_pictures_label"
+                  android:layout_below="@id/car_detail_picture"
+                  android:layout_alignRight="@id/car_detail_picture"
+                  android:layout_marginRight="16dp"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textIsSelectable="true" android:text="@string/bigger"/>
+        <!-- Engine -->
+        <com.dublet.celicadb2.layouts.EngineLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                           android:id="@+id/car_detail_layout_engine"
+                                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                           android:layout_below="@id/car_detail_code"/>
+        <!-- Drivetrain -->
+        <com.dublet.celicadb2.layouts.DrivetrainLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               android:id="@+id/car_detail_layout_drivetrain" android:layout_toRightOf="@id/car_detail_layout_engine"
+                                               android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                               android:layout_alignTop="@id/car_detail_layout_engine" android:layout_marginLeft="16dp"/>
+        <!-- Performance -->
+        <com.dublet.celicadb2.layouts.PerformanceLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                android:id="@+id/car_detail_layout_performance"  android:layout_marginLeft="16dp"
+                                                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:layout_toRightOf="@id/car_detail_layout_drivetrain"
+                                                android:layout_below="@id/car_detail_layout_engine"/>
+
+        <!-- Economy -->
+        <com.dublet.celicadb2.layouts.EconomyLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:id="@+id/car_detail_layout_economy"  android:layout_marginLeft="16dp"
+                                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                            android:layout_alignLeft="@id/car_detail_layout_performance"
+                                            android:layout_below="@id/car_detail_layout_performance"/>
+
+        <!-- Measurements -->
+        <com.dublet.celicadb2.layouts.MeasurementsLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 android:id="@+id/car_detail_layout_measurements"
+                                                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                 android:layout_below="@id/car_detail_layout_engine"/>
+        <!-- Tyres -->
+        <com.dublet.celicadb2.layouts.TyresLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                  android:id="@+id/car_detail_layout_tyres" android:layout_marginLeft="16dp"
+                                                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                  android:layout_toRightOf="@id/car_detail_layout_measurements"
+                                                  android:layout_alignTop="@id/car_detail_layout_measurements"
+                                                  android:layout_alignLeft="@id/car_detail_layout_drivetrain"/>
+
+        <!-- Brakes -->
+        <com.dublet.celicadb2.layouts.BrakesLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                           android:id="@+id/car_detail_layout_brakes"
+                                           android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                           android:layout_alignLeft="@id/car_detail_layout_tyres"
+                                           android:layout_below="@id/car_detail_layout_tyres"/>
+
+        <!-- Suspension -->
+        <com.dublet.celicadb2.layouts.SuspensionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               android:id="@+id/car_detail_layout_suspension"
+                                               android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                               android:layout_alignLeft="@id/car_detail_layout_brakes"
+                                               android:layout_below="@id/car_detail_layout_brakes"/>
+
+    </RelativeLayout>
+</ScrollView>

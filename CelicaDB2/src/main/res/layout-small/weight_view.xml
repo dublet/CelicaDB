@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:columnCount="2" >
+    <EditText
+        android:id="@+id/metric" android:text="@string/default_zero" android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/metric_unit" android:text="@string/unit_kg"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:gravity="center" android:focusable="false"/>
+    <EditText
+        android:id="@+id/imperial" android:text="@string/default_zero" android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/imperial_unit" android:text="@string/unit_pound"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:gravity="center" android:focusable="false"  />
+    <EditText
+        android:id="@+id/imperial_simpsons" android:text="@string/default_zero" android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/imperial_simpsons_unit" android:text="@string/unit_bag_of_cement"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:gravity="center" android:focusable="false" />
+</GridLayout>

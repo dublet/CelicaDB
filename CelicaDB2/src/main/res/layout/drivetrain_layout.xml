@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_header"
+              style="?android:attr/textAppearanceLarge"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_drivetrain"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_transmission_label" android:layout_below="@id/car_detail_drivetrain_header"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginRight="16dp"
+              android:textIsSelectable="false" android:text="Transmission"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_transmission"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_marginRight="16dp"
+              android:layout_toRightOf="@id/car_detail_drivetrain_transmission_label"
+              android:layout_below="@id/car_detail_drivetrain_header"
+              android:text="manual"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gears"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true"
+              android:layout_below="@id/car_detail_drivetrain_header"
+              android:layout_toRightOf="@id/car_detail_drivetrain_transmission"
+              android:text="5"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gears_label"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_marginRight="16dp"
+              android:layout_below="@id/car_detail_drivetrain_header"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gears"
+              android:text="gears "/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_drive"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gears_label"
+              android:layout_below="@id/car_detail_drivetrain_header"
+              android:text="RWD"/>
+
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr1_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gears"
+              android:text="1              "/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr1_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr1_label"
+              android:text="5.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr2_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr1_label"
+              android:text="2"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr2"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr2_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr2_label"
+              android:text="4.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr3_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr2_label"
+              android:text="3"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr3"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr3_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr3_label"
+              android:text="3.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr4_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr3_label"
+              android:text="4"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr4"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr4_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr4_label"
+              android:text="2.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr5_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr4_label"
+              android:text="5"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr5"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr5_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr5_label"
+              android:text="1.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr6_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr5_label"
+              android:text="6"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_gr6"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_toRightOf="@id/car_detail_drivetrain_gr6_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_gr6_label"
+              android:text="0.500"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_grr_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_gr6_label"
+              android:text="R"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_grr" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/car_detail_drivetrain_grr_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_grr_label"
+              android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:text="5.000"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_final_drive_label" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/car_detail_drivetrain_grr_label"
+              android:text="Final"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_final_drive" android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/car_detail_drivetrain_final_drive_label"
+              android:layout_alignBaseline="@id/car_detail_drivetrain_final_drive_label"
+              android:text="5.000"/>
+
+</RelativeLayout>

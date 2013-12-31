@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/image_viewer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content" android:layout_height="0dp"
+            android:id="@+id/big_image" android:layout_weight="1" android:scaleType="centerInside"
+            android:layout_gravity="top|center_horizontal" android:adjustViewBounds="true"
+            android:src="@drawable/big_ta64_tte_historical_half"/>
+        <TextView android:gravity="center_horizontal"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/default_string" android:id="@+id/big_image_narrative"/>
+    </LinearLayout>
+</ScrollView>

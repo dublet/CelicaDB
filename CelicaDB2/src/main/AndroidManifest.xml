@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dublet.celicadb2"
+    android:versionCode="7"
+    android:versionName="1.0" >
+
+    <!--<uses-permission android:name="android.permission.INTERNET" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/celica_trace"
+        android:logo="@drawable/celica_trace"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:debuggable="true">
+        <activity
+            android:name="com.dublet.celicadb2.CarListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.dublet.celicadb2.CarDetailActivity"
+            android:label="@string/title_car_detail"
+            android:parentActivityName=".CarListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CarListActivity" />
+        </activity>
+        <activity android:name="com.dublet.celicadb2.Preferences" android:label="Settings">
+
+        </activity>
+        <activity android:name="com.dublet.celicadb2.About" android:label="About">
+
+        </activity>
+        <activity android:name="com.dublet.celicadb2.ImageViewerActivity" android:label="ImageViewer">
+
+        </activity>
+        <activity android:name=".CorrectionActivity" android:label="Corrections">
+
+        </activity>
+    </application>
+
+</manifest>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:orientation="horizontal" >
+    <TextView
+        android:id="@+id/metric" android:text="@string/default_zero" android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/metric_unit" android:text="@string/performance_power_per_weight_unit_metric"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp" android:focusable="false"/>
+    <TextView
+        android:id="@+id/imperial" android:text="@string/default_zero" android:textSize="14sp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"/>
+    <TextView
+        android:id="@+id/imperial_unit" android:text="@string/performance_power_per_weight_unit_imperial"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp" android:focusable="false"/>
+</LinearLayout>

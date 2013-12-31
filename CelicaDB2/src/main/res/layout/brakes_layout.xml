@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_header"
+              style="?android:attr/textAppearanceLarge" android:layout_columnSpan="2"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_brakes"/>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_front_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/brakes_front"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_front" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_string"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_rear_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/brakes_rear"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_rear" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_string"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_additional_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/brakes_additional"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_additional" android:textIsSelectable="true"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_string"/>
+</GridLayout>
