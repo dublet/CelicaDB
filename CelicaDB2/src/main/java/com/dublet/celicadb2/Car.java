@@ -44,13 +44,7 @@ public class Car implements Comparable<Car> {
     public Float gear_ratio_1 = Float.NaN, gear_ratio_2 = Float.NaN,
         gear_ratio_3 = Float.NaN, gear_ratio_4 = Float.NaN, gear_ratio_5 = Float.NaN,
         gear_ratio_6 = Float.NaN, gear_ratio_R = Float.NaN, final_drive = Float.NaN;
-    
-    /* Brakes */
-    public String brakes_additional = null, brakes_front = null, brakes_rear = null;
-    /* Tyres */
-    public String rim_size = null, tyre_size = null;
-    /* Suspension */
-    public String suspension_front_mount = null, suspension_rear_mount = null, suspension_shock_absorbers = null, suspension_stabilisers = null;
+
     /* Economy */
     public String ECO_CITY = "city", ECO_MOTORWAY = "motorway", ECO_OVERALL = "overall";
     /* Measurements */
@@ -62,6 +56,13 @@ public class Car implements Comparable<Car> {
             MEASURE_STEERING_ROT = "steering_wheel_rotations";
     /* Performance */
     public String PERFORMANCE_TOP_SPEED = "top_speed", PERFORMANCE_ZERO_TO_HUNDRED = "acceleration";
+    /* Tyres */
+    public String TYRES_RIM_SIZE = "rim_size", TYRES_SIZE = "tyre_size";
+    /* Brakes */
+    public String BRAKES_FRONT = "front", BRAKES_REAR = "rear", BRAKES_ADDITIONAL = "additional";
+    /* Suspension */
+    public String SUSPENSION_FRONT = "front_mount", SUSPENSION_REAR = "rear_mount",
+            SUSPENSION_SHOCKS = "shock_absorbers", SUSPENSION_STABILISERS = "stabilisers";
 
     HashMap<String, CorrectableData<Float>> floatValues = new HashMap<String, CorrectableData<Float>>();
     HashMap<String, CorrectableData<Integer>> intValues = new HashMap<String, CorrectableData<Integer>>();
@@ -202,57 +203,31 @@ public class Car implements Comparable<Car> {
     }
 
     private void loadBrakesData(Element e) {
-        NodeList nl = e.getElementsByTagName("brakes");
-        if (nl.getLength() > 0) {
-            NodeList children = nl.item(0).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                if (!children.item(i).hasChildNodes()) {
-                    continue;
-                }
-                String nodeName = children.item(i).getNodeName();
-                String nodeValue = children.item(i).getFirstChild().getNodeValue();
-
-                if (nodeName.equalsIgnoreCase("additional")) brakes_additional = nodeValue;
-                else if (nodeName.equalsIgnoreCase("front")) brakes_front = nodeValue;
-                else if (nodeName.equalsIgnoreCase("rear")) brakes_rear = nodeValue;
-            }
+        String[] elements = { BRAKES_FRONT, BRAKES_REAR, BRAKES_ADDITIONAL };
+        for (String element : elements) {
+            stringValues.put(element, new CorrectableData<String>(element, null));
         }
+        NodeList nl = e.getElementsByTagName("brakes");
+        readStringElements(nl, elements);
     }
 
     private void loadSuspensionData(Element e) {
-        NodeList nl = e.getElementsByTagName("suspension");
-        if (nl.getLength() > 0) {
-            NodeList children = nl.item(0).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                if (!children.item(i).hasChildNodes()) {
-                    continue;
-                }
-                String nodeName = children.item(i).getNodeName();
-                String nodeValue = children.item(i).getFirstChild().getNodeValue();
-
-                if (nodeName.equalsIgnoreCase("front_mount")) suspension_front_mount = nodeValue;
-                else if (nodeName.equalsIgnoreCase("rear_mount")) suspension_rear_mount = nodeValue;
-                else if (nodeName.equalsIgnoreCase("shock_absorbers")) suspension_shock_absorbers = nodeValue;
-                else if (nodeName.equalsIgnoreCase("stabilisers")) suspension_stabilisers = nodeValue;
-            }
+        String[] elements = { SUSPENSION_FRONT, SUSPENSION_REAR,
+                SUSPENSION_SHOCKS, SUSPENSION_STABILISERS };
+        for (String element : elements) {
+            stringValues.put(element, new CorrectableData<String>(element, null));
         }
+        NodeList nl = e.getElementsByTagName("suspension");
+        readStringElements(nl, elements);
     }
 
     private void loadTyresData(Element e) {
-        NodeList nl = e.getElementsByTagName("tyres");
-        if (nl.getLength() > 0) {
-            NodeList children = nl.item(0).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                if (!children.item(i).hasChildNodes()) {
-                    continue;
-                }
-                String nodeName = children.item(i).getNodeName();
-                String nodeValue = children.item(i).getFirstChild().getNodeValue();
-
-                if (nodeName.equalsIgnoreCase("rim_size")) rim_size = nodeValue;
-                else if (nodeName.equalsIgnoreCase("tyre_size")) tyre_size = nodeValue;
-            }
+        String[] elements = { TYRES_RIM_SIZE, TYRES_SIZE };
+        for (String element : elements) {
+            stringValues.put(element, new CorrectableData<String>(element, null));
         }
+        NodeList nl = e.getElementsByTagName("tyres");
+        readStringElements(nl, elements);
     }
 
     private void readFloatElements(NodeList nl, String[] elements) {
@@ -333,13 +308,29 @@ public class Car implements Comparable<Car> {
         return Float.NaN;
     }
 
-    public String getCorrections() {
+    public String getCorrectionsXML() {
         boolean hasCorrections = false;
         StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<String, CorrectableData<Float>> entry : floatValues.entrySet()) {
             String key = entry.getKey();
             CorrectableData<Float> value = entry.getValue();
+            if (value.isCorrected()) {
+                hasCorrections = true;
+                sb.append(value.toXML(key));
+            }
+        }
+        for (Map.Entry<String, CorrectableData<Integer>> entry : intValues.entrySet()) {
+            String key = entry.getKey();
+            CorrectableData<Integer> value = entry.getValue();
+            if (value.isCorrected()) {
+                hasCorrections = true;
+                sb.append(value.toXML(key));
+            }
+        }
+        for (Map.Entry<String, CorrectableData<String>> entry : stringValues.entrySet()) {
+            String key = entry.getKey();
+            CorrectableData<String> value = entry.getValue();
             if (value.isCorrected()) {
                 hasCorrections = true;
                 sb.append(value.toXML(key));
@@ -381,7 +372,7 @@ public class Car implements Comparable<Car> {
     public List<CorrectableData<String>> getCorrrectionsList() {
         List<CorrectableData<String>> list = new ArrayList<CorrectableData<String>>();
         for (CorrectableData<String> stringData : stringValues.values()) {
-            if (stringData.isCorrected())
+            if (stringData.orig != null && stringData.isCorrected())
                 list.add(stringData);
         }
         for (CorrectableData<Integer> intData : intValues.values()) {
@@ -389,7 +380,7 @@ public class Car implements Comparable<Car> {
                 list.add(new CorrectableData<String>(intData.tag, "" + intData.orig, "" + intData.corrected));
         }
         for (CorrectableData<Float> floatData : floatValues.values()) {
-            if (floatData.isCorrected())
+            if (floatData.orig != Float.NaN && floatData.isCorrected())
                 list.add(new CorrectableData<String>(floatData.tag, "" + floatData.orig, "" + floatData.corrected));
         }
         return list;
@@ -433,5 +424,18 @@ public class Car implements Comparable<Car> {
     public CorrectableData<Float> coolant_capacity() { return floatValues.get(MEASURE_COOLANT_CAP); }
     public CorrectableData<Float> drag_coefficient() { return floatValues.get(MEASURE_CD_VALUE); }
     public CorrectableData<Float> steering_wheel_rotations() { return floatValues.get(MEASURE_STEERING_ROT); }
+
+    public CorrectableData<String> rim_size() { return stringValues.get(TYRES_RIM_SIZE); }
+    public CorrectableData<String> tyre_size() { return stringValues.get(TYRES_SIZE); }
+
+    public CorrectableData<String> brakes_additional() { return stringValues.get(BRAKES_ADDITIONAL); }
+    public CorrectableData<String> brakes_front() { return stringValues.get(BRAKES_FRONT); }
+    public CorrectableData<String> brakes_rear() { return stringValues.get(BRAKES_REAR); }
+
+    public CorrectableData<String> suspension_front_mount() { return stringValues.get(SUSPENSION_FRONT); }
+    public CorrectableData<String> suspension_rear_mount() { return stringValues.get(SUSPENSION_REAR); }
+    public CorrectableData<String> suspension_shock_absorbers() { return stringValues.get(SUSPENSION_SHOCKS); }
+    public CorrectableData<String> suspension_stabilisers() { return stringValues.get(SUSPENSION_STABILISERS); }
 }
+
 

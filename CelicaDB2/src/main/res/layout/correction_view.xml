@@ -11,7 +11,12 @@
     <TextView android:layout_marginLeft="8dp"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:id="@+id/original" android:text="@string/default_zero"/>
-    <EditText android:textSize="14sp"
+    <EditText android:textSize="14sp" android:inputType="text"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:id="@+id/corrected" android:text="@string/default_zero"/>
+    <!--<Button style="?android:attr/buttonStyleSmall" android:includeFontPadding="false"
+            android:padding="0dp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/remove" android:text="X" android:textSize="14sp"/>-->
+
 </LinearLayout>

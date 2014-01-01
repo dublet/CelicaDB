@@ -1,5 +1,7 @@
 package com.dublet.celicadb2;
 
+import android.util.Log;
+
 /**
  * A helper class to keep track of whether an element is corrected or not.
  *
@@ -27,6 +29,10 @@ public class CorrectableData<T extends Comparable<T>> {
     }
 
     public boolean isCorrected() {
+        if (orig == null) {
+            Log.e("Uninitialised data? ", tag);
+            return false;
+        }
         if (corrected == null)
             return false;
         return !orig.equals(corrected);

@@ -2,20 +2,26 @@ package com.dublet.celicadb2;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dublet.celicadb2.widgets.BaseTextWatcher;
 import com.dublet.celicadb2.widgets.DateRangeView;
 import com.dublet.celicadb2.widgets.FloatValueChangeListener;
 import com.dublet.celicadb2.widgets.FloatView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,6 +41,8 @@ public class CarDetailFragment extends Fragment {
      * The content this fragment is presenting.
      */
     private Car mItem;
+
+    private HashMap<EditText, BaseTextWatcher> mTextWatchers = new HashMap<EditText, BaseTextWatcher>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -144,6 +152,43 @@ public class CarDetailFragment extends Fragment {
         setStringField(rootView, visibilitySet.get(0), stringValue);
         setFieldsVisibility(rootView, visibilitySet, stringValue != null);
     }
+
+    private void updateCorrectableStringFields(View rootView, List<Integer> visibilitySet, final CorrectableData<String> stringValue) {
+        assert(!visibilitySet.isEmpty());
+
+        try {
+            final EditText editText = (EditText) rootView.findViewById(visibilitySet.get(0));
+            BaseTextWatcher textWatcher;
+            if (mTextWatchers.containsKey(editText))
+                textWatcher = mTextWatchers.get(editText);
+            else {
+                textWatcher =  new BaseTextWatcher() {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        super.afterTextChanged(s);
+                        stringValue.setCorrected(s.toString());
+                        editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                    }};
+                mTextWatchers.put(editText, textWatcher);
+            }
+            editText.removeTextChangedListener(textWatcher);
+            if (stringValue.orig != null) {
+                editText.setText(stringValue.getValue());
+                if (stringValue.isCorrected())
+                    editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                else
+                    editText.setTypeface(Typeface.DEFAULT, 0);
+
+            } else {
+                editText.setText("");
+            }
+            editText.addTextChangedListener(textWatcher);
+        }
+        catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
+        catch (Exception e) { Log.e("Exception", e.getMessage()); }
+
+        setFieldsVisibility(rootView, visibilitySet, stringValue.orig != null);
+    }
     private void updateFloatViewFields(View rootView, List<Integer> visibilitySet, Float floatValue) {
         assert(!visibilitySet.isEmpty());
 
@@ -252,17 +297,17 @@ public class CarDetailFragment extends Fragment {
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_economy_city, R.id.car_detail_economy_city_label), mItem.eco_city());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_economy_motorway, R.id.car_detail_economy_motorway_label), mItem.eco_motorway());
             /* Tyres */
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_rim_size_label), mItem.rim_size);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_size, R.id.car_detail_tyres_size_label), mItem.tyre_size);
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_rim_size_label), mItem.rim_size());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_size, R.id.car_detail_tyres_size_label), mItem.tyre_size());
             /* Brakes */
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_front, R.id.car_detail_brakes_front_label), mItem.brakes_front);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_rear, R.id.car_detail_brakes_rear_label), mItem.brakes_rear);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_additional, R.id.car_detail_brakes_additional_label), mItem.brakes_additional);
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_front, R.id.car_detail_brakes_front_label), mItem.brakes_front());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_rear, R.id.car_detail_brakes_rear_label), mItem.brakes_rear());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_additional, R.id.car_detail_brakes_additional_label), mItem.brakes_additional());
             /* Suspension */
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_front_mount_label), mItem.suspension_front_mount);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_rear_mount, R.id.car_detail_suspension_rear_mount_label), mItem.suspension_rear_mount);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_shock, R.id.car_detail_suspension_shock_label), mItem.suspension_shock_absorbers);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_stabilisers, R.id.car_detail_suspension_stabilisers_label), mItem.suspension_stabilisers);
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_front_mount_label), mItem.suspension_front_mount());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_rear_mount, R.id.car_detail_suspension_rear_mount_label), mItem.suspension_rear_mount());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_shock, R.id.car_detail_suspension_shock_label), mItem.suspension_shock_absorbers());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_suspension_stabilisers, R.id.car_detail_suspension_stabilisers_label), mItem.suspension_stabilisers());
             /* Measurements */
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_length, R.id.car_detail_measurement_length_label), mItem.length());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_width, R.id.car_detail_measurement_width_label), mItem.width());
@@ -287,9 +332,18 @@ public class CarDetailFragment extends Fragment {
                 R.id.car_detail_measurement_length, R.id.car_detail_measurement_width, R.id.car_detail_measurement_height,
                 R.id.car_detail_measurement_wheel_base,  R.id.car_detail_measurement_track_width_front, R.id.car_detail_measurement_track_width_rear,
                 R.id.car_detail_measurement_mass, R.id.car_detail_measurement_fuel_capacity, R.id.car_detail_measurement_oil_capacity,
-                R.id.car_detail_measurement_coolant_capacity,
-                R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred)) {
+                R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred)) {
                 ((FloatView)rootView.findViewById(i)).setEditMode(newEditMode);
+        }
+
+        for (Integer i : Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_size,
+                R.id.car_detail_brakes_front,  R.id.car_detail_brakes_rear, R.id.car_detail_brakes_additional,
+                R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_rear_mount,
+                R.id.car_detail_suspension_shock,  R.id.car_detail_suspension_stabilisers)) {
+            int disabledType = InputType.TYPE_NULL;
+            int enabledType = InputType.TYPE_CLASS_TEXT;
+            int newInputType = newEditMode ? enabledType : disabledType;
+            ((EditText)rootView.findViewById(i)).setInputType(newInputType);
         }
     }
 }

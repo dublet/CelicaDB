@@ -65,7 +65,6 @@ public class LengthView extends FloatView {
         imperialText.setText("" + nf.format(Converter.metresToFeet(metres)));
         imperialSimpText.setText("" + nf.format(Converter.metresToRods(metres)));
 
-
         /* Restore text watchers */
         metricText.addTextChangedListener(_metricWatch);
         imperialText.addTextChangedListener(_imperialWatch);

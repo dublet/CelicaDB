@@ -151,7 +151,7 @@ public class CarFactory {
                 fos.write("<corrections>".getBytes());
                 fos.write(("<version>" + _ctx.getPackageManager().getPackageInfo(_ctx.getPackageName(), 0).versionCode + "</version>").getBytes());
                 for (Car car : CarFactory.getInstance().getCarList()) {
-                    fos.write(car.getCorrections().getBytes());
+                    fos.write(car.getCorrectionsXML().getBytes());
                 }
                 fos.write("</corrections>".getBytes());
                 fos.close();

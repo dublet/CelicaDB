@@ -21,7 +21,8 @@ While every effort is made to ensure correctness of data, no liability will be a
 
 Some images taken from Toyota brochures and are used under the Fair use clause of the local copyright legislation. </string>
     <string name="build_number_label">Build number:</string>
-    <string name="changelog">Changes in build 7:\n
+    <string name="changelog">Changes in build 8:\n
+Changes in build 7:\n
 - Added corrections manager\n\n
 
 Changes in build 6:\n
@@ -112,6 +113,9 @@ Changes in build 4:\n
     <string name="suspension_rear">Rear</string>
     <string name="suspension_shock">Shock absorbers</string>
     <string name="suspension_stabilisers">Stabilisers</string>
+
+    <string name="tyres_size">Tyre size</string>
+    <string name="tyres_rim_size">Rim size</string>
 
     <string name="default_zero">0</string>
     <string name="default_string">Test string</string>
