@@ -4,7 +4,7 @@
     <string name="app_name">CelicaDB2</string>
     <string name="title_car_detail">Car Detail</string>
     <string name="about">An Android database about Toyota Celicas.\n\n
- Code &#169;2013 Wouter Klouwen.\n\n
+ Code &#169;2013 Wouter Klouwen. On GitHub: https://github.com/dublet/CelicaDB\n\n
 
 Data sourced by many people, including:\n
 - Uncle Bob\n
@@ -22,6 +22,8 @@ While every effort is made to ensure correctness of data, no liability will be a
 Some images taken from Toyota brochures and are used under the Fair use clause of the local copyright legislation. </string>
     <string name="build_number_label">Build number:</string>
     <string name="changelog">Changes in build 7:\n
+- Added corrections manager\n\n
+
 Changes in build 6:\n
 - Improved layout for large screens.\n
 - Added built in changelog\n
@@ -40,7 +42,10 @@ Changes in build 4:\n
 - Add sorting capability\n
 - Layout improvements</string>
     <string name="whats_new">What\'s new?</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="destroy">This will destroy all of your corrections. They cannot be restored.</string>
     <string name="got_it">Got it!</string>
+    <string name="oh_no">Oh no!</string>
     <string name="bigger">TAP FOR BIGGER</string>
     <string name="unit_kg">kg</string>
     <string name="unit_pound">lb</string>
@@ -76,6 +81,9 @@ Changes in build 4:\n
     <string name="menu_edit">Edit</string>
     <string name="menu_edit_done">Done</string>
     <string name="menu_corrections">Corrections</string>
+
+    <string name="menu_corrections_clear">Clear</string>
+    <string name="menu_corrections_submit">Submit</string>
 
     <string name="brakes_front">Front</string>
     <string name="brakes_rear">Rear</string>

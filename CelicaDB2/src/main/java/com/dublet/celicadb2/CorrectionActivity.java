@@ -1,28 +1,19 @@
 package com.dublet.celicadb2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-
-import com.dublet.celicadb2.layouts.EconomyLayout;
-import com.dublet.celicadb2.layouts.MeasurementsLayout;
+import android.widget.Toast;
 
 /**
- * An activity representing a single Car detail screen. This
- * activity is only used on handset devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a {@link CarListActivity}.
- * <p>
- * This activity is mostly just a 'shell' activity containing nothing
- * more than a {@link CarDetailFragment}.
+ * Activity for corrections.
  */
-public class CorrectionActivity extends Activity /*FragmentActivity*/ {
+public class CorrectionActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +28,57 @@ public class CorrectionActivity extends Activity /*FragmentActivity*/ {
 
         // setting list adapter
         listView.setAdapter(new CorrectionAdapter(this));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.corrections_menu, menu);
+        return true;
+    }
+
+    @Override
+    public void onPause () {
+        super.onPause();
+        CarFactory.getInstance().saveCorrections();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option_item_corrections_submit:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"celicadbcorrections@dublet.org"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "[CelicaDB] corrections");
+                i.putExtra(Intent.EXTRA_TEXT   , CarFactory.getInstance().getCorrectionsXML());
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(CorrectionActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.option_item_corrections_clear:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle(R.string.are_you_sure)
+                        .setMessage(R.string.destroy)
+                        .setPositiveButton(R.string.got_it, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                CarFactory cf = CarFactory.getInstance();
+                                cf.clearCorrections();
+                                cf.saveCorrections();
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.oh_no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                /* Do nothing */
+                            }
+                        }).create().show();
+                break;
+        }
+        return true;
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/option_item_corrections_clear" android:title="@string/menu_corrections_clear" />
+    <item android:id="@+id/option_item_corrections_submit" android:title="@string/menu_corrections_submit" android:showAsAction="ifRoom"/>
+</menu>

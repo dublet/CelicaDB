@@ -148,27 +148,27 @@ public class CarFactory {
         if (Util.isExternalStorageWritable()) {
             try {
                 FileOutputStream fos = _ctx.openFileOutput(CORRECTIONS_FILE, Context.MODE_PRIVATE);
-                fos.write("<_corrections>".getBytes());
+                fos.write("<corrections>".getBytes());
                 fos.write(("<version>" + _ctx.getPackageManager().getPackageInfo(_ctx.getPackageName(), 0).versionCode + "</version>").getBytes());
                 for (Car car : CarFactory.getInstance().getCarList()) {
                     fos.write(car.getCorrections().getBytes());
                 }
-                fos.write("</_corrections>".getBytes());
+                fos.write("</corrections>".getBytes());
                 fos.close();
             }
             catch (PackageManager.NameNotFoundException o) {
-                Log.e("Could not save _corrections", o.getMessage());
+                Log.e("Could not save corrections", o.getMessage());
             }
             catch (IOException o) {
-                Log.e("Could not save _corrections", o.getMessage());
+                Log.e("Could not save corrections", o.getMessage());
             }
             catch (NullPointerException o) {
-                Log.e("Could not save _corrections", o.getMessage());
+                Log.e("Could not save corrections", o.getMessage());
             }
         }
     }
 
-    void loadCorrections() {
+    public String getCorrectionsXML() {
         if (Util.isExternalStorageReadable()) {
             try {
                 BufferedInputStream bis = new BufferedInputStream(_ctx.openFileInput(CORRECTIONS_FILE));
@@ -176,71 +176,91 @@ public class CarFactory {
                 int bytesRead = bis.read(b);
                 assert(bytesRead == bis.available());
                 String s = new String(b);
-                Document d = getDocumentElement(s);
-                if (d != null) {
-                    NodeList versionNodelist = d.getElementsByTagName("version");
-                    if (versionNodelist.getLength() > 0) {
-                        String versionNodeName = versionNodelist.item(0).getNodeName().toLowerCase();
-                        String versionNodeValue = versionNodelist.item(0).getFirstChild().getNodeValue();
-                        if (versionNodeName.equals("version")) {
-                            correctionsVersion = Integer.parseInt(versionNodeValue);
-                        }
-                    }
-
-                    NodeList nl = d.getElementsByTagName("correction_of_model");
-                    for (int numModelsCorrected = 0; numModelsCorrected < nl.getLength(); ++numModelsCorrected ) {
-                        NodeList children = nl.item(numModelsCorrected).getChildNodes();
-                        Car currentCarToCorrect = null;
-                        for (int i = 0; i < children.getLength(); i++) {
-                            if (!children.item(i).hasChildNodes()) {
-                                continue;
-                            }
-                            String nodeName = children.item(i).getNodeName().toLowerCase();
-                            String nodeValue = children.item(i).getFirstChild().getNodeValue();
-                            if (currentCarToCorrect == null) {
-                                if (!nodeName.equalsIgnoreCase("modelcode"))
-                                    throw new RuntimeException("EEK");
-                                currentCarToCorrect = getCar(nodeValue);
-                            } else {
-                                NodeList correctionNodes = children.item(i).getChildNodes();
-                                if (correctionNodes.getLength() == 3) {
-                                    if (!correctionNodes.item(0).getNodeName().toLowerCase().equals("element"))
-                                        throw new RuntimeException("EEK");
-                                    if (!correctionNodes.item(1).getNodeName().toLowerCase().equals("orig"))
-                                        throw new RuntimeException("EEK");
-                                    if (!correctionNodes.item(2).getNodeName().toLowerCase().equals("value"))
-                                        throw new RuntimeException("EEK");
-                                    String element = correctionNodes.item(0).getFirstChild().getNodeValue();
-                                    String orig = correctionNodes.item(1).getFirstChild().getNodeValue();
-                                    String corrected = correctionNodes.item(2).getFirstChild().getNodeValue();
-
-                                    if (corrections.containsKey(currentCarToCorrect.code)) {
-                                        corrections.get(currentCarToCorrect.code).add(new CorrectableData<String>(element, orig, corrected));
-                                    } else {
-                                        corrections.put(currentCarToCorrect.code, Arrays.asList(new CorrectableData<String>(element, orig, corrected)));
-                                    }
-                                    if (dbVersion <= correctionsVersion) {
-                                        currentCarToCorrect.correct(element, corrected);
-                                    }
-                                } else {
-                                    throw new RuntimeException("EEK");
-                                }
-                            }
-                        }
-                    }
-                }
                 bis.close();
+                return s;
             }
             catch (IOException o) {
                 Log.e("Could not read corrections", o.getMessage());
             }
         }
+        return null;
     }
 
-    public List<CorrectableData<String>> getCorrections(String model){
-        return corrections.get(model);
+    void loadCorrections() {
+        String s = getCorrectionsXML();
+        if (s == null)
+            return;
+
+        Document d = getDocumentElement(s);
+        if (d != null) {
+            NodeList versionNodelist = d.getElementsByTagName("version");
+            if (versionNodelist.getLength() > 0) {
+                String versionNodeName = versionNodelist.item(0).getNodeName().toLowerCase();
+                String versionNodeValue = versionNodelist.item(0).getFirstChild().getNodeValue();
+                if (versionNodeName.equals("version")) {
+                    correctionsVersion = Integer.parseInt(versionNodeValue);
+                }
+            }
+
+            NodeList nl = d.getElementsByTagName("correction_of_model");
+            for (int numModelsCorrected = 0; numModelsCorrected < nl.getLength(); ++numModelsCorrected ) {
+                NodeList children = nl.item(numModelsCorrected).getChildNodes();
+                Car currentCarToCorrect = null;
+                for (int i = 0; i < children.getLength(); i++) {
+                    if (!children.item(i).hasChildNodes()) {
+                        continue;
+                    }
+                    String nodeName = children.item(i).getNodeName().toLowerCase();
+                    String nodeValue = children.item(i).getFirstChild().getNodeValue();
+                    if (currentCarToCorrect == null) {
+                        if (!nodeName.equalsIgnoreCase("modelcode"))
+                            throw new RuntimeException("EEK");
+                        currentCarToCorrect = getCar(nodeValue);
+                    } else {
+                        NodeList correctionNodes = children.item(i).getChildNodes();
+                        if (correctionNodes.getLength() == 3) {
+                            if (!correctionNodes.item(0).getNodeName().toLowerCase().equals("element"))
+                                throw new RuntimeException("EEK");
+                            if (!correctionNodes.item(1).getNodeName().toLowerCase().equals("orig"))
+                                throw new RuntimeException("EEK");
+                            if (!correctionNodes.item(2).getNodeName().toLowerCase().equals("value"))
+                                throw new RuntimeException("EEK");
+                            String element = correctionNodes.item(0).getFirstChild().getNodeValue();
+                            String orig = correctionNodes.item(1).getFirstChild().getNodeValue();
+                            String corrected = correctionNodes.item(2).getFirstChild().getNodeValue();
+
+
+                            if (corrections.containsKey(currentCarToCorrect.code)) {
+                                corrections.get(currentCarToCorrect.code).add(new CorrectableData<String>(element, orig, corrected));
+                            } else {
+                                corrections.put(currentCarToCorrect.code, Arrays.asList(new CorrectableData<String>(element, orig, corrected)));
+                            }
+                            if (dbVersion <= correctionsVersion) {
+                                currentCarToCorrect.loadCorrection(element, orig, corrected);
+                            }
+                        } else {
+                            throw new RuntimeException("EEK");
+                        }
+                    }
+                }
+            }
+        }
     }
+
     public HashMap<String, List<CorrectableData<String>>> getCorrections(){
+        HashMap<String, List<CorrectableData<String>>> corrections = new HashMap<String, List<CorrectableData<String>>>();
+        for (Car car : _Cars.values()) {
+            List<CorrectableData<String>> stringCorrections = car.getCorrrectionsList();
+            if (!stringCorrections.isEmpty())
+                corrections.put(car.code, stringCorrections);
+        }
         return corrections;
+    }
+
+    public void clearCorrections() {
+        corrections.clear();
+        for (Car car : _Cars.values()) {
+            car.clearCorrections();
+        }
     }
 }

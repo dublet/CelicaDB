@@ -1,12 +1,16 @@
 package com.dublet.celicadb2;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import com.dublet.celicadb2.widgets.BaseTextWatcher;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,12 +53,34 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
 
          /* Set data */
          try {
-             CorrectableData<String> data = (CorrectableData<String>) getChild(groupPosition, childPosition);
-              assert(data != null);
+             final CorrectableData<String> data = (CorrectableData<String>) getChild(groupPosition, childPosition);
+             assert(data != null);
 
-             ((TextView)convertView.findViewById(R.id.element)).setText(data.tag);
-             ((TextView)convertView.findViewById(R.id.original)).setText(data.orig);
-             ((TextView)convertView.findViewById(R.id.corrected)).setText(data.corrected);
+             TextView elementView = ((TextView)convertView.findViewById(R.id.element)),
+                     originalView = ((TextView)convertView.findViewById(R.id.original)),
+                     correctedView = ((TextView)convertView.findViewById(R.id.corrected));
+
+             elementView.setText(data.tag);
+             originalView.setText(data.orig);
+             correctedView.setText(data.corrected);
+
+             final Car car = CarFactory.getInstance().getCar(_correctedModels.get(groupPosition));
+             if (car.isFloat(data.tag)) {
+                 correctedView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+             } else if (car.isInteger(data.tag)) {
+                 correctedView.setInputType(InputType.TYPE_CLASS_NUMBER);
+             } else if (car.isString(data.tag)) {
+                 correctedView.setInputType(InputType.TYPE_CLASS_TEXT);
+             }
+
+             correctedView.addTextChangedListener(new BaseTextWatcher() {
+                 @Override
+                 public void afterTextChanged(Editable s) {
+                     super.afterTextChanged(s);
+                     data.setCorrected(s.toString());
+                     car.correct(data.tag, s.toString());
+                 }
+             });
          } catch (ClassCastException e) { Log.e("CCE", e.getMessage()); }
         return convertView;
     }
@@ -89,10 +115,14 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
 
         String modelcode = (String) getGroup(groupPosition);
         Car car = CarFactory.getInstance().getCar(modelcode);
+        int correctionCount = _corrections.get(modelcode).size();
+        TextView codeView = ((TextView)convertView.findViewById(R.id.corrected_modelcode)),
+                nameView = ((TextView)convertView.findViewById(R.id.corrected_name)),
+                countView = ((TextView)convertView.findViewById(R.id.corrected_count));
 
-        ((TextView) convertView.findViewById(R.id.corrected_modelcode)).setText(modelcode);
-        ((TextView) convertView.findViewById(R.id.corrected_name)).setText(car.name);
-        ((TextView) convertView.findViewById(R.id.corrected_count)).setText("" + _corrections.get(modelcode).size());
+        codeView.setText(modelcode);
+        nameView.setText(car.name);
+        countView.setText("" + correctionCount + " correction" + (correctionCount > 1 ? "s" : ""));
 
         return convertView;
     }

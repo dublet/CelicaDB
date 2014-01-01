@@ -36,6 +36,8 @@ public class CorrectableData<T extends Comparable<T>> {
         this.corrected = corrected;
     }
 
+    public void removeCorrection() { this.corrected = null; }
+
     public String toXML(String identifier) {
         if (isCorrected()) {
             return "<correction><element>" + identifier + "</element><orig>" + orig + "</orig><value>" + corrected + "</value></correction>";

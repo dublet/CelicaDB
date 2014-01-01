@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -358,6 +359,58 @@ public class Car implements Comparable<Car> {
     public void correct(String element, String newValue) {
         if (floatValues.containsKey(element)) {
             floatValues.get(element).setCorrected(Util.parseFloat(newValue));
+        } else if (intValues.containsKey(element)) {
+            intValues.get(element).setCorrected(Integer.parseInt(newValue));
+        } else if (stringValues.containsKey(element)) {
+            stringValues.get(element).setCorrected(newValue);
+        }
+    }
+
+    public void loadCorrection(String element, String orig, String corrected) {
+        if (floatValues.containsKey(element)) {
+            floatValues.get(element).setCorrected(Util.parseFloat(corrected));
+        }  else if (intValues.containsKey(element)) {
+            intValues.get(element).setCorrected(Integer.parseInt(corrected));
+        } else if (stringValues.containsKey(element)) {
+            stringValues.get(element).setCorrected(corrected);
+        } else {
+            stringValues.put(element, new CorrectableData<String>(element, orig, corrected));
+        }
+    }
+
+    public List<CorrectableData<String>> getCorrrectionsList() {
+        List<CorrectableData<String>> list = new ArrayList<CorrectableData<String>>();
+        for (CorrectableData<String> stringData : stringValues.values()) {
+            if (stringData.isCorrected())
+                list.add(stringData);
+        }
+        for (CorrectableData<Integer> intData : intValues.values()) {
+            if (intData.isCorrected())
+                list.add(new CorrectableData<String>(intData.tag, "" + intData.orig, "" + intData.corrected));
+        }
+        for (CorrectableData<Float> floatData : floatValues.values()) {
+            if (floatData.isCorrected())
+                list.add(new CorrectableData<String>(floatData.tag, "" + floatData.orig, "" + floatData.corrected));
+        }
+        return list;
+    }
+
+    public boolean isFloat(String element) { return floatValues.containsKey(element); }
+    public boolean isInteger(String element) { return intValues.containsKey(element); }
+    public boolean isString(String element) { return stringValues.containsKey(element); }
+
+    public void clearCorrections() {
+        for (Map.Entry<String, CorrectableData<Float>> entry : floatValues.entrySet()) {
+            CorrectableData<Float> value = entry.getValue();
+            value.removeCorrection();
+        }
+        for (Map.Entry<String, CorrectableData<Integer>> entry : intValues.entrySet()) {
+            CorrectableData<Integer> value = entry.getValue();
+            value.removeCorrection();
+        }
+        for (Map.Entry<String, CorrectableData<String>> entry : stringValues.entrySet()) {
+            CorrectableData<String> value = entry.getValue();
+            value.removeCorrection();
         }
     }
 
