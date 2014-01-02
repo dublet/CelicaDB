@@ -2054,7 +2054,7 @@
         <drivetrain>
             <transmission>manual</transmission>
             <gears>5</gears>
-            <drive>front wheel drive (FWD)</drive>
+            <drive>four wheel drive (4WD)</drive>
             <gear_ratio_1>3.384</gear_ratio_1>
             <gear_ratio_2>1.913</gear_ratio_2>
             <gear_ratio_3>1.333</gear_ratio_3>
@@ -2131,7 +2131,7 @@
         <drivetrain>
             <transmission>manual</transmission>
             <gears>5</gears>
-            <drive>front wheel drive (FWD)</drive>
+            <drive>four wheel drive (4WD)</drive>
             <gear_ratio_1>3.230</gear_ratio_1>
             <gear_ratio_2>2.142</gear_ratio_2>
             <gear_ratio_3>1.518</gear_ratio_3>
@@ -2208,7 +2208,7 @@
         <drivetrain>
             <transmission>manual</transmission>
             <gears>5</gears>
-            <drive>front wheel drive (FWD)</drive>
+            <drive>four wheel drive (4WD)</drive>
             <gear_ratio_1>3.384</gear_ratio_1>
             <gear_ratio_2>1.913</gear_ratio_2>
             <gear_ratio_3>1.333</gear_ratio_3>
@@ -2282,6 +2282,7 @@
             <cams>twin overhead</cams>
         </engine>
         <drivetrain>
+            <drive>four wheel drive (4WD)</drive>
             <transmission>manual</transmission>
             <gears>6</gears>
         </drivetrain>
