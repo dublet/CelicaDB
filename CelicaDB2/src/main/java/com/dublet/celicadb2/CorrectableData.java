@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class CorrectableData<T extends Comparable<T>> {
     public T orig, corrected;
-    public String tag;
+    public final String tag;
 
     public CorrectableData(String tag, T orig) {
         this.tag = tag;

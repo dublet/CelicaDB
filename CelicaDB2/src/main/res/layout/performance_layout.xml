@@ -19,7 +19,7 @@
               android:id="@+id/car_detail_performance_zero2hundred_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/performance_zero_to_hundred"/>
-    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_performance_zero2hundred" android:textIsSelectable="true" android:layout_marginLeft="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/default_zero" />

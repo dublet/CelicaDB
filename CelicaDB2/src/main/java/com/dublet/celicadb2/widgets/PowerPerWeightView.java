@@ -4,22 +4,18 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dublet.celicadb2.R;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by dublet on 27/12/13.
  */
-public class PowerPerWeightView  extends FloatView {
+public class PowerPerWeightView  extends ValueView<Float> {
     public PowerPerWeightView(Context context, AttributeSet attrs) {
-        super(context, attrs, R.layout.power_per_weight,
-                new ArrayList<Integer>(/* Not editable */));
+        super(context, attrs, R.layout.power_per_weight);
     }
 
     public void applyPreferences() {

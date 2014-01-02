@@ -30,11 +30,11 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by dublet on 15/12/13.
  */
 public class CarFactory {
-    private static CarFactory ourInstance = new CarFactory();
-    private static HashMap<String, Car> _Cars = new HashMap<String, Car>();
+    private static final CarFactory ourInstance = new CarFactory();
+    private static final HashMap<String, Car> _Cars = new HashMap<String, Car>();
     private static Context _ctx = null;
     private static Integer dbVersion = -1, correctionsVersion = -1;
-    private static HashMap<String, List<CorrectableData<String>>> corrections = new HashMap<String, List<CorrectableData<String>>>();
+    private static final HashMap<String, List<CorrectableData<String>>> corrections = new HashMap<String, List<CorrectableData<String>>>();
 
     private static final String CORRECTIONS_FILE = "corrections.xml";
 
@@ -87,9 +87,7 @@ public class CarFactory {
         return null;
     }
 
-    private void fillList()
-    {
-        assert(_Cars != null);
+    private void fillList() {
         String xmlContents = readFile(R.raw.celicas);
         Document d = getDocumentElement(xmlContents);
         if (d != null) {
@@ -116,7 +114,6 @@ public class CarFactory {
     }
 
     HashMap<String, Car> getCarMap() {
-        assert(_Cars != null);
         if (_Cars.isEmpty()) {
             fillList();
         }
@@ -125,7 +122,6 @@ public class CarFactory {
     }
 
     ArrayList<Car> getCarList() {
-        assert(_Cars != null);
         if (_Cars.isEmpty()) {
             fillList();
         }
@@ -136,7 +132,6 @@ public class CarFactory {
     }
 
     Car getCar(String code) {
-        assert(_Cars != null);
         if (_Cars.isEmpty()) {
             fillList();
         }
@@ -216,6 +211,10 @@ public class CarFactory {
                         if (!nodeName.equalsIgnoreCase("modelcode"))
                             throw new RuntimeException("EEK");
                         currentCarToCorrect = getCar(nodeValue);
+                        if (currentCarToCorrect == null) {
+                            Log.e("EEK", "Could not find car with model code: " + nodeValue);
+                            break;
+                        }
                     } else {
                         NodeList correctionNodes = children.item(i).getChildNodes();
                         if (correctionNodes.getLength() == 3) {

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
+ * A parent activity that provites an editing mode.
  * Created by dublet on 31/12/13.
  */
 public class EditableActivity extends FragmentActivity {

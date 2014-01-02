@@ -20,9 +20,9 @@ import java.util.List;
  * Created by dublet on 31/12/13.
  */
 public class CorrectionAdapter extends BaseExpandableListAdapter {
-    List<String> _correctedModels;
-    HashMap<String, List<CorrectableData<String>>> _corrections;
-    Context _context;
+    final List<String> _correctedModels;
+    final HashMap<String, List<CorrectableData<String>>> _corrections;
+    final Context _context;
 
     public CorrectionAdapter(Context c) {
         _context = c;
@@ -77,8 +77,8 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
                  @Override
                  public void afterTextChanged(Editable s) {
                      super.afterTextChanged(s);
-                     data.setCorrected(s.toString());
-                     car.correct(data.tag, s.toString());
+                    /*TODO fix watchers data.setCorrected(s.toString());
+                     car.correct(data.tag, s.toString());*/
                  }
              });
          } catch (ClassCastException e) { Log.e("CCE", e.getMessage()); }

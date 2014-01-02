@@ -48,22 +48,8 @@ Changes in build 4:\n
     <string name="got_it">Got it!</string>
     <string name="oh_no">Oh no!</string>
     <string name="bigger">TAP FOR BIGGER</string>
-    <string name="unit_kg">kg</string>
-    <string name="unit_pound">lb</string>
-    <string name="unit_bag_of_cement">cwt</string>
-    <string name="unit_metres">m</string>
-    <string name="unit_ft">ft</string>
-    <string name="unit_rods">rods</string>
-    <string name="unit_kmph">km/h</string>
-    <string name="unit_mph">mph</string>
-    <string name="unit_furlong_per_fortnight">f/f</string>
 
-
-    <string name="unit_hogshead">hh</string>
-    <string name="unit_litres">l</string>
-    <string name="unit_gallon_us">gal (US)</string>
-    <string name="unit_gallon_uk">gal (UK)</string>
-
+    <!-- Headers -->
     <string name="header_brakes">Brakes</string>
     <string name="header_drivetrain">Drivetrain</string>
     <string name="header_economy">Economy</string>
@@ -74,6 +60,47 @@ Changes in build 4:\n
     <string name="header_tyres">Tyres</string>
     <string name="header_about">About</string>
     <string name="header_changelog">Changelog</string>
+    <!-- Weight -->
+    <string name="unit_kg">kg</string>
+    <string name="unit_pound">lb</string>
+    <string name="unit_bag_of_cement">cwt</string>
+    <!-- Distance -->
+    <string name="unit_metres">m</string>
+    <string name="unit_millimetres">mm</string>
+    <string name="unit_inch">in</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_rods">rods</string>
+    <!-- Speed -->
+    <string name="unit_kmph">km/h</string>
+    <string name="unit_mph">mph</string>
+    <string name="unit_furlong_per_fortnight">f/f</string>
+    <!-- Power/torque -->
+    <string name="unit_kwatt">kW</string>
+    <string name="unit_nm">Nm</string>
+    <!-- Volume -->
+    <string name="unit_hogshead">hh</string>
+    <string name="unit_litres">l</string>
+    <string name="unit_gallon_us">gal (US)</string>
+    <string name="unit_gallon_uk">gal (UK)</string>
+    <string name="unit_cubic_cm">cm^3</string>
+    <string name="unit_cubic_inch">cu in</string>
+
+    <string name="engine_rpm">rpm</string>
+    <string name="engine_code">Engine code</string>
+    <string name="engine_aspiration">Aspiration</string>
+    <string name="engine_cylinder">Cylinders</string>
+    <string name="engine_valves_per_cylinder">Valves/cylinder</string>
+    <string name="engine_displacement">Displacement</string>
+    <string name="engine_bore">Bore</string>
+    <string name="engine_stroke">Stroke</string>
+    <string name="engine_compression_ratio">Compression ratio</string>
+    <string name="engine_compression_ratio_to_1">:1</string>
+    <string name="engine_power">Power</string>
+    <string name="engine_torque">Torque</string>
+    <string name="engine_fuel">Fuel</string>
+    <string name="engine_alternator">Alternator</string>
+    <string name="engine_battery">Battery</string>
+
 
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
@@ -116,6 +143,16 @@ Changes in build 4:\n
 
     <string name="tyres_size">Tyre size</string>
     <string name="tyres_rim_size">Rim size</string>
+
+    <string name="drivetrain_1">1</string>
+    <string name="drivetrain_2">2</string>
+    <string name="drivetrain_3">3</string>
+    <string name="drivetrain_4">4</string>
+    <string name="drivetrain_5">5</string>
+    <string name="drivetrain_6">6</string>
+    <string name="drivetrain_R">R</string>
+    <string name="drivetrain_final">Final</string>
+
 
     <string name="default_zero">0</string>
     <string name="default_string">Test string</string>

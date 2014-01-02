@@ -18,6 +18,7 @@ public class ImageViewerActivity extends FragmentActivity {
     private ViewPager mPager;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

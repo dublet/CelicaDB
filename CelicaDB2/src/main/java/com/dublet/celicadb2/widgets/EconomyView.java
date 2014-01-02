@@ -2,7 +2,6 @@ package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -14,25 +13,23 @@ import com.dublet.celicadb2.R;
 import com.dublet.celicadb2.Util;
 
 import java.text.NumberFormat;
-import java.util.Arrays;
 
 /**
  * Created by dublet on 22/12/13.
  */
-public class EconomyView extends FloatView {
-    private TextWatcher _metricWatch = new BaseTextWatcher() {
+public class EconomyView extends ValueView<Float> {
+    private final TextWatcher _metricWatch = new BaseTextWatcher() {
         public void afterTextChanged(Editable s) { setValue(Util.parseFloat(s.toString())); }
     };
-    private TextWatcher _imperialUsWatch = new BaseTextWatcher() {
+    private final TextWatcher _imperialUsWatch = new BaseTextWatcher() {
         public void afterTextChanged(Editable s) { setValue(Converter.mpgUSTolPer100km(Util.parseFloat(s.toString()))); }
     };
-    private TextWatcher _imperialUkWatch = new BaseTextWatcher() {
+    private final TextWatcher _imperialUkWatch = new BaseTextWatcher() {
         public void afterTextChanged(Editable s) { setValue(Converter.mpgUkTolPer100km(Util.parseFloat(s.toString()))); }
     };
 
     public EconomyView(Context context, AttributeSet attrs) {
-        super(context, attrs, R.layout.economy_view,
-                Arrays.asList(R.id.metric, R.id.imperial_uk, R.id.imperial_us/*, R.id.imperial_simpsons*/));
+        super(context, attrs, R.layout.economy_view);
 
         ((EditText)findViewById(R.id.metric)).addTextChangedListener(_metricWatch);
         ((EditText)findViewById(R.id.imperial_us)).addTextChangedListener(_imperialUsWatch);

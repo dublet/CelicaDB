@@ -21,21 +21,14 @@ public class Car implements Comparable<Car> {
     public String code;
     public String name;
     public int releaseYear = -1, deceaseYear = -1, generation = -1;
-    public ArrayList<Integer> pictureResources = new ArrayList<Integer>();
+    public final ArrayList<Integer> pictureResources = new ArrayList<Integer>();
     @SuppressLint("UseSparseArrays")
-    public HashMap<Integer, String> bigPictureResources = new HashMap<Integer, String>();
+    public final HashMap<Integer, String> bigPictureResources = new HashMap<Integer, String>();
     /* Engine info */
-    public String engineCode;
-    public String aspiration;
-    public Integer numCylinders = 1, numValesPerCylinder = -1, displacement = -1;
-    public Float bore = Float.NaN, stroke = Float.NaN, compressionRatio = Float.NaN;
     public Float maxPower = Float.NaN;
     public Integer maxPowerRevs = -1;
     public Float maxTorque = Float.NaN;
     public Integer maxTorqueRevs = -1;
-    public String fuel;
-    public String alternator;
-    public String battery;
 
     /* Drivetrain */
     public String transmission = "";
@@ -44,29 +37,34 @@ public class Car implements Comparable<Car> {
     public Float gear_ratio_1 = Float.NaN, gear_ratio_2 = Float.NaN,
         gear_ratio_3 = Float.NaN, gear_ratio_4 = Float.NaN, gear_ratio_5 = Float.NaN,
         gear_ratio_6 = Float.NaN, gear_ratio_R = Float.NaN, final_drive = Float.NaN;
-
+    /* Engine */
+    public final String ENGINE_CODE = "code", ENGINE_ASPIRATION = "aspiration",
+            ENGINE_FUEL = "fuel", ENGINE_ALTERNATOR = "alternator",
+            ENGINE_BATTERY = "battery", ENGINE_DISPLACEMENT = "displacement",
+            ENGINE_BORE="bore", ENGINE_STROKE = "stroke", ENGINE_COMPRESSION_RATIO = "compression_ratio",
+            ENGINE_NUM_CYLINDERS = "cylinders", ENGINE_NUM_VALVES_PER_CYLINDER = "valves_per_cylinder";
     /* Economy */
-    public String ECO_CITY = "city", ECO_MOTORWAY = "motorway", ECO_OVERALL = "overall";
+    public final String ECO_CITY = "city", ECO_MOTORWAY = "motorway", ECO_OVERALL = "overall";
     /* Measurements */
-    public String MEASURE_LENGTH = "length", MEASURE_WIDTH = "width", MEASURE_HEIGHT = "height",
+    public final String MEASURE_LENGTH = "length", MEASURE_WIDTH = "width", MEASURE_HEIGHT = "height",
             MEASURE_WHEEL_BASE = "wheel_base", MEASURE_TW_FRONT = "track_width_front",
             MEASURE_TW_REAR = "track_width_rear", MEASURE_MASS = "mass",
             MEASURE_FUEL_CAP = "fuel_capacity", MEASURE_OIL_CAP = "oil_capacity",
             MEASURE_COOLANT_CAP = "coolant_capacity", MEASURE_CD_VALUE = "drag_coefficient",
             MEASURE_STEERING_ROT = "steering_wheel_rotations";
     /* Performance */
-    public String PERFORMANCE_TOP_SPEED = "top_speed", PERFORMANCE_ZERO_TO_HUNDRED = "acceleration";
+    public final String PERFORMANCE_TOP_SPEED = "top_speed", PERFORMANCE_ZERO_TO_HUNDRED = "acceleration";
     /* Tyres */
-    public String TYRES_RIM_SIZE = "rim_size", TYRES_SIZE = "tyre_size";
+    public final String TYRES_RIM_SIZE = "rim_size", TYRES_SIZE = "tyre_size";
     /* Brakes */
-    public String BRAKES_FRONT = "front", BRAKES_REAR = "rear", BRAKES_ADDITIONAL = "additional";
+    public final String BRAKES_FRONT = "front", BRAKES_REAR = "rear", BRAKES_ADDITIONAL = "additional";
     /* Suspension */
-    public String SUSPENSION_FRONT = "front_mount", SUSPENSION_REAR = "rear_mount",
+    public final String SUSPENSION_FRONT = "front_mount", SUSPENSION_REAR = "rear_mount",
             SUSPENSION_SHOCKS = "shock_absorbers", SUSPENSION_STABILISERS = "stabilisers";
 
-    HashMap<String, CorrectableData<Float>> floatValues = new HashMap<String, CorrectableData<Float>>();
-    HashMap<String, CorrectableData<Integer>> intValues = new HashMap<String, CorrectableData<Integer>>();
-    HashMap<String, CorrectableData<String>> stringValues = new HashMap<String, CorrectableData<String>>();
+    final HashMap<String, CorrectableData<Float>> floatValues = new HashMap<String, CorrectableData<Float>>();
+    final HashMap<String, CorrectableData<Integer>> intValues = new HashMap<String, CorrectableData<Integer>>();
+    final HashMap<String, CorrectableData<String>> stringValues = new HashMap<String, CorrectableData<String>>();
 
     Car(Element d) {
         NodeList children = d.getChildNodes();
@@ -116,7 +114,22 @@ public class Car implements Comparable<Car> {
     }
 
     private void loadEngineData(Element e) {
+        String[] stringElements = { ENGINE_CODE, ENGINE_ASPIRATION, ENGINE_FUEL, ENGINE_ALTERNATOR, ENGINE_BATTERY };
+        String[] floatElements = { ENGINE_DISPLACEMENT, ENGINE_BORE, ENGINE_STROKE, ENGINE_COMPRESSION_RATIO };
+        String[] intElements = { ENGINE_NUM_CYLINDERS, ENGINE_NUM_VALVES_PER_CYLINDER };
+        for (String element : stringElements) {
+            stringValues.put(element, new CorrectableData<String>(element, null));
+        }
+        for (String element : floatElements) {
+            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
+        }
+        for (String element : intElements) {
+            intValues.put(element, new CorrectableData<Integer>(element, -1));
+        }
         NodeList nl = e.getElementsByTagName("engine");
+        readFloatElements(nl, floatElements);
+        readStringElements(nl, stringElements);
+        readIntElements(nl, intElements);
         if (nl.getLength() > 0) {
             NodeList children = nl.item(0).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
@@ -126,21 +139,10 @@ public class Car implements Comparable<Car> {
                 String nodeName = children.item(i).getNodeName();
                 String nodeValue = children.item(i).getFirstChild().getNodeValue();
         
-                if (nodeName.equalsIgnoreCase("code")) engineCode = nodeValue;
-                else if (nodeName.equalsIgnoreCase("aspiration")) aspiration = nodeValue;
-                else if (nodeName.equalsIgnoreCase("cylinders")) numCylinders = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("valves_per_cylinder")) numValesPerCylinder = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("displacement")) displacement = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("bore")) bore =  Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("stroke")) stroke = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("compression_ratio")) compressionRatio = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("power_output")) maxPower = Float.parseFloat(nodeValue);
+                if (nodeName.equalsIgnoreCase("power_output")) maxPower = Float.parseFloat(nodeValue);
                 else if (nodeName.equalsIgnoreCase("power_revs")) maxPowerRevs = Integer.parseInt(nodeValue);
                 else if (nodeName.equalsIgnoreCase("torque_output")) maxTorque = Float.parseFloat(nodeValue);
                 else if (nodeName.equalsIgnoreCase("torque_revs")) maxTorqueRevs = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("fuel")) fuel = nodeValue;
-                else if (nodeName.equalsIgnoreCase("alternator")) alternator = nodeValue;
-                else if (nodeName.equalsIgnoreCase("battery")) battery = nodeValue;
             }
         }
     }
@@ -273,6 +275,30 @@ public class Car implements Comparable<Car> {
         }
     }
 
+    private void readIntElements(NodeList nl, String[] elements) {
+        if (nl.getLength() > 0) {
+            NodeList children = nl.item(0).getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                if (!children.item(i).hasChildNodes()) {
+                    continue;
+                }
+                String nodeName = children.item(i).getNodeName();
+                String nodeValue = children.item(i).getFirstChild().getNodeValue();
+
+                for (String element : elements) {
+                    if (nodeName.equals(element)) {
+                        try {
+                            intValues.get(element).orig = Integer.parseInt(nodeValue);
+                        } catch (NumberFormatException exception) {
+                            Log.e("Could not parse for code " + code + " element " +
+                                    nodeName + " value: " + nodeValue, exception.getMessage());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public String toString() {
         return name + " (" + code + ")";
     }
@@ -337,17 +363,17 @@ public class Car implements Comparable<Car> {
             }
         }
         if (hasCorrections) {
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append("<correction_of_model>");
-            sb2.append("<modelcode>" +  code + "</modelcode>");
-            sb2.append(sb.toString());
-            sb2.append("</correction_of_model>");
-            return sb2.toString();
+            String output = "<correction_of_model>";
+            output += "<modelcode>" +  code + "</modelcode>";
+            output += sb.toString();
+            output += "</correction_of_model>";
+            return output;
         }
         return "";
     }
 
     public void correct(String element, String newValue) {
+        try {
         if (floatValues.containsKey(element)) {
             floatValues.get(element).setCorrected(Util.parseFloat(newValue));
         } else if (intValues.containsKey(element)) {
@@ -355,6 +381,11 @@ public class Car implements Comparable<Car> {
         } else if (stringValues.containsKey(element)) {
             stringValues.get(element).setCorrected(newValue);
         }
+        } catch (NumberFormatException e) {
+            int i =0;
+
+        }
+        assert(false);
     }
 
     public void loadCorrection(String element, String orig, String corrected) {
@@ -404,6 +435,19 @@ public class Car implements Comparable<Car> {
             value.removeCorrection();
         }
     }
+
+    public CorrectableData<String> engineCode() { return stringValues.get(ENGINE_CODE); }
+    public CorrectableData<String> aspiration() { return stringValues.get(ENGINE_ASPIRATION); }
+    public CorrectableData<String> fuel() { return stringValues.get(ENGINE_FUEL); }
+    public CorrectableData<String> alternator() { return stringValues.get(ENGINE_ALTERNATOR); }
+    public CorrectableData<String> battery() { return stringValues.get(ENGINE_BATTERY); }
+    public CorrectableData<Float> displacement() { return floatValues.get(ENGINE_DISPLACEMENT); }
+    public CorrectableData<Float> bore() { return floatValues.get(ENGINE_BORE); }
+    public CorrectableData<Float> stroke() { return floatValues.get(ENGINE_STROKE); }
+    public CorrectableData<Float> compressionRatio() { return floatValues.get(ENGINE_COMPRESSION_RATIO); }
+
+    public CorrectableData<Integer> numCylinders() { return intValues.get(ENGINE_NUM_CYLINDERS); }
+    public CorrectableData<Integer> numValesPerCylinder() { return intValues.get(ENGINE_NUM_VALVES_PER_CYLINDER); }
 
     public CorrectableData<Float> eco_city() { return floatValues.get(ECO_CITY); }
     public CorrectableData<Float> eco_motorway() { return floatValues.get(ECO_MOTORWAY); }

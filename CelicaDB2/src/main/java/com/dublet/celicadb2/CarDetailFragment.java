@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.dublet.celicadb2.widgets.BaseTextWatcher;
 import com.dublet.celicadb2.widgets.DateRangeView;
-import com.dublet.celicadb2.widgets.FloatValueChangeListener;
-import com.dublet.celicadb2.widgets.FloatView;
+import com.dublet.celicadb2.widgets.ValueChangeListener;
+import com.dublet.celicadb2.widgets.ValueView;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,7 +42,7 @@ public class CarDetailFragment extends Fragment {
      */
     private Car mItem;
 
-    private HashMap<EditText, BaseTextWatcher> mTextWatchers = new HashMap<EditText, BaseTextWatcher>();
+    private final HashMap<EditText, BaseTextWatcher> mTextWatchers = new HashMap<EditText, BaseTextWatcher>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -141,17 +141,6 @@ public class CarDetailFragment extends Fragment {
         setIntField(rootView, visibilitySet.get(0), intValue);
         setFieldsVisibility(rootView, visibilitySet, intValue > 0);
     }
-    private void updateFloatFields(View rootView, List<Integer> visibilitySet, Float floatValue) {
-        assert(!visibilitySet.isEmpty());
-        setFloatField(rootView, visibilitySet.get(0), floatValue);
-        setFieldsVisibility(rootView, visibilitySet, !floatValue.isNaN());
-    }
-
-    private void updateStringFields(View rootView, List<Integer> visibilitySet, String stringValue) {
-        assert(!visibilitySet.isEmpty());
-        setStringField(rootView, visibilitySet.get(0), stringValue);
-        setFieldsVisibility(rootView, visibilitySet, stringValue != null);
-    }
 
     private void updateCorrectableStringFields(View rootView, List<Integer> visibilitySet, final CorrectableData<String> stringValue) {
         assert(!visibilitySet.isEmpty());
@@ -185,15 +174,53 @@ public class CarDetailFragment extends Fragment {
             editText.addTextChangedListener(textWatcher);
         }
         catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
-        catch (Exception e) { Log.e("Exception", e.getMessage()); }
+     //   catch (Exception e) { Log.e("Exception", e.getMessage()); }
 
         setFieldsVisibility(rootView, visibilitySet, stringValue.orig != null);
     }
+
+    private void updateIntViewFields(View rootView, List<Integer> visibilitySet, Integer intValue) {
+        assert(!visibilitySet.isEmpty());
+
+        try {
+            ValueView<Integer> intView = (ValueView<Integer>) rootView.findViewById(visibilitySet.get(0));
+            intView.setValue(intValue);
+        }
+        catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
+        catch (Exception e) { Log.e("Exception", e.getMessage()); }
+
+        setFieldsVisibility(rootView, visibilitySet, intValue > -1);
+    }
+
+    private void updateCorrectableIntViewFields(View rootView, List<Integer> visibilitySet, final CorrectableData<Integer> intData) {
+        assert(!visibilitySet.isEmpty());
+
+        try {
+            final ValueView<Integer> intView = (ValueView<Integer>) rootView.findViewById(visibilitySet.get(0));
+            if (intData.isCorrected())
+                intView.setCorrected();
+            intView.setValue(intData.getValue());
+            intView.setChangeListener(new ValueChangeListener<Integer>() {
+                final ValueView listenerFloatView = intView;
+
+                @Override
+                public void valueChanged(Integer newValue) {
+                    intData.setCorrected(newValue);
+                    listenerFloatView.setCorrected();
+                }
+            });
+        }
+        catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
+      //  catch (Exception e) { Log.e("Exception", e.getMessage()); }
+
+        setFieldsVisibility(rootView, visibilitySet, intData.getValue() > -1);
+    }
+
     private void updateFloatViewFields(View rootView, List<Integer> visibilitySet, Float floatValue) {
         assert(!visibilitySet.isEmpty());
 
         try {
-            FloatView floatView = (FloatView) rootView.findViewById(visibilitySet.get(0));
+            ValueView<Float> floatView = (ValueView<Float>) rootView.findViewById(visibilitySet.get(0));
             floatView.setValue(floatValue);
         }
         catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
@@ -207,12 +234,12 @@ public class CarDetailFragment extends Fragment {
         assert(floatData != null);
 
         try {
-            final FloatView floatView = (FloatView) rootView.findViewById(visibilitySet.get(0));
+            final ValueView<Float> floatView = (ValueView<Float>) rootView.findViewById(visibilitySet.get(0));
             if (floatData.isCorrected())
                 floatView.setCorrected();
             floatView.setValue(floatData.getValue());
-            floatView.setChangeListener(new FloatValueChangeListener() {
-                FloatView listenerFloatView = floatView;
+            floatView.setChangeListener(new ValueChangeListener<Float>() {
+                final ValueView listenerFloatView = floatView;
                 @Override
                 public void valueChanged(Float newValue) {
                     floatData.setCorrected(newValue);
@@ -249,17 +276,17 @@ public class CarDetailFragment extends Fragment {
             updateDateRangeFields(rootView, Arrays.asList(R.id.car_detail_release_date_range), mItem.releaseYear, mItem.deceaseYear);
             updatePicture(rootView, mItem);
             /* Engine */
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_engine_code, R.id.car_detail_engine_code_label), mItem.engineCode);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_engine_aspiration, R.id.car_detail_engine_aspiration_label), mItem.aspiration);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_engine_fuel, R.id.car_detail_engine_fuel_label), mItem.fuel);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_engine_alternator, R.id.car_detail_engine_alternator_label), mItem.alternator);
-            updateStringFields(rootView, Arrays.asList(R.id.car_detail_engine_battery, R.id.car_detail_engine_battery_label), mItem.battery);
-            updateIntFields(rootView, Arrays.asList(R.id.car_detail_engine_cylinders, R.id.car_detail_engine_cylinders_label), mItem.numCylinders);
-            updateIntFields(rootView, Arrays.asList(R.id.car_detail_engine_valves_per_cylinder, R.id.car_detail_engine_valves_per_cylinder_label), mItem.numValesPerCylinder);
-            updateIntFields(rootView, Arrays.asList(R.id.car_detail_engine_displacement, R.id.car_detail_engine_displacement_label, R.id.car_detail_engine_displacement_unit), mItem.displacement);
-            updateFloatFields(rootView, Arrays.asList(R.id.car_detail_engine_bore, R.id.car_detail_engine_bore_label, R.id.car_detail_engine_bore_unit), mItem.bore);
-            updateFloatFields(rootView, Arrays.asList(R.id.car_detail_engine_stroke, R.id.car_detail_engine_stroke_label, R.id.car_detail_engine_stroke_unit), mItem.stroke);
-            updateFloatFields(rootView, Arrays.asList(R.id.car_detail_engine_compression_ratio, R.id.car_detail_engine_compression_ratio_label), mItem.compressionRatio);
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_engine_code, R.id.car_detail_engine_code_label), mItem.engineCode());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_engine_aspiration, R.id.car_detail_engine_aspiration_label), mItem.aspiration());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_engine_fuel, R.id.car_detail_engine_fuel_label), mItem.fuel());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_engine_alternator, R.id.car_detail_engine_alternator_label), mItem.alternator());
+            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_engine_battery, R.id.car_detail_engine_battery_label), mItem.battery());
+            updateCorrectableIntViewFields(rootView, Arrays.asList(R.id.car_detail_engine_cylinders, R.id.car_detail_engine_cylinders_label), mItem.numCylinders());
+            updateCorrectableIntViewFields(rootView, Arrays.asList(R.id.car_detail_engine_valves_per_cylinder, R.id.car_detail_engine_valves_per_cylinder_label), mItem.numValesPerCylinder());
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_displacement, R.id.car_detail_engine_displacement_label), mItem.displacement());
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_bore, R.id.car_detail_engine_bore_label), mItem.bore());
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_stroke, R.id.car_detail_engine_stroke_label), mItem.stroke());
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_compression_view, R.id.car_detail_engine_compression_ratio_label), mItem.compressionRatio());
             setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_label, R.id.car_detail_engine_max_power, R.id.car_detail_engine_max_power_unit), mItem.maxPower > 0);
             setFloatField(rootView, R.id.car_detail_engine_max_power, mItem.maxPower);
             setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_revs, R.id.car_detail_engine_max_power_revs_unit), mItem.maxPowerRevs > 0);
@@ -328,18 +355,27 @@ public class CarDetailFragment extends Fragment {
 
     public void setEditMode(boolean newEditMode) {
         View rootView = getView();
+        /* Value Views */
         for (Integer i : Arrays.asList(R.id.car_detail_economy_overall, R.id.car_detail_economy_city, R.id.car_detail_economy_motorway,
                 R.id.car_detail_measurement_length, R.id.car_detail_measurement_width, R.id.car_detail_measurement_height,
                 R.id.car_detail_measurement_wheel_base,  R.id.car_detail_measurement_track_width_front, R.id.car_detail_measurement_track_width_rear,
                 R.id.car_detail_measurement_mass, R.id.car_detail_measurement_fuel_capacity, R.id.car_detail_measurement_oil_capacity,
-                R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred)) {
-                ((FloatView)rootView.findViewById(i)).setEditMode(newEditMode);
+                R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_drag_coefficient, R.id.car_detail_measurement_steering_wheel_rotations,
+                R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred,
+                R.id.car_detail_engine_displacement, R.id.car_detail_engine_bore,
+                R.id.car_detail_engine_stroke, R.id.car_detail_engine_compression_view,
+                R.id.car_detail_engine_cylinders, R.id.car_detail_engine_valves_per_cylinder)) {
+                ((ValueView)rootView.findViewById(i)).setEditMode(newEditMode);
         }
 
+        /* Strings fields */
         for (Integer i : Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_size,
                 R.id.car_detail_brakes_front,  R.id.car_detail_brakes_rear, R.id.car_detail_brakes_additional,
                 R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_rear_mount,
-                R.id.car_detail_suspension_shock,  R.id.car_detail_suspension_stabilisers)) {
+                R.id.car_detail_suspension_shock,  R.id.car_detail_suspension_stabilisers,
+                R.id.car_detail_engine_code, R.id.car_detail_engine_aspiration,
+                R.id.car_detail_engine_fuel, R.id.car_detail_engine_alternator,
+                R.id.car_detail_engine_battery)) {
             int disabledType = InputType.TYPE_NULL;
             int enabledType = InputType.TYPE_CLASS_TEXT;
             int newInputType = newEditMode ? enabledType : disabledType;

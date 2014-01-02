@@ -1,7 +1,5 @@
 package com.dublet.celicadb2;
 
-
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -9,10 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.HashMap;
 
 /**
+ * Pager adapter for full screen images.
+ *
  * Created by dublet on 27/12/13.
  */
 class ImageViewerPagerAdapter extends FragmentStatePagerAdapter {
-    private HashMap<Integer, String> _pictureResources;
+    private final HashMap<Integer, String> _pictureResources;
     public ImageViewerPagerAdapter(FragmentManager fm, HashMap<Integer, String> pictureResources) {
         super(fm);
         _pictureResources = pictureResources;

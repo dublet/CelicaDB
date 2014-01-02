@@ -4,23 +4,18 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dublet.celicadb2.R;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by dublet on 27/12/13.
  */
-public class WeightPerTorqueView  extends FloatView {
+public class WeightPerTorqueView  extends ValueView<Float> {
     public WeightPerTorqueView(Context context, AttributeSet attrs) {
-        super(context, attrs, R.layout.weight_per_torque,
-                new ArrayList<Integer>(/* Not editable */));
+        super(context, attrs, R.layout.weight_per_torque);
     }
 
     public void applyPreferences() {

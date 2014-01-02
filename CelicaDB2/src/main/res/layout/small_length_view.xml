@@ -8,7 +8,7 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:inputType="number" />
     <TextView
-        android:id="@+id/metric_unit" android:text="@string/unit_kmph"
+        android:id="@+id/metric_unit" android:text="@string/unit_millimetres"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:gravity="center" android:focusable="false"/>
     <EditText
@@ -16,15 +16,15 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:inputType="number" />
     <TextView
-        android:id="@+id/imperial_unit" android:text="@string/unit_mph"
+        android:id="@+id/imperial_unit" android:text="@string/unit_inch"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:gravity="center" android:focusable="false"  />
-    <EditText
-        android:id="@+id/imperial_simpsons" android:text="@string/default_zero"
+    <!--<EditText
+        android:id="@+id/imperial_simpsons" android:text="@string/default_zero" android:textSize="14sp"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:inputType="number" android:textSize="14sp" />
+        android:inputType="number"  />
     <TextView
-        android:id="@+id/imperial_simpsons_unit" android:text="@string/unit_furlong_per_fortnight"
+        android:id="@+id/imperial_simpsons_unit" android:text="@string/unit_rods"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:gravity="center" android:focusable="false" />
+        android:gravity="center" android:focusable="false" />-->
 </LinearLayout>

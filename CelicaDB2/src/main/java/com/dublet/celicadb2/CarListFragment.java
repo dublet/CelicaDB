@@ -1,6 +1,5 @@
 package com.dublet.celicadb2;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class CarListFragment extends ListFragment {
      * A dummy implementation of the {@link Callbacks} interface that does
      * nothing. Used only when this fragment is not attached to an activity.
      */
-    private static Callbacks sCallbacks = new Callbacks() {
+    private static final Callbacks sCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(String id) {
         }

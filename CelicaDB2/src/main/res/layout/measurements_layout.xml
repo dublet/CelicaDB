@@ -85,14 +85,14 @@
               android:id="@+id/car_detail_measurement_drag_coefficient_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="Drag coefficient (Cd)"/>
-    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_measurement_drag_coefficient" android:textIsSelectable="true"
               android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_measurement_steering_wheel_rotations_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="Steering wheel rotations"/>
-    <com.dublet.celicadb2.widgets.NumberView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_measurement_steering_wheel_rotations" android:textIsSelectable="true"
               android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </GridLayout>

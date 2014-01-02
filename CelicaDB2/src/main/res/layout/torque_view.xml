@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_max_torque" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_zero" android:inputType="number" android:textSize="14sp"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_max_torque_unit" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/unit_nm"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_max_torque_at" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginLeft="8sp" android:layout_marginRight="8sp"
+              android:text="\@"/>
+    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_max_torque_revs" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/default_zero" android:inputType="number" android:textSize="14sp"/>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_max_torque_revs_unit" android:textIsSelectable="false"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/engine_rpm"/>
+</LinearLayout>

@@ -20,6 +20,10 @@ public class Converter {
     private static final Float kgToPoundMultiplier = 0.45359237f;
     private static final Float kgToBagsOfCementMultiplier = 50.802345f;
 
+    private static final Float mmToInchMultiplier = 25.4f;
+
+    private static final Float cubicCmToCubicInchMultiplier = 16.387064f;
+
 
     public static Float lPer100kmToMpgUS(Float lPer100Km) {
         return  lPer100kmToMphUsMultiplier / lPer100Km;
@@ -111,5 +115,21 @@ public class Converter {
 
     public static Float bagsOfCementToKg(Float bagsOfCement) {
         return bagsOfCement  * kgToBagsOfCementMultiplier;
+    }
+
+    public static Float mmToInch(Float mm) {
+        return mm  / mmToInchMultiplier;
+    }
+
+    public static Float inchToMm(Float inch) {
+        return inch  * mmToInchMultiplier;
+    }
+
+    public static Float cubicCmToCubicInch(Float cm3) {
+        return cm3  / cubicCmToCubicInchMultiplier;
+    }
+
+    public static Float cubicInchToCubicCm(Float cubicInch) {
+        return cubicInch  * cubicCmToCubicInchMultiplier;
     }
 }
