@@ -16,7 +16,7 @@ import com.dublet.celicadb2.R;
  */
 public class IntegerView extends ValueView<Integer> {
     private final TextWatcher _intWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Integer.parseInt(s.toString())); }
+        public void afterTextChanged(Editable s) {  try { setValue(Integer.parseInt(s.toString())); } catch (NumberFormatException e) {  /* Do Nothing */} }
     };
     public IntegerView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.number_view);

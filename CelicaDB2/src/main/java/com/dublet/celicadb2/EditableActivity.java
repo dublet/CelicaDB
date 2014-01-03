@@ -19,7 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 public class EditableActivity extends FragmentActivity {
     private static final int MENU_SETTINGS = 1,
             MENU_ABOUT = 2, MENU_FILTER = 3,
-            MENU_SORT = 4, MENU_CORRECTIONS = 5;
+            MENU_SORT = 4, MENU_CORRECTIONS = 5, MENU_TYRE_SIZE = 6;
 
     private boolean mEditMode = false;
 
@@ -89,8 +89,12 @@ public class EditableActivity extends FragmentActivity {
                 }
                 break;
 
+            case R.id.option_item_tyre_size:
+                startActivityForResult(new Intent(this, TyreSizeActivity.class),  MENU_TYRE_SIZE);
+                break;
             /*case R.id.option_item_filter:
                 break;*/
+
 
         }
 

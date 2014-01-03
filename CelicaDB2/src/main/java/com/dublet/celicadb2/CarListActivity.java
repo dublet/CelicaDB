@@ -1,25 +1,13 @@
 package com.dublet.celicadb2;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 /**
@@ -41,7 +29,7 @@ import java.util.ArrayList;
 public class CarListActivity extends EditableActivity
         implements CarListFragment.Callbacks {
 
-    private static final String SETTING_SELECTION = "current_selection",
+    public static final String SETTING_SELECTION = "current_selection",
             SETTING_LAST_OPENED_VERSION = "last_opened_version";
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet

@@ -12,35 +12,34 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_transmission_label" android:layout_below="@id/car_detail_drivetrain_header"
               android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginRight="16dp"
-              android:textIsSelectable="false" android:text="Transmission"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:textIsSelectable="false"  android:gravity="center_vertical" android:text="Transmission"
+              android:layout_alignBottom="@+id/car_detail_drivetrain_transmission"/>
+    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_transmission"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_marginRight="16dp"
+              android:textIsSelectable="false"  android:textSize="12sp"
               android:layout_toRightOf="@id/car_detail_drivetrain_transmission_label"
-              android:layout_below="@id/car_detail_drivetrain_header"
-              android:text="manual"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_below="@id/car_detail_drivetrain_header" android:entries="@array/transmission"/>
+    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gears"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true"
+              android:entries="@array/number_gears"  android:textSize="12sp"
               android:layout_below="@id/car_detail_drivetrain_header"
-              android:layout_toRightOf="@id/car_detail_drivetrain_transmission"
-              android:text="@string/default_zero"/>
+              android:layout_toRightOf="@id/car_detail_drivetrain_transmission" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gears_label"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:textIsSelectable="true" android:layout_marginRight="16dp"
               android:layout_below="@id/car_detail_drivetrain_header"
               android:layout_toRightOf="@id/car_detail_drivetrain_gears"
+              android:gravity="center_vertical" android:layout_alignBottom="@+id/car_detail_drivetrain_transmission"
               android:text="gears "/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_drive"
+    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_drive" android:textSize="12sp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true"
               android:layout_toRightOf="@id/car_detail_drivetrain_gears_label"
               android:layout_below="@id/car_detail_drivetrain_header"
-              android:text="RWD"/>
+              android:entries="@array/driven_wheels" android:padding="0sp"/>
 
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"

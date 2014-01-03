@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dublet.celicadb2.widgets.BaseTextWatcher;
@@ -297,9 +298,31 @@ public class CarDetailFragment extends Fragment {
             setIntField(rootView, R.id.car_detail_engine_max_torque_revs, mItem.maxTorqueRevs);
             
             /* Drivetrain */
-            setStringField(rootView, R.id.car_detail_drivetrain_transmission, mItem.transmission);
-            setStringField(rootView, R.id.car_detail_drivetrain_drive, mItem.drive);
-            setIntField(rootView, R.id.car_detail_drivetrain_gears, mItem.gears);
+            //setStringField(rootView, R.id.car_detail_drivetrain_transmission, mItem.transmission);
+            //setStringField(rootView, R.id.car_detail_drivetrain_drive, mItem.drive);
+            //setIntField(rootView, R.id.car_detail_drivetrain_gears, mItem.gears);
+            Spinner gearsSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_gears);
+            if (mItem.gears > 2) {
+                gearsSpinner.setSelection(mItem.gears - 3);
+                gearsSpinner.setVisibility(View.VISIBLE);
+            } else {
+                gearsSpinner.setVisibility(View.GONE);
+            }
+            Spinner transmissionSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_transmission);
+            if (mItem.transmission.toLowerCase().contains("auto")) {
+                transmissionSpinner.setSelection(1);
+            } else {
+                transmissionSpinner.setSelection(0);
+            }
+            Spinner driveSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_drive);
+            if (mItem.drive.contains("RWD")) {
+                driveSpinner.setSelection(1);
+            } else if (mItem.drive.contains("4WD")) {
+                driveSpinner.setSelection(2);
+            } else  {
+                driveSpinner.setSelection(0);
+            }
+
             setFloatField(rootView, R.id.car_detail_drivetrain_gr1, mItem.gear_ratio_1);
             setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr1, mItem.gears > 0);
             setFloatField(rootView, R.id.car_detail_drivetrain_gr2, mItem.gear_ratio_2);
@@ -348,6 +371,8 @@ public class CarDetailFragment extends Fragment {
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_coolant_capacity_label), mItem.coolant_capacity());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_drag_coefficient, R.id.car_detail_measurement_drag_coefficient_label), mItem.drag_coefficient());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_steering_wheel_rotations, R.id.car_detail_measurement_steering_wheel_rotations_label), mItem.steering_wheel_rotations());
+
+
         }
 
         return rootView;
@@ -358,7 +383,7 @@ public class CarDetailFragment extends Fragment {
         /* Value Views */
         for (Integer i : Arrays.asList(R.id.car_detail_economy_overall, R.id.car_detail_economy_city, R.id.car_detail_economy_motorway,
                 R.id.car_detail_measurement_length, R.id.car_detail_measurement_width, R.id.car_detail_measurement_height,
-                R.id.car_detail_measurement_wheel_base,  R.id.car_detail_measurement_track_width_front, R.id.car_detail_measurement_track_width_rear,
+                R.id.car_detail_measurement_wheel_base, R.id.car_detail_measurement_track_width_front, R.id.car_detail_measurement_track_width_rear,
                 R.id.car_detail_measurement_mass, R.id.car_detail_measurement_fuel_capacity, R.id.car_detail_measurement_oil_capacity,
                 R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_drag_coefficient, R.id.car_detail_measurement_steering_wheel_rotations,
                 R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred,
@@ -380,6 +405,10 @@ public class CarDetailFragment extends Fragment {
             int enabledType = InputType.TYPE_CLASS_TEXT;
             int newInputType = newEditMode ? enabledType : disabledType;
             ((EditText)rootView.findViewById(i)).setInputType(newInputType);
+        }
+        /* Spinners */
+        for (Integer i : Arrays.asList(R.id.car_detail_drivetrain_gears, R.id.car_detail_drivetrain_transmission, R.id.car_detail_drivetrain_drive)) {
+            rootView.findViewById(i).setEnabled(newEditMode);
         }
     }
 }

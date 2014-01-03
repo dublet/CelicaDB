@@ -7,4 +7,5 @@
     <item android:id="@+id/option_item_sort" android:title="@string/menu_sort" android:showAsAction="ifRoom"/>
     <item android:id="@+id/option_item_edit" android:title="@string/menu_edit" android:showAsAction="ifRoom"/>
     <item android:id="@+id/option_item_corrections" android:title="@string/menu_corrections"/>
+    <item android:id="@+id/option_item_tyre_size" android:title="Tyre size"/>
 </menu>

@@ -15,4 +15,19 @@
         <item name="acceleration">By acceleration</item>
         <item name="power_to_weight">By power to weight ratio</item>
     </string-array>
+    <string-array name="transmission">
+        <item name="manual">manual</item>
+        <item name="auto">automatic</item>
+    </string-array>
+    <string-array name="driven_wheels">
+        <item name="fwd">Front wheel drive (FWD)</item>
+        <item name="rwd">Rear wheel drive (RWD)</item>
+        <item name="4wd">Four wheel drive (4WD)</item>
+    </string-array>
+    <string-array name="number_gears">
+        <item name="3">3</item>
+        <item name="4">4</item>
+        <item name="5">5</item>
+        <item name="6">6</item>
+    </string-array>
 </resources>

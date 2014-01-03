@@ -341,7 +341,7 @@ public class Car implements Comparable<Car> {
         for (Map.Entry<String, CorrectableData<Float>> entry : floatValues.entrySet()) {
             String key = entry.getKey();
             CorrectableData<Float> value = entry.getValue();
-            if (value.isCorrected()) {
+            if (value.orig != Float.NaN && value.isCorrected()) {
                 hasCorrections = true;
                 sb.append(value.toXML(key));
             }
@@ -349,7 +349,7 @@ public class Car implements Comparable<Car> {
         for (Map.Entry<String, CorrectableData<Integer>> entry : intValues.entrySet()) {
             String key = entry.getKey();
             CorrectableData<Integer> value = entry.getValue();
-            if (value.isCorrected()) {
+            if (value.orig > -1 && value.isCorrected()) {
                 hasCorrections = true;
                 sb.append(value.toXML(key));
             }
@@ -357,7 +357,7 @@ public class Car implements Comparable<Car> {
         for (Map.Entry<String, CorrectableData<String>> entry : stringValues.entrySet()) {
             String key = entry.getKey();
             CorrectableData<String> value = entry.getValue();
-            if (value.isCorrected()) {
+            if (value.orig != null && value.isCorrected()) {
                 hasCorrections = true;
                 sb.append(value.toXML(key));
             }
