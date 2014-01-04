@@ -1,141 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:columnCount="2"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_header"
-              style="?android:attr/textAppearanceLarge"
+              style="?android:attr/textAppearanceLarge" android:layout_columnSpan="2"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:padding="16dp" android:textIsSelectable="false" android:text="@string/header_drivetrain"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_transmission_label" android:layout_below="@id/car_detail_drivetrain_header"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginRight="16dp"
-              android:textIsSelectable="false"  android:gravity="center_vertical" android:text="Transmission"
-              android:layout_alignBottom="@+id/car_detail_drivetrain_transmission"/>
-    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_transmission"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="false"  android:textSize="12sp"
-              android:layout_toRightOf="@id/car_detail_drivetrain_transmission_label"
-              android:layout_below="@id/car_detail_drivetrain_header" android:entries="@array/transmission"/>
-    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_gears"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:entries="@array/number_gears"  android:textSize="12sp"
-              android:layout_below="@id/car_detail_drivetrain_header"
-              android:layout_toRightOf="@id/car_detail_drivetrain_transmission" />
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_gears_label"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_marginRight="16dp"
-              android:layout_below="@id/car_detail_drivetrain_header"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gears"
-              android:gravity="center_vertical" android:layout_alignBottom="@+id/car_detail_drivetrain_transmission"
-              android:text="gears "/>
-    <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_drive" android:textSize="12sp"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gears_label"
-              android:layout_below="@id/car_detail_drivetrain_header"
-              android:entries="@array/driven_wheels" android:padding="0sp"/>
-
+    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_columnSpan="2">
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/car_detail_drivetrain_transmission_label"  android:text="Transmission"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginRight="16dp" />
+        <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/car_detail_drivetrain_transmission"
+                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                 android:textIsSelectable="false"  android:textSize="12sp" android:entries="@array/transmission"/>
+        <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/car_detail_drivetrain_gears"
+                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                 android:entries="@array/number_gears"  android:textSize="12sp"/>
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/car_detail_drivetrain_gears_label"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textIsSelectable="true" android:layout_marginRight="16dp"
+                  android:gravity="center_vertical" android:text="gears "/>
+        <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/car_detail_drivetrain_drive" android:textSize="12sp"
+                 android:layout_width="wrap_content" android:layout_height="wrap_content"
+                 android:entries="@array/driven_wheels" android:padding="0sp"/>
+    </LinearLayout>
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr1_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gears"
-              android:text="1              "/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:text="@string/drivetrain_1"/>
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr1"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr1_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr1_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr2_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr1_label"
               android:text="@string/drivetrain_2"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr2"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr2_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr2_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr3_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr2_label"
               android:text="@string/drivetrain_3"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr3"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr3_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr3_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr4_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr3_label"
               android:text="@string/drivetrain_4"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr4"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr4_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr4_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr5_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr4_label"
               android:text="@string/drivetrain_5"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr5"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr5_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr5_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr6_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr5_label"
               android:text="@string/drivetrain_6"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_gr6"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_toRightOf="@id/car_detail_drivetrain_gr6_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_gr6_label"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_grr_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_gr6_label"
               android:text="@string/drivetrain_R"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_grr" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/car_detail_drivetrain_grr_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_grr_label"
-              android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:text="@string/default_zero"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_drivetrain_final_drive_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@id/car_detail_drivetrain_grr_label"
-              android:text="@string/drivetrain_final"/>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_drivetrain_final_drive" android:textIsSelectable="true" android:layout_alignLeft="@id/car_detail_drivetrain_gr1"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/car_detail_drivetrain_final_drive_label"
-              android:layout_alignBaseline="@id/car_detail_drivetrain_final_drive_label"
-              android:text="@string/default_zero"/>
+              android:text="@string/drivetrain_final" android:layout_marginRight="16sp"/>
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_drivetrain_final_drive"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+</GridLayout>
