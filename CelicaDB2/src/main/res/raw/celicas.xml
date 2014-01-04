@@ -1412,6 +1412,18 @@
         <chassiscode>ST162-BKMVF</chassiscode>
         <picture_url>cel87cabrio200.jpg</picture_url>
         <picture_resource_name>cel87cabrio200</picture_resource_name>
+        <drivetrain>
+            <transmission>manual</transmission>
+            <gears>5</gears>
+            <drive>front wheel drive (FWD)</drive>
+            <gear_ratio_1>3.285</gear_ratio_1>
+            <gear_ratio_2>2.041</gear_ratio_2>
+            <gear_ratio_3>1.322</gear_ratio_3>
+            <gear_ratio_4>1.028</gear_ratio_4>
+            <gear_ratio_5>0.820</gear_ratio_5>
+            <gear_ratio_R>3.153</gear_ratio_R>
+            <final_drive>3.944</final_drive>
+        </drivetrain>
     </car>
     <car>
         <name>Celica Turbo 4WD</name>
