@@ -3,22 +3,18 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal" >
-    <EditText
-        android:id="@+id/metric" android:text="@string/default_zero" android:textSize="14sp"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:inputType="number" />
-    <TextView
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/metric"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:layout_marginRight="8sp"
         android:id="@+id/metric_unit" android:text="@string/unit_millimetres"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:gravity="center" android:focusable="false"/>
-    <EditText
-        android:id="@+id/imperial" android:text="@string/default_zero" android:textSize="14sp"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:gravity="center" />
+    <com.dublet.celicadb2.widgets.EditableTextView  android:id="@+id/imperial"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/imperial_unit" android:text="@string/unit_inch"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:gravity="center" android:focusable="false"  />
+        android:gravity="center" />
     <!--<EditText
         android:id="@+id/imperial_simpsons" android:text="@string/default_zero" android:textSize="14sp"
         android:layout_width="wrap_content" android:layout_height="wrap_content"

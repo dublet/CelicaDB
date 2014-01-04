@@ -11,21 +11,21 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_economy_overall_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/economy_overall"/>
+              android:text="@string/economy_overall"  android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
                                        android:id="@+id/car_detail_economy_overall"
                                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_economy_city_label" android:textIsSelectable="false"
-              android:text="@string/economy_city"/>
+              android:text="@string/economy_city"  android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
                                       android:id="@+id/car_detail_economy_city"
                                       android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_economy_motorway_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
+              android:id="@+id/car_detail_economy_motorway_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/economy_motorway"/>
+              android:text="@string/economy_motorway"  android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.EconomyView xmlns:android="http://schemas.android.com/apk/res/android"
                                       android:id="@+id/car_detail_economy_motorway"
                                       android:layout_width="wrap_content" android:layout_height="wrap_content"/>

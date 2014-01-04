@@ -1,12 +1,9 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -18,21 +15,31 @@ import java.text.NumberFormat;
  * Created by dublet on 23/12/13.
  */
 public class VolumeView extends ValueView<Float> {
-    private final TextWatcher _metricWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Util.parseFloat(s.toString())); }
+    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
     };
-    private final TextWatcher _imperialUsWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.galUsToLitres(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialUsWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.galUsToLitres(Util.parseFloat(s.toString()))); }
     };
-    private final TextWatcher _imperialUkWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.galUKToLitres(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialUkWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.galUKToLitres(Util.parseFloat(s.toString()))); }
     };
-    private final TextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.hogsheadToLitres(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.hogsheadToLitres(Util.parseFloat(s.toString()))); }
     };
 
     public VolumeView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.volume_view);
+
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialUsText = ((EditableTextView)findViewById(R.id.imperial_us)),
+                imperialUkText = ((EditableTextView)findViewById(R.id.imperial_uk)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
+        metricText.addCallback(_metricWatch);
+        imperialUsText.addCallback(_imperialUsWatch);
+        imperialUkText.addCallback(_imperialUkWatch);
+        imperialSimpText.addCallback(_imperialSimpsonsWatch);
+
     }
 
     public void applyPreferences() {
@@ -50,16 +57,10 @@ public class VolumeView extends ValueView<Float> {
 
     public void setValue(Float litres) {
         super.setValue(litres);
-        EditText metricText = ((EditText)findViewById(R.id.metric)),
-                imperialUsText = ((EditText)findViewById(R.id.imperial_us)),
-                imperialUkText = ((EditText)findViewById(R.id.imperial_uk)),
-                imperialSimpText = ((EditText)findViewById(R.id.imperial_simpsons));
-
-        /* Remove text watchers to prevent loops */
-        metricText.removeTextChangedListener(_metricWatch);
-        imperialUsText.removeTextChangedListener(_imperialUsWatch);
-        imperialUkText.removeTextChangedListener(_imperialUkWatch);
-        imperialSimpText.removeTextChangedListener(_imperialSimpsonsWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialUsText = ((EditableTextView)findViewById(R.id.imperial_us)),
+                imperialUkText = ((EditableTextView)findViewById(R.id.imperial_uk)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(getMaxDecimalPlaces());
@@ -67,11 +68,5 @@ public class VolumeView extends ValueView<Float> {
         imperialUkText.setText("" + nf.format(Converter.litresToGalUK(litres)));
         imperialUsText.setText("" + nf.format(Converter.litresToGalUs(litres)));
         imperialSimpText.setText("" + nf.format(Converter.litresToHogshead(litres)));
-
-        /* Restore text watchers */
-        metricText.addTextChangedListener(_metricWatch);
-        imperialUsText.addTextChangedListener(_imperialUsWatch);
-        imperialUkText.addTextChangedListener(_imperialUkWatch);
-        imperialSimpText.addTextChangedListener(_imperialSimpsonsWatch);
     }
 }

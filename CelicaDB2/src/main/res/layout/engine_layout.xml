@@ -11,7 +11,7 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_code_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_code"/>
+              android:text="@string/engine_code"  android:layout_marginRight="16dp"/>
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_code" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_aspiration_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_aspiration"/>
+              android:text="@string/engine_aspiration" android:layout_marginRight="16dp"/>
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_aspiration" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -27,58 +27,58 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_cylinders_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_cylinder"/>
+              android:text="@string/engine_cylinder" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.IntegerView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_cylinders"
               android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_valves_per_cylinder_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_valves_per_cylinder"/>
+              android:text="@string/engine_valves_per_cylinder" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.IntegerView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_valves_per_cylinder"
               android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_displacement_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_displacement"/>
+              android:text="@string/engine_displacement" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.DisplacementView
         android:id="@+id/car_detail_engine_displacement"
         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_bore_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_bore"/>
+              android:text="@string/engine_bore" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.SmallLengthView android:id="@+id/car_detail_engine_bore"
                                                   android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_stroke_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_stroke"/>
+              android:text="@string/engine_stroke" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.SmallLengthView android:id="@+id/car_detail_engine_stroke"
         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_compression_ratio_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_compression_ratio"/>
+              android:text="@string/engine_compression_ratio" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.CompressionView android:id="@+id/car_detail_engine_compression_view"
         android:layout_width="wrap_content" android:layout_height="wrap_content" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_max_power_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_power"/>
+              android:text="@string/engine_power" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.PowerView android:id="@+id/car_detail_engine_max_power_view"
                                              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_max_torque_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_torque"/>
+              android:text="@string/engine_torque" android:layout_marginRight="16dp"/>
     <com.dublet.celicadb2.widgets.TorqueView android:id="@+id/car_detail_engine_max_torque_view"
                                              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_fuel_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_fuel"/>
+              android:text="@string/engine_fuel" android:layout_marginRight="16dp"/>
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_fuel" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_alternator_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_alternator"/>
+              android:text="@string/engine_alternator" android:layout_marginRight="16dp"/>
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_alternator" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_battery_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/engine_battery"/>
+              android:text="@string/engine_battery" android:layout_marginRight="16dp"/>
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_battery" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"

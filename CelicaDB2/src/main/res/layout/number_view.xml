@@ -4,6 +4,6 @@
               android:orientation="horizontal"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
-    <EditText android:id="@+id/number_value" android:text="@string/default_zero"  android:textSize="14sp"
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/number_value"
         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </LinearLayout>

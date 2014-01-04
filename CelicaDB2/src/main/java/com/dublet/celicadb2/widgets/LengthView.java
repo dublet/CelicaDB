@@ -1,12 +1,9 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -18,22 +15,26 @@ import java.text.NumberFormat;
  * Created by dublet on 23/12/13.
  */
 public class LengthView extends ValueView<Float> {
-    private final TextWatcher _metricWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Util.parseFloat(s.toString())); }
+    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
     };
-    private final TextWatcher _imperialWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.feetToMetres(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.feetToMetres(Util.parseFloat(s.toString()))); }
     };
-    private final TextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.rodsToMetres(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.rodsToMetres(Util.parseFloat(s.toString()))); }
     };
 
     public LengthView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.length_view);
 
-        ((EditText)findViewById(R.id.metric)).addTextChangedListener(_metricWatch);
-        ((EditText)findViewById(R.id.imperial)).addTextChangedListener(_imperialWatch);
-        ((EditText)findViewById(R.id.imperial_simpsons)).addTextChangedListener(_imperialSimpsonsWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialText = ((EditableTextView)findViewById(R.id.imperial)),
+                simpsonsText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
+
+        metricText.addCallback(_metricWatch);
+        imperialText.addCallback(_imperialWatch);
+        simpsonsText.addCallback(_imperialSimpsonsWatch);
     }
 
     public void applyPreferences() {
@@ -49,23 +50,14 @@ public class LengthView extends ValueView<Float> {
 
     public void setValue(Float metres) {
         super.setValue(metres);
-        EditText metricText = ((EditText)findViewById(R.id.metric)),
-                imperialText = ((EditText)findViewById(R.id.imperial)),
-                imperialSimpText = ((EditText)findViewById(R.id.imperial_simpsons));
-        /* Remove text watchers to prevent loops */
-        metricText.removeTextChangedListener(_metricWatch);
-        imperialText.removeTextChangedListener(_imperialWatch);
-        imperialSimpText.removeTextChangedListener(_imperialSimpsonsWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialText = ((EditableTextView)findViewById(R.id.imperial)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(getMaxDecimalPlaces());
         metricText.setText("" + nf.format(metres));
         imperialText.setText("" + nf.format(Converter.metresToFeet(metres)));
         imperialSimpText.setText("" + nf.format(Converter.metresToRods(metres)));
-
-        /* Restore text watchers */
-        metricText.addTextChangedListener(_metricWatch);
-        imperialText.addTextChangedListener(_imperialWatch);
-        imperialSimpText.addTextChangedListener(_imperialSimpsonsWatch);
     }
 }

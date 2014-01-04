@@ -50,13 +50,4 @@ public class DisplacementView extends ValueView<Float> {
         metricText.setText("" + nf.format(cubicCm));
         imperialText.setText("" + nf.format(Converter.cubicCmToCubicInch(cubicCm)));
     }
-
-    @Override
-    public void setEditMode(boolean newEditMove) {
-        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
-                imperialText = ((EditableTextView)findViewById(R.id.imperial));
-
-        metricText.setEditMode(newEditMove);
-        imperialText.setEditMode(newEditMove);
-    }
 }

@@ -100,15 +100,6 @@ public class CarDetailFragment extends Fragment {
         catch (Exception e) { Log.e("Exception", e.getMessage()); }
     }
 
-    private void setIntField(View rootView, int resourceId, int value) {
-        String stringVal = "?";
-
-        if (value > 0) {
-            stringVal = "" + value;
-        }
-        setTextOfField(rootView, resourceId, stringVal);
-    }
-
     private void setFloatField(View rootView, int resourceId, Float value) {
         String stringVal = "?";
 
@@ -260,14 +251,14 @@ public class CarDetailFragment extends Fragment {
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_bore, R.id.car_detail_engine_bore_label), mItem.bore());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_stroke, R.id.car_detail_engine_stroke_label), mItem.stroke());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_compression_view, R.id.car_detail_engine_compression_ratio_label), mItem.compressionRatio());
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_label, R.id.car_detail_engine_max_power, R.id.car_detail_engine_max_power_unit), mItem.maxPower > 0);
-            setFloatField(rootView, R.id.car_detail_engine_max_power, mItem.maxPower);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_revs, R.id.car_detail_engine_max_power_revs_unit), mItem.maxPowerRevs > 0);
-            setIntField(rootView, R.id.car_detail_engine_max_power_revs, mItem.maxPowerRevs);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_torque_label, R.id.car_detail_engine_max_torque, R.id.car_detail_engine_max_torque_unit), mItem.maxTorque > 0);
-            setFloatField(rootView, R.id.car_detail_engine_max_torque, mItem.maxTorque);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_torque_revs, R.id.car_detail_engine_max_torque_revs_unit), mItem.maxTorqueRevs > 0);
-            setIntField(rootView, R.id.car_detail_engine_max_torque_revs, mItem.maxTorqueRevs);
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_label, R.id.car_detail_engine_max_power, R.id.car_detail_engine_max_power_unit), mItem.maxPower().getValue() > 0);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_max_power), mItem.maxPower());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_power_revs, R.id.car_detail_engine_max_power_revs_unit), mItem.maxPowerRevs().getValue() > 0);
+            updateCorrectableIntViewFields(rootView, Arrays.asList(R.id.car_detail_engine_max_power_revs), mItem.maxPowerRevs());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_torque_label, R.id.car_detail_engine_max_torque, R.id.car_detail_engine_max_torque_unit), mItem.maxTorque().getValue() > 0);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_engine_max_torque), mItem.maxTorque());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_engine_max_torque_revs, R.id.car_detail_engine_max_torque_revs_unit), mItem.maxTorqueRevs().getValue() > 0);
+            updateCorrectableIntViewFields(rootView, Arrays.asList(R.id.car_detail_engine_max_torque_revs), mItem.maxTorqueRevs());
             
             /* Drivetrain */
             //setStringField(rootView, R.id.car_detail_drivetrain_transmission, mItem.transmission);
@@ -343,8 +334,6 @@ public class CarDetailFragment extends Fragment {
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_coolant_capacity_label), mItem.coolant_capacity());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_drag_coefficient, R.id.car_detail_measurement_drag_coefficient_label), mItem.drag_coefficient());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_measurement_steering_wheel_rotations, R.id.car_detail_measurement_steering_wheel_rotations_label), mItem.steering_wheel_rotations());
-
-
         }
 
         return rootView;
@@ -361,7 +350,9 @@ public class CarDetailFragment extends Fragment {
                 R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred,
                 R.id.car_detail_engine_displacement, R.id.car_detail_engine_bore,
                 R.id.car_detail_engine_stroke, R.id.car_detail_engine_compression_view,
-                R.id.car_detail_engine_cylinders, R.id.car_detail_engine_valves_per_cylinder)) {
+                R.id.car_detail_engine_cylinders, R.id.car_detail_engine_valves_per_cylinder,
+                R.id.car_detail_engine_max_power, R.id.car_detail_engine_max_power_revs,
+                R.id.car_detail_engine_max_torque, R.id.car_detail_engine_max_torque_revs)) {
                 ((ValueView)rootView.findViewById(i)).setEditMode(newEditMode);
         }
 

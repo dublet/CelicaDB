@@ -42,7 +42,9 @@ public class Car implements Comparable<Car> {
             ENGINE_FUEL = "fuel", ENGINE_ALTERNATOR = "alternator",
             ENGINE_BATTERY = "battery", ENGINE_DISPLACEMENT = "displacement",
             ENGINE_BORE="bore", ENGINE_STROKE = "stroke", ENGINE_COMPRESSION_RATIO = "compression_ratio",
-            ENGINE_NUM_CYLINDERS = "cylinders", ENGINE_NUM_VALVES_PER_CYLINDER = "valves_per_cylinder";
+            ENGINE_NUM_CYLINDERS = "cylinders", ENGINE_NUM_VALVES_PER_CYLINDER = "valves_per_cylinder",
+            ENGINE_MAX_POWER = "power_output", ENGINE_MAX_POWER_REVS = "power_revs",
+            ENGINE_MAX_TORQUE = "torque_output", ENGINE_MAX_TORQUE_REVS = "torque_revs";
     /* Economy */
     public final String ECO_CITY = "city", ECO_MOTORWAY = "motorway", ECO_OVERALL = "overall";
     /* Measurements */
@@ -115,8 +117,11 @@ public class Car implements Comparable<Car> {
 
     private void loadEngineData(Element e) {
         String[] stringElements = { ENGINE_CODE, ENGINE_ASPIRATION, ENGINE_FUEL, ENGINE_ALTERNATOR, ENGINE_BATTERY };
-        String[] floatElements = { ENGINE_DISPLACEMENT, ENGINE_BORE, ENGINE_STROKE, ENGINE_COMPRESSION_RATIO };
-        String[] intElements = { ENGINE_NUM_CYLINDERS, ENGINE_NUM_VALVES_PER_CYLINDER };
+        String[] floatElements = { ENGINE_DISPLACEMENT, ENGINE_BORE, ENGINE_STROKE, ENGINE_COMPRESSION_RATIO,
+                ENGINE_MAX_POWER , ENGINE_MAX_TORQUE};
+        String[] intElements = { ENGINE_NUM_CYLINDERS, ENGINE_NUM_VALVES_PER_CYLINDER,
+                ENGINE_MAX_POWER_REVS, ENGINE_MAX_TORQUE_REVS };
+
         for (String element : stringElements) {
             stringValues.put(element, new CorrectableData<String>(element, null));
         }
@@ -130,21 +135,6 @@ public class Car implements Comparable<Car> {
         readFloatElements(nl, floatElements);
         readStringElements(nl, stringElements);
         readIntElements(nl, intElements);
-        if (nl.getLength() > 0) {
-            NodeList children = nl.item(0).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                if (!children.item(i).hasChildNodes()) {
-                    continue;
-                }
-                String nodeName = children.item(i).getNodeName();
-                String nodeValue = children.item(i).getFirstChild().getNodeValue();
-        
-                if (nodeName.equalsIgnoreCase("power_output")) maxPower = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("power_revs")) maxPowerRevs = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("torque_output")) maxTorque = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("torque_revs")) maxTorqueRevs = Integer.parseInt(nodeValue);
-            }
-        }
     }
 
     private void loadDrivetrainData(Element e) {
@@ -480,6 +470,11 @@ public class Car implements Comparable<Car> {
     public CorrectableData<String> suspension_rear_mount() { return stringValues.get(SUSPENSION_REAR); }
     public CorrectableData<String> suspension_shock_absorbers() { return stringValues.get(SUSPENSION_SHOCKS); }
     public CorrectableData<String> suspension_stabilisers() { return stringValues.get(SUSPENSION_STABILISERS); }
+
+    public CorrectableData<Float> maxPower() { return floatValues.get(ENGINE_MAX_POWER); }
+    public CorrectableData<Integer> maxPowerRevs() { return intValues.get(ENGINE_MAX_POWER_REVS); }
+    public CorrectableData<Float> maxTorque() { return floatValues.get(ENGINE_MAX_TORQUE); }
+    public CorrectableData<Integer> maxTorqueRevs() { return intValues.get(ENGINE_MAX_TORQUE_REVS); }
 }
 
 

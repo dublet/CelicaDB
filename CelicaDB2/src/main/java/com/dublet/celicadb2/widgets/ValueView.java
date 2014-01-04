@@ -3,7 +3,6 @@ package com.dublet.celicadb2.widgets;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dublet.celicadb2.Preferences;
+import com.dublet.celicadb2.R;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
  * Created by dublet on 27/12/13.
  */
 public class ValueView<T> extends LinearLayout  {
+    private class ForEachEditableText { public void doSomething(EditableTextView editText) { } }
     private class ForEachEditText { public void doSomething(EditText editText) { } }
 
     final ArrayList<ValueChangeListener> _listeners = new ArrayList<ValueChangeListener>();
@@ -54,7 +56,7 @@ public class ValueView<T> extends LinearLayout  {
     }
 
     public void setEditMode(final boolean newEditMode) {
-        doJobForEachEditText(new ForEachEditText() {
+        /*doJobForEachEditText(new ForEachEditText() {
             @Override
             public void doSomething(EditText editText) {
                 int disabledType = InputType.TYPE_NULL;
@@ -62,7 +64,14 @@ public class ValueView<T> extends LinearLayout  {
                 int newInputType = newEditMode ? enabledType : disabledType;
                 editText.setInputType(newInputType);
             }
-        });
+        });*/
+
+        doJobForEachEditableTextField(new ForEachEditableText() {
+            @Override
+            public void doSomething(EditableTextView editText) {
+                super.doSomething(editText);
+                editText.setEditMode(newEditMode);
+            }});
     }
 
     public boolean showImperial() {
@@ -78,7 +87,7 @@ public class ValueView<T> extends LinearLayout  {
         _listeners.add(newListener);
     }
 
-    private void doJobForEachEditText(ForEachEditText feet) {
+   /* private void doJobForEachEditText(ForEachEditText feet) {
         if (getChildCount() != 1)
             return;
 
@@ -94,14 +103,40 @@ public class ValueView<T> extends LinearLayout  {
                 feet.doSomething(editText);
             }
         }
+    }*/
+    private void doJobForEachEditableTextField(ForEachEditableText feet) {
+        if (getChildCount() != 1)
+            return;
+
+        ViewGroup layout = (ViewGroup)getChildAt(0);
+        if (layout == null)
+            return;
+
+        for (int i = 0; i < layout.getChildCount(); ++i) {
+            View child = layout.getChildAt(i);
+            if (child instanceof EditableTextView)
+            {
+                EditableTextView editText = (EditableTextView) child;
+                feet.doSomething(editText);
+            }
+        }
     }
 
     public void setCorrected() {
-        doJobForEachEditText(new ForEachEditText() {
+        doJobForEachEditableTextField(new ForEachEditableText() {
+            @Override
+            public void doSomething(EditableTextView editText) {
+                EditText et = (EditText) findViewById(R.id.edit_view);
+                TextView tv = (TextView) findViewById(R.id.text_view);
+                et.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                tv.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+            }
+        });
+        /*doJobForEachEditText(new ForEachEditText() {
             @Override
             public void doSomething(EditText editText) {
                 editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
             }
-        });
+        });*/
     }
 }

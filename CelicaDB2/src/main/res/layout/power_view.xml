@@ -4,7 +4,7 @@
               android:orientation="horizontal"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.FloatingPointView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_max_power" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/default_zero" android:inputType="number" android:textSize="14sp"/>
@@ -17,7 +17,7 @@
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:layout_marginLeft="8sp" android:layout_marginRight="8sp"
               android:text="\@"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.IntegerView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_max_power_revs" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/default_zero" android:inputType="number" android:textSize="14sp"/>

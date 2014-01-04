@@ -1,12 +1,9 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -18,22 +15,30 @@ import java.text.NumberFormat;
  * Created by dublet on 22/12/13.
  */
 public class EconomyView extends ValueView<Float> {
-    private final TextWatcher _metricWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Util.parseFloat(s.toString())); }
+    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
     };
-    private final TextWatcher _imperialUsWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.mpgUSTolPer100km(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialUsWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.mpgUSTolPer100km(Util.parseFloat(s.toString()))); }
     };
-    private final TextWatcher _imperialUkWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.mpgUkTolPer100km(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialUkWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.mpgUkTolPer100km(Util.parseFloat(s.toString()))); }
     };
+    /*private final BaseTextWatcher _imperialSimpsonsWatchWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.mpgUkTolPer100km(Util.parseFloat(s.toString()))); }
+    };*/
 
     public EconomyView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.economy_view);
 
-        ((EditText)findViewById(R.id.metric)).addTextChangedListener(_metricWatch);
-        ((EditText)findViewById(R.id.imperial_us)).addTextChangedListener(_imperialUsWatch);
-        ((EditText)findViewById(R.id.imperial_uk)).addTextChangedListener(_imperialUkWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialUsText = ((EditableTextView)findViewById(R.id.imperial_us)),
+                imperialUkText = ((EditableTextView)findViewById(R.id.imperial_uk)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
+        metricText.addCallback(_metricWatch);
+        imperialUsText.addCallback(_imperialUsWatch);
+        imperialUkText.addCallback(_imperialUkWatch);
+        //imperialSimpText.addCallback(_imperialSimpsonsWatch);
     }
 
     public void applyPreferences() {
@@ -53,14 +58,10 @@ public class EconomyView extends ValueView<Float> {
 
     public void setValue(Float litresPerHundredKm) {
         super.setValue(litresPerHundredKm);
-        EditText metricText = ((EditText)findViewById(R.id.metric)),
-                imperialUkText = ((EditText)findViewById(R.id.imperial_uk)),
-                imperialUsText = ((EditText)findViewById(R.id.imperial_us)),
-                imperialSimpText = ((EditText)findViewById(R.id.imperial_simpsons));
-        /* Remove text watchers to prevent loops */
-        metricText.removeTextChangedListener(_metricWatch);
-        imperialUkText.removeTextChangedListener(_imperialUkWatch);
-        imperialUsText.removeTextChangedListener(_imperialUsWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialUkText = ((EditableTextView)findViewById(R.id.imperial_uk)),
+                imperialUsText = ((EditableTextView)findViewById(R.id.imperial_us)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(getMaxDecimalPlaces());
@@ -71,10 +72,5 @@ public class EconomyView extends ValueView<Float> {
         imperialUkText.setText("" + nf.format(mpgUK));
         imperialUsText.setText("" + nf.format(mpgUS));
         imperialSimpText.setText("" + nf.format(rph));
-
-        /* Restore text watchers */
-        metricText.addTextChangedListener(_metricWatch);
-        imperialUkText.addTextChangedListener(_imperialUkWatch);
-        imperialUsText.addTextChangedListener(_imperialUsWatch);
     }
 }

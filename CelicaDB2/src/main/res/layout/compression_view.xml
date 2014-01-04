@@ -4,10 +4,9 @@
               android:orientation="horizontal"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_engine_compression_ratio" android:textIsSelectable="false"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_zero" android:inputType="number" android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_compression_ratio"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_compression_ratio_to1" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"

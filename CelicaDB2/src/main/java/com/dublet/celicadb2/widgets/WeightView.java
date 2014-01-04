@@ -1,12 +1,9 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -18,18 +15,26 @@ import java.text.NumberFormat;
  * Created by dublet on 23/12/13.
  */
 public class WeightView extends ValueView<Float> {
-    private final TextWatcher _metricWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Util.parseFloat(s.toString())); }
+    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
     };
-    private final TextWatcher _imperialWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.poundsToKg(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.poundsToKg(Util.parseFloat(s.toString()))); }
     };
-    private final TextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
-        public void afterTextChanged(Editable s) { setValue(Converter.bagsOfCementToKg(Util.parseFloat(s.toString()))); }
+    private final BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
+        public void textChanged(String s) { setValue(Converter.bagsOfCementToKg(Util.parseFloat(s.toString()))); }
     };
 
     public WeightView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.weight_view);
+
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialText = ((EditableTextView)findViewById(R.id.imperial)),
+                simpsonsText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
+
+        metricText.addCallback(_metricWatch);
+        imperialText.addCallback(_imperialWatch);
+        simpsonsText.addCallback(_imperialSimpsonsWatch);
     }
 
     public void applyPreferences() {
@@ -45,24 +50,14 @@ public class WeightView extends ValueView<Float> {
 
     public void setValue(Float kg) {
         super.setValue(kg);
-        EditText metricText = ((EditText)findViewById(R.id.metric)),
-                imperialText = ((EditText)findViewById(R.id.imperial)),
-                imperialSimpText = ((EditText)findViewById(R.id.imperial_simpsons));
-
-        /* Remove text watchers to prevent loops */
-        metricText.removeTextChangedListener(_metricWatch);
-        imperialText.removeTextChangedListener(_imperialWatch);
-        imperialSimpText.removeTextChangedListener(_imperialSimpsonsWatch);
+        EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
+                imperialText = ((EditableTextView)findViewById(R.id.imperial)),
+                imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(getMaxDecimalPlaces());
         metricText.setText("" + nf.format(kg));
         imperialText.setText("" + nf.format(Converter.kgToPounds(kg)));
         imperialSimpText.setText("" + nf.format(Converter.kgToBagsOfCement(kg)));
-
-        /* Restore text watchers */
-        metricText.addTextChangedListener(_metricWatch);
-        imperialText.addTextChangedListener(_imperialWatch);
-        imperialSimpText.addTextChangedListener(_imperialSimpsonsWatch);
     }
 }
