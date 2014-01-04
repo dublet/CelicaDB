@@ -1,9 +1,11 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -35,6 +37,10 @@ public class LengthView extends ValueView<Float> {
         metricText.addCallback(_metricWatch);
         imperialText.addCallback(_imperialWatch);
         simpsonsText.addCallback(_imperialSimpsonsWatch);
+
+        ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)imperialText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)simpsonsText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void applyPreferences() {

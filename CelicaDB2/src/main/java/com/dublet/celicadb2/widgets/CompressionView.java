@@ -1,9 +1,11 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.dublet.celicadb2.R;
 import com.dublet.celicadb2.Util;
@@ -22,6 +24,8 @@ public class CompressionView extends ValueView<Float> {
 
         EditableTextView compressionRatioText = ((EditableTextView)findViewById(R.id.car_detail_engine_compression_ratio));
         compressionRatioText.addCallback(_compressionRatioWatch);
+
+        ((EditText)compressionRatioText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void applyPreferences() {

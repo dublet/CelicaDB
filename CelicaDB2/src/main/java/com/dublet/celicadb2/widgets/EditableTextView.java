@@ -1,6 +1,7 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -71,5 +72,17 @@ public class EditableTextView extends LinearLayout {
 
     public void removeCallback(BaseTextWatcher btw) {
         _callbacks.remove(btw);
+    }
+
+    public void setCorrected(final boolean isCorrected) {
+        TextView textView = (TextView)findViewById(R.id.text_view);
+        EditText editText = (EditText)findViewById(R.id.edit_view);
+        if (isCorrected) {
+            textView.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+            editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+        } else {
+            textView.setTypeface(Typeface.DEFAULT, 0);
+            editText.setTypeface(Typeface.DEFAULT, 0);
+        }
     }
 }

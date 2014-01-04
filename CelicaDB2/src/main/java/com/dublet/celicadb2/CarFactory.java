@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -228,11 +227,12 @@ public class CarFactory {
                             String orig = correctionNodes.item(1).getFirstChild().getNodeValue();
                             String corrected = correctionNodes.item(2).getFirstChild().getNodeValue();
 
-
                             if (corrections.containsKey(currentCarToCorrect.code)) {
                                 corrections.get(currentCarToCorrect.code).add(new CorrectableData<String>(element, orig, corrected));
                             } else {
-                                corrections.put(currentCarToCorrect.code, Arrays.asList(new CorrectableData<String>(element, orig, corrected)));
+                                ArrayList<CorrectableData<String>> newList = new ArrayList<CorrectableData<String>>();
+                                newList.add(new CorrectableData<String>(element, orig, corrected));
+                                corrections.put(currentCarToCorrect.code, newList);
                             }
                             if (dbVersion <= correctionsVersion) {
                                 currentCarToCorrect.loadCorrection(element, orig, corrected);

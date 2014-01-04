@@ -1,16 +1,15 @@
 package com.dublet.celicadb2;
 
 import android.content.Context;
-import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-
-import com.dublet.celicadb2.widgets.BaseTextWatcher;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -73,12 +72,17 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
                  correctedView.setInputType(InputType.TYPE_CLASS_TEXT);
              }
 
-             correctedView.addTextChangedListener(new BaseTextWatcher() {
+             correctedView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                  @Override
-                 public void afterTextChanged(Editable s) {
-                     super.afterTextChanged(s);
-                    /*TODO fix watchers data.setCorrected(s.toString());
-                     car.correct(data.tag, s.toString());*/
+                 public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                     switch (actionId) {
+                         case EditorInfo.IME_ACTION_DONE: /* FALLTHROUGH */
+                         case EditorInfo.IME_ACTION_NEXT:
+                             // TODO
+                             break;
+                     }
+
+                     return false;
                  }
              });
          } catch (ClassCastException e) { Log.e("CCE", e.getMessage()); }

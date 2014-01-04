@@ -2,22 +2,19 @@ package com.dublet.celicadb2;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dublet.celicadb2.widgets.BaseTextWatcher;
 import com.dublet.celicadb2.widgets.DateRangeView;
+import com.dublet.celicadb2.widgets.EditableTextView;
 import com.dublet.celicadb2.widgets.ValueChangeListener;
 import com.dublet.celicadb2.widgets.ValueView;
 
@@ -43,7 +40,7 @@ public class CarDetailFragment extends Fragment {
      */
     private Car mItem;
 
-    private final HashMap<EditText, BaseTextWatcher> mTextWatchers = new HashMap<EditText, BaseTextWatcher>();
+    private final HashMap<EditableTextView, BaseTextWatcher> mTextWatchers = new HashMap<EditableTextView, BaseTextWatcher>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -123,32 +120,24 @@ public class CarDetailFragment extends Fragment {
         assert(!visibilitySet.isEmpty());
 
         try {
-            final EditText editText = (EditText) rootView.findViewById(visibilitySet.get(0));
-            BaseTextWatcher textWatcher;
-            if (mTextWatchers.containsKey(editText))
-                textWatcher = mTextWatchers.get(editText);
-            else {
-                textWatcher =  new BaseTextWatcher() {
+            final EditableTextView editableTextView = (EditableTextView) rootView.findViewById(visibilitySet.get(0));
+            if (!mTextWatchers.containsKey(editableTextView)) {
+                BaseTextWatcher textWatcher =  new BaseTextWatcher() {
                     @Override
-                    public void afterTextChanged(Editable s) {
-                        super.afterTextChanged(s);
-                        stringValue.setCorrected(s.toString());
-                        editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                    public void textChanged(String s) {
+                        super.textChanged(s);
+                        stringValue.setCorrected(s);
+                        editableTextView.setCorrected(stringValue.isCorrected());
                     }};
-                mTextWatchers.put(editText, textWatcher);
+                editableTextView.addCallback(textWatcher);
+                mTextWatchers.put(editableTextView, textWatcher);
             }
-            editText.removeTextChangedListener(textWatcher);
             if (stringValue.orig != null) {
-                editText.setText(stringValue.getValue());
-                if (stringValue.isCorrected())
-                    editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-                else
-                    editText.setTypeface(Typeface.DEFAULT, 0);
-
+                editableTextView.setText(stringValue.getValue());
+                editableTextView.setCorrected(stringValue.isCorrected());
             } else {
-                editText.setText("");
+                editableTextView.setText("");
             }
-            editText.addTextChangedListener(textWatcher);
         }
         catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
      //   catch (Exception e) { Log.e("Exception", e.getMessage()); }
@@ -161,8 +150,7 @@ public class CarDetailFragment extends Fragment {
 
         try {
             final ValueView<Integer> intView = (ValueView<Integer>) rootView.findViewById(visibilitySet.get(0));
-            if (intData.isCorrected())
-                intView.setCorrected();
+            intView.setCorrected(intData.isCorrected());
             intView.setValue(intData.getValue());
             intView.setChangeListener(new ValueChangeListener<Integer>() {
                 final ValueView listenerFloatView = intView;
@@ -170,7 +158,7 @@ public class CarDetailFragment extends Fragment {
                 @Override
                 public void valueChanged(Integer newValue) {
                     intData.setCorrected(newValue);
-                    listenerFloatView.setCorrected();
+                    listenerFloatView.setCorrected(intData.isCorrected());
                 }
             });
         }
@@ -199,15 +187,14 @@ public class CarDetailFragment extends Fragment {
 
         try {
             final ValueView<Float> floatView = (ValueView<Float>) rootView.findViewById(visibilitySet.get(0));
-            if (floatData.isCorrected())
-                floatView.setCorrected();
+            floatView.setCorrected(floatData.isCorrected());
             floatView.setValue(floatData.getValue());
             floatView.setChangeListener(new ValueChangeListener<Float>() {
                 final ValueView listenerFloatView = floatView;
                 @Override
                 public void valueChanged(Float newValue) {
                     floatData.setCorrected(newValue);
-                    listenerFloatView.setCorrected();
+                    listenerFloatView.setCorrected(floatData.isCorrected());
                 }
             });
         }
@@ -364,10 +351,8 @@ public class CarDetailFragment extends Fragment {
                 R.id.car_detail_engine_code, R.id.car_detail_engine_aspiration,
                 R.id.car_detail_engine_fuel, R.id.car_detail_engine_alternator,
                 R.id.car_detail_engine_battery)) {
-            int disabledType = InputType.TYPE_NULL;
-            int enabledType = InputType.TYPE_CLASS_TEXT;
-            int newInputType = newEditMode ? enabledType : disabledType;
-            ((EditText)rootView.findViewById(i)).setInputType(newInputType);
+            EditableTextView editableTextView = (EditableTextView)rootView.findViewById(i);
+            editableTextView.setEditMode(newEditMode);
         }
         /* Spinners */
         for (Integer i : Arrays.asList(R.id.car_detail_drivetrain_gears, R.id.car_detail_drivetrain_transmission, R.id.car_detail_drivetrain_drive)) {

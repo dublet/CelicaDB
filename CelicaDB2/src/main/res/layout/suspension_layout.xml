@@ -11,32 +11,28 @@
               android:id="@+id/car_detail_suspension_front_mount_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/suspension_front"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="14sp"
-              android:id="@+id/car_detail_suspension_front_mount" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_suspension_front_mount"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_suspension_rear_mount_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/suspension_rear"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="14sp"
-              android:id="@+id/car_detail_suspension_rear_mount" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_suspension_rear_mount"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_suspension_shock_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/suspension_shock"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="14sp"
-              android:id="@+id/car_detail_suspension_shock" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_suspension_shock"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_suspension_stabilisers_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/suspension_stabilisers"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="14sp"
-              android:id="@+id/car_detail_suspension_stabilisers" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_suspension_stabilisers"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </GridLayout>

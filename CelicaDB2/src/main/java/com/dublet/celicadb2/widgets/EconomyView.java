@@ -1,9 +1,11 @@
 package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.dublet.celicadb2.Converter;
 import com.dublet.celicadb2.R;
@@ -39,6 +41,11 @@ public class EconomyView extends ValueView<Float> {
         imperialUsText.addCallback(_imperialUsWatch);
         imperialUkText.addCallback(_imperialUkWatch);
         //imperialSimpText.addCallback(_imperialSimpsonsWatch);
+
+        ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)imperialUsText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)imperialUkText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)imperialSimpText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
     public void applyPreferences() {

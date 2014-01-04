@@ -12,18 +12,16 @@
               android:id="@+id/car_detail_engine_code_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/engine_code"  android:layout_marginRight="16dp"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_engine_code" android:textIsSelectable="false"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string"  android:inputType="text" android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_code"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_aspiration_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/engine_aspiration" android:layout_marginRight="16dp"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_engine_aspiration" android:textIsSelectable="false"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text" android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_aspiration"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_cylinders_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -79,15 +77,14 @@
               android:id="@+id/car_detail_engine_fuel_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/engine_fuel" android:layout_marginRight="16dp"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_engine_fuel" android:textIsSelectable="false"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string"  android:inputType="text" android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_fuel"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_alternator_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/engine_alternator" android:layout_marginRight="16dp"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_engine_alternator" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/default_string"  android:inputType="text" android:textSize="14sp"/>
@@ -95,8 +92,7 @@
               android:id="@+id/car_detail_engine_battery_label" android:textIsSelectable="false"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/engine_battery" android:layout_marginRight="16dp"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_engine_battery" android:textIsSelectable="false"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string"  android:inputType="text" android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_engine_battery"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </GridLayout>

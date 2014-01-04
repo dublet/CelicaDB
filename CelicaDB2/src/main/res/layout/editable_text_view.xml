@@ -11,5 +11,5 @@
     <EditText
         android:id="@+id/edit_view" android:text="@string/default_zero" android:textSize="14sp"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:inputType="number" android:visibility="gone"/>
+        android:inputType="text" android:visibility="gone"/>
 </LinearLayout>

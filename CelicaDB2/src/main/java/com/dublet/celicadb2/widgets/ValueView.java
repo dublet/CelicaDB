@@ -2,7 +2,6 @@ package com.dublet.celicadb2.widgets;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.dublet.celicadb2.Preferences;
-import com.dublet.celicadb2.R;
 
 import java.util.ArrayList;
 
@@ -122,14 +119,11 @@ public class ValueView<T> extends LinearLayout  {
         }
     }
 
-    public void setCorrected() {
+    public void setCorrected(final boolean isCorrected) {
         doJobForEachEditableTextField(new ForEachEditableText() {
             @Override
             public void doSomething(EditableTextView editText) {
-                EditText et = (EditText) findViewById(R.id.edit_view);
-                TextView tv = (TextView) findViewById(R.id.text_view);
-                et.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-                tv.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                editText.setCorrected(isCorrected);
             }
         });
         /*doJobForEachEditText(new ForEachEditText() {

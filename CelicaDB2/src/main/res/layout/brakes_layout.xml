@@ -14,24 +14,21 @@
               android:id="@+id/car_detail_brakes_front_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/brakes_front"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_brakes_front" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"  android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_front"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_brakes_rear_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/brakes_rear"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_brakes_rear" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"  android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_rear"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_brakes_additional_label" android:textIsSelectable="false" android:layout_marginRight="16dp"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/brakes_additional"/>
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/car_detail_brakes_additional" android:textIsSelectable="true"
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/default_string" android:inputType="text"  android:textSize="14sp"/>
+    <com.dublet.celicadb2.widgets.EditableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/car_detail_brakes_additional"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </GridLayout>
