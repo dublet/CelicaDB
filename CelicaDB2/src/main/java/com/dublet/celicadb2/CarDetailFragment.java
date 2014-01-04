@@ -100,15 +100,6 @@ public class CarDetailFragment extends Fragment {
         catch (Exception e) { Log.e("Exception", e.getMessage()); }
     }
 
-    private void setStringField(View rootView, int resourceId, String value) {
-        String stringVal = "?";
-
-        if (value != null) {
-            stringVal = "" + value;
-        }
-        setTextOfField(rootView, resourceId, stringVal);
-    }
-
     private void setIntField(View rootView, int resourceId, int value) {
         String stringVal = "?";
 
@@ -135,12 +126,6 @@ public class CarDetailFragment extends Fragment {
         for (int resourceId : resourceIds) {
             setFieldVisibility(rootView, resourceId, isVisible);
         }
-    }
-
-    private void updateIntFields(View rootView, List<Integer> visibilitySet, Integer intValue) {
-        assert(!visibilitySet.isEmpty());
-        setIntField(rootView, visibilitySet.get(0), intValue);
-        setFieldsVisibility(rootView, visibilitySet, intValue > 0);
     }
 
     private void updateCorrectableStringFields(View rootView, List<Integer> visibilitySet, final CorrectableData<String> stringValue) {
@@ -178,19 +163,6 @@ public class CarDetailFragment extends Fragment {
      //   catch (Exception e) { Log.e("Exception", e.getMessage()); }
 
         setFieldsVisibility(rootView, visibilitySet, stringValue.orig != null);
-    }
-
-    private void updateIntViewFields(View rootView, List<Integer> visibilitySet, Integer intValue) {
-        assert(!visibilitySet.isEmpty());
-
-        try {
-            ValueView<Integer> intView = (ValueView<Integer>) rootView.findViewById(visibilitySet.get(0));
-            intView.setValue(intValue);
-        }
-        catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
-        catch (Exception e) { Log.e("Exception", e.getMessage()); }
-
-        setFieldsVisibility(rootView, visibilitySet, intValue > -1);
     }
 
     private void updateCorrectableIntViewFields(View rootView, List<Integer> visibilitySet, final CorrectableData<Integer> intData) {

@@ -82,7 +82,7 @@ Changes in build 4:\n
     <string name="unit_litres">l</string>
     <string name="unit_gallon_us">gal (US)</string>
     <string name="unit_gallon_uk">gal (UK)</string>
-    <string name="unit_cubic_cm">cm^3</string>
+    <string name="unit_cubic_cm">cm3</string>
     <string name="unit_cubic_inch">cu in</string>
 
     <string name="engine_rpm">rpm</string>
