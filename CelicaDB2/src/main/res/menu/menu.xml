@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/option_item_settings" android:title="@string/menu_settings"/>
-    <item android:id="@+id/option_item_about" android:title="@string/menu_about"/>
     <!--<item android:id="@+id/option_item_filter" android:title="@string/menu_filter" android:showAsAction="ifRoom"/>-->
     <item android:id="@+id/option_item_sort" android:title="@string/menu_sort" android:showAsAction="ifRoom"/>
     <item android:id="@+id/option_item_edit" android:title="@string/menu_edit" android:showAsAction="ifRoom"/>
     <item android:id="@+id/option_item_corrections" android:title="@string/menu_corrections"/>
     <item android:id="@+id/option_item_tyre_size" android:title="Tyre size"/>
+    <item android:id="@+id/option_item_settings" android:title="@string/menu_settings"/>
+    <item android:id="@+id/option_item_about" android:title="@string/menu_about"/>
 </menu>

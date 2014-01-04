@@ -22,6 +22,12 @@ While every effort is made to ensure correctness of data, no liability will be a
 Some images taken from Toyota brochures and are used under the Fair use clause of the local copyright legislation. </string>
     <string name="build_number_label">Build number:</string>
     <string name="changelog">Changes in build 8:\n
+- Make switching between viewing and editing mode more obvious.\n
+- Drivetrain now has spinners.\n
+- Various bug fixes to do with corrections.\n
+- Some data corrections for ST164.\n
+- Added suggested tyre sizes screen.\n\n
+
 Changes in build 7:\n
 - Added corrections manager\n\n
 

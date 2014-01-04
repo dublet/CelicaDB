@@ -252,41 +252,45 @@ public class CarDetailFragment extends Fragment {
             //setStringField(rootView, R.id.car_detail_drivetrain_drive, mItem.drive);
             //setIntField(rootView, R.id.car_detail_drivetrain_gears, mItem.gears);
             Spinner gearsSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_gears);
-            if (mItem.gears > 2) {
-                gearsSpinner.setSelection(mItem.gears - 3);
+            if (mItem.gears().getValue() > 2) {
+                gearsSpinner.setSelection(mItem.gears().getValue() - 3);
                 gearsSpinner.setVisibility(View.VISIBLE);
             } else {
                 gearsSpinner.setVisibility(View.GONE);
             }
             Spinner transmissionSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_transmission);
-            if (mItem.transmission.toLowerCase().contains("auto")) {
+            if (mItem.transmission().getValue() != null && mItem.transmission().getValue().toLowerCase().contains("auto")) {
                 transmissionSpinner.setSelection(1);
             } else {
                 transmissionSpinner.setSelection(0);
             }
             Spinner driveSpinner = (Spinner)rootView.findViewById(R.id.car_detail_drivetrain_drive);
-            if (mItem.drive.contains("RWD")) {
-                driveSpinner.setSelection(1);
-            } else if (mItem.drive.contains("4WD")) {
-                driveSpinner.setSelection(2);
+            if (mItem.drive().getValue() != null) {
+                if  (mItem.drive().getValue().contains("RWD")) {
+                    driveSpinner.setSelection(1);
+                } else if (mItem.drive().getValue().contains("4WD")) {
+                    driveSpinner.setSelection(2);
+                } else  {
+                    driveSpinner.setSelection(0);
+                }
             } else  {
                 driveSpinner.setSelection(0);
             }
 
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr1, mItem.gear_ratio_1);
-            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr1, mItem.gears > 0);
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr2, mItem.gear_ratio_2);
-            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr2, mItem.gears > 1);
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr3, mItem.gear_ratio_3);
-            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr3, mItem.gears > 2);
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr4, mItem.gear_ratio_4);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr4_label, R.id.car_detail_drivetrain_gr4), mItem.gears > 3);
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr5, mItem.gear_ratio_5);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr5_label, R.id.car_detail_drivetrain_gr5), mItem.gears > 4);
-            setFloatField(rootView, R.id.car_detail_drivetrain_gr6, mItem.gear_ratio_6);
-            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr6_label, R.id.car_detail_drivetrain_gr6), mItem.gears > 5);
-            setFloatField(rootView, R.id.car_detail_drivetrain_grr, mItem.gear_ratio_R);
-            setFloatField(rootView, R.id.car_detail_drivetrain_final_drive, mItem.final_drive);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr1), mItem.gear_ratio_1());
+            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr1, mItem.gears().getValue() > 0);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr2), mItem.gear_ratio_2());
+            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr2, mItem.gears().getValue() > 1);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr3), mItem.gear_ratio_3());
+            setFieldVisibility(rootView, R.id.car_detail_drivetrain_gr3, mItem.gears().getValue() > 2);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr4), mItem.gear_ratio_4());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr4_label, R.id.car_detail_drivetrain_gr4), mItem.gears().getValue() > 3);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr5), mItem.gear_ratio_5());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr5_label, R.id.car_detail_drivetrain_gr5), mItem.gears().getValue() > 4);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr6), mItem.gear_ratio_6());
+            setFieldsVisibility(rootView, Arrays.asList(R.id.car_detail_drivetrain_gr6_label, R.id.car_detail_drivetrain_gr6), mItem.gears().getValue() > 5);
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_grr), mItem.gear_ratio_R());
+            updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_drivetrain_final_drive), mItem.final_drive());
             /* Performance */
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_performance_top_speed, R.id.car_detail_performance_top_speed_label), mItem.top_speed());
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_performance_zero2hundred, R.id.car_detail_performance_zero2hundred_label), mItem.zero2hundred());
@@ -339,11 +343,15 @@ public class CarDetailFragment extends Fragment {
                 R.id.car_detail_engine_stroke, R.id.car_detail_engine_compression_view,
                 R.id.car_detail_engine_cylinders, R.id.car_detail_engine_valves_per_cylinder,
                 R.id.car_detail_engine_max_power, R.id.car_detail_engine_max_power_revs,
-                R.id.car_detail_engine_max_torque, R.id.car_detail_engine_max_torque_revs)) {
+                R.id.car_detail_engine_max_torque, R.id.car_detail_engine_max_torque_revs,
+                R.id.car_detail_drivetrain_gr1, R.id.car_detail_drivetrain_gr2,
+                R.id.car_detail_drivetrain_gr3,R.id.car_detail_drivetrain_gr4,
+                R.id.car_detail_drivetrain_gr5,R.id.car_detail_drivetrain_gr6,
+                R.id.car_detail_drivetrain_grr,R.id.car_detail_drivetrain_final_drive)) {
                 ((ValueView)rootView.findViewById(i)).setEditMode(newEditMode);
         }
 
-        /* Strings fields */
+        /* EditableTextView fields */
         for (Integer i : Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_size,
                 R.id.car_detail_brakes_front,  R.id.car_detail_brakes_rear, R.id.car_detail_brakes_additional,
                 R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_rear_mount,

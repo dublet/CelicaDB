@@ -24,19 +24,12 @@ public class Car implements Comparable<Car> {
     public final ArrayList<Integer> pictureResources = new ArrayList<Integer>();
     @SuppressLint("UseSparseArrays")
     public final HashMap<Integer, String> bigPictureResources = new HashMap<Integer, String>();
-    /* Engine info */
-    public Float maxPower = Float.NaN;
-    public Integer maxPowerRevs = -1;
-    public Float maxTorque = Float.NaN;
-    public Integer maxTorqueRevs = -1;
 
     /* Drivetrain */
-    public String transmission = "";
-    public Integer gears = -1;
-    public String drive = "";
-    public Float gear_ratio_1 = Float.NaN, gear_ratio_2 = Float.NaN,
-        gear_ratio_3 = Float.NaN, gear_ratio_4 = Float.NaN, gear_ratio_5 = Float.NaN,
-        gear_ratio_6 = Float.NaN, gear_ratio_R = Float.NaN, final_drive = Float.NaN;
+    public final String DRIVETRAIN_TRANSMISSION = "transmission", DRIVETRAIN_NUM_GEARS = "gears",
+            DRIVETRAIN_DRIVE = "drive", DRIVETRAIN_GR_1 = "gear_ratio_1", DRIVETRAIN_GR_2 = "gear_ratio_2",
+            DRIVETRAIN_GR_3 = "gear_ratio_3", DRIVETRAIN_GR_4 = "gear_ratio_4", DRIVETRAIN_GR_5 = "gear_ratio_5",
+            DRIVETRAIN_GR_6 = "gear_ratio_6", DRIVETRAIN_GR_R = "gear_ratio_R", DRIVETRAIN_GR_FINAL = "final_drive";
     /* Engine */
     public final String ENGINE_CODE = "code", ENGINE_ASPIRATION = "aspiration",
             ENGINE_FUEL = "fuel", ENGINE_ALTERNATOR = "alternator",
@@ -121,16 +114,6 @@ public class Car implements Comparable<Car> {
                 ENGINE_MAX_POWER , ENGINE_MAX_TORQUE};
         String[] intElements = { ENGINE_NUM_CYLINDERS, ENGINE_NUM_VALVES_PER_CYLINDER,
                 ENGINE_MAX_POWER_REVS, ENGINE_MAX_TORQUE_REVS };
-
-        for (String element : stringElements) {
-            stringValues.put(element, new CorrectableData<String>(element, null));
-        }
-        for (String element : floatElements) {
-            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
-        }
-        for (String element : intElements) {
-            intValues.put(element, new CorrectableData<Integer>(element, -1));
-        }
         NodeList nl = e.getElementsByTagName("engine");
         readFloatElements(nl, floatElements);
         readStringElements(nl, stringElements);
@@ -138,46 +121,26 @@ public class Car implements Comparable<Car> {
     }
 
     private void loadDrivetrainData(Element e) {
+        String[] stringElements = { DRIVETRAIN_TRANSMISSION, DRIVETRAIN_DRIVE };
+        String[] floatElements = { DRIVETRAIN_GR_1, DRIVETRAIN_GR_2,
+                DRIVETRAIN_GR_3, DRIVETRAIN_GR_4, DRIVETRAIN_GR_5,
+                DRIVETRAIN_GR_6, DRIVETRAIN_GR_R, DRIVETRAIN_GR_FINAL };
+        String[] intElements = { DRIVETRAIN_NUM_GEARS };
         NodeList nl = e.getElementsByTagName("drivetrain");
-        if (nl.getLength() > 0) {
-            NodeList children = nl.item(0).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                if (!children.item(i).hasChildNodes()) {
-                    continue;
-                }
-                String nodeName = children.item(i).getNodeName();
-                String nodeValue = children.item(i).getFirstChild().getNodeValue();
-
-                if (nodeName.equalsIgnoreCase("transmission")) transmission = nodeValue;
-                else if (nodeName.equalsIgnoreCase("gears")) gears = Integer.parseInt(nodeValue);
-                else if (nodeName.equalsIgnoreCase("drive")) drive = nodeValue;
-                else if (nodeName.equalsIgnoreCase("gear_ratio_1")) gear_ratio_1 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_2")) gear_ratio_2 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_3")) gear_ratio_3 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_4")) gear_ratio_4 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_5")) gear_ratio_5 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_6")) gear_ratio_6 = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("gear_ratio_R")) gear_ratio_R = Float.parseFloat(nodeValue);
-                else if (nodeName.equalsIgnoreCase("final_drive")) final_drive = Float.parseFloat(nodeValue);
-            }
-        }
+        readFloatElements(nl, floatElements);
+        readStringElements(nl, stringElements);
+        readIntElements(nl, intElements);
     }
 
     private void loadPerformanceData(Element e) {
         String[] elements = { PERFORMANCE_TOP_SPEED, PERFORMANCE_ZERO_TO_HUNDRED };
-        for (String element : elements) {
-            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
-        }
+
         NodeList nl = e.getElementsByTagName("performance");
         readFloatElements(nl, elements);
     }
 
     private void loadEconomyData(Element e) {
         String[] elements = { ECO_CITY, ECO_MOTORWAY, ECO_OVERALL};
-        for (String element : elements) {
-            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
-        }
-
         NodeList nl = e.getElementsByTagName("economy");
         readFloatElements(nl, elements);
     }
@@ -187,18 +150,12 @@ public class Car implements Comparable<Car> {
                 MEASURE_LENGTH, MEASURE_WIDTH, MEASURE_HEIGHT, MEASURE_WHEEL_BASE,
                 MEASURE_TW_FRONT, MEASURE_TW_REAR, MEASURE_MASS, MEASURE_FUEL_CAP,
                 MEASURE_OIL_CAP, MEASURE_COOLANT_CAP, MEASURE_CD_VALUE, MEASURE_STEERING_ROT };
-        for (String element : elements) {
-            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
-        }
         NodeList nl = e.getElementsByTagName("measurements");
         readFloatElements(nl, elements);
     }
 
     private void loadBrakesData(Element e) {
         String[] elements = { BRAKES_FRONT, BRAKES_REAR, BRAKES_ADDITIONAL };
-        for (String element : elements) {
-            stringValues.put(element, new CorrectableData<String>(element, null));
-        }
         NodeList nl = e.getElementsByTagName("brakes");
         readStringElements(nl, elements);
     }
@@ -206,23 +163,21 @@ public class Car implements Comparable<Car> {
     private void loadSuspensionData(Element e) {
         String[] elements = { SUSPENSION_FRONT, SUSPENSION_REAR,
                 SUSPENSION_SHOCKS, SUSPENSION_STABILISERS };
-        for (String element : elements) {
-            stringValues.put(element, new CorrectableData<String>(element, null));
-        }
         NodeList nl = e.getElementsByTagName("suspension");
         readStringElements(nl, elements);
     }
 
     private void loadTyresData(Element e) {
         String[] elements = { TYRES_RIM_SIZE, TYRES_SIZE };
-        for (String element : elements) {
-            stringValues.put(element, new CorrectableData<String>(element, null));
-        }
         NodeList nl = e.getElementsByTagName("tyres");
         readStringElements(nl, elements);
     }
 
     private void readFloatElements(NodeList nl, String[] elements) {
+        for (String element : elements) {
+            floatValues.put(element, new CorrectableData<Float>(element, Float.NaN));
+        }
+
         if (nl.getLength() > 0) {
             NodeList children = nl.item(0).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
@@ -247,6 +202,10 @@ public class Car implements Comparable<Car> {
     }
 
     private void readStringElements(NodeList nl, String[] elements) {
+        for (String element : elements) {
+            stringValues.put(element, new CorrectableData<String>(element, null));
+        }
+
         if (nl.getLength() > 0) {
             NodeList children = nl.item(0).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
@@ -266,6 +225,10 @@ public class Car implements Comparable<Car> {
     }
 
     private void readIntElements(NodeList nl, String[] elements) {
+        for (String element : elements) {
+            intValues.put(element, new CorrectableData<Integer>(element, -1));
+        }
+
         if (nl.getLength() > 0) {
             NodeList children = nl.item(0).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
@@ -311,15 +274,15 @@ public class Car implements Comparable<Car> {
     }
 
     public float getPowerPerWeight() {
-        if (!maxPower.isNaN() && !mass().getValue().isNaN()) {
-            return maxPower / (mass().getValue() / 1000f);
+        if (!maxPower().getValue().isNaN() && !mass().getValue().isNaN()) {
+            return maxPower().getValue() / (mass().getValue() / 1000f);
         }
         return Float.NaN;
     }
 
     public float getWeightPerTorque() {
-        if (!maxTorque.isNaN() && !mass().getValue().isNaN()) {
-            return mass().getValue() / maxTorque;
+        if (!maxTorque().getValue().isNaN() && !mass().getValue().isNaN()) {
+            return mass().getValue() / maxTorque().getValue();
         }
         return Float.NaN;
     }
@@ -475,6 +438,18 @@ public class Car implements Comparable<Car> {
     public CorrectableData<Integer> maxPowerRevs() { return intValues.get(ENGINE_MAX_POWER_REVS); }
     public CorrectableData<Float> maxTorque() { return floatValues.get(ENGINE_MAX_TORQUE); }
     public CorrectableData<Integer> maxTorqueRevs() { return intValues.get(ENGINE_MAX_TORQUE_REVS); }
+
+    public CorrectableData<String> transmission () { return stringValues.get(DRIVETRAIN_TRANSMISSION); }
+    public CorrectableData<Integer> gears() { return intValues.get(DRIVETRAIN_NUM_GEARS); }
+    public CorrectableData<String> drive() { return stringValues.get(DRIVETRAIN_DRIVE); }
+    public CorrectableData<Float> gear_ratio_1() { return floatValues.get(DRIVETRAIN_GR_1); }
+    public CorrectableData<Float> gear_ratio_2() { return floatValues.get(DRIVETRAIN_GR_2); }
+    public CorrectableData<Float> gear_ratio_3() { return floatValues.get(DRIVETRAIN_GR_3); }
+    public CorrectableData<Float> gear_ratio_4() { return floatValues.get(DRIVETRAIN_GR_4); }
+    public CorrectableData<Float> gear_ratio_5() { return floatValues.get(DRIVETRAIN_GR_5); }
+    public CorrectableData<Float> gear_ratio_6() { return floatValues.get(DRIVETRAIN_GR_6); }
+    public CorrectableData<Float> gear_ratio_R() { return floatValues.get(DRIVETRAIN_GR_R); }
+    public CorrectableData<Float> final_drive() { return floatValues.get(DRIVETRAIN_GR_FINAL); }
 }
 
 
