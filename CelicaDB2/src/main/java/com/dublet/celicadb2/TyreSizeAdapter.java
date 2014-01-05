@@ -39,9 +39,11 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
     }
 
     private class RimSize {
-        public float rimSize;
-        public float minSize, maxSize;
-        public float idealMinSize, idealMaxSize;
+        public final float rimSize;
+        public final float minSize;
+        public final float maxSize;
+        public final float idealMinSize;
+        public final float idealMaxSize;
         public RimSize() {
             rimSize = minSize = maxSize = idealMinSize = idealMaxSize = Float.NaN;
         }
@@ -224,17 +226,18 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
 
         for (int suggestedAlloySize : _suggestedAlloySizes) {
             for (int suggestedWidth = tyre.tyreWidth - 10; suggestedWidth < tyre.tyreWidth + 50; suggestedWidth += 5) {
-                float previousDiff = Float.NaN;
+                Float previousDiff = Float.NaN;
                 for (int suggestedProfile = 25; suggestedProfile < 80; suggestedProfile += 5) {
                     if (_suggestedTyreSizes.get(suggestedAlloySize).size() > limit)
                         break;
                     TyreSize guess = new TyreSize(suggestedAlloySize, suggestedProfile, suggestedWidth);
                     float diff = Math.abs(tyre.differenceTo(guess));
-                    if (previousDiff != Float.NaN && diff > softMax && diff > previousDiff) {
+                    float absDiff = Math.abs(diff);
+                    if (previousDiff.isNaN() && absDiff > softMax && diff > previousDiff) {
                         break;
                     }
                     previousDiff = diff;
-                    if (diff < softMax) {
+                    if (absDiff < softMax) {
                         _suggestedTyreSizes.get(suggestedAlloySize).add(guess);
                     }
                 }

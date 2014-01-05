@@ -17,19 +17,6 @@ import java.text.NumberFormat;
  * Created by dublet on 23/12/13.
  */
 public class VolumeView extends ValueView<Float> {
-    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
-    };
-    private final BaseTextWatcher _imperialUsWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.galUsToLitres(Util.parseFloat(s.toString()))); }
-    };
-    private final BaseTextWatcher _imperialUkWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.galUKToLitres(Util.parseFloat(s.toString()))); }
-    };
-    private final BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.hogsheadToLitres(Util.parseFloat(s.toString()))); }
-    };
-
     public VolumeView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.volume_view);
 
@@ -37,10 +24,18 @@ public class VolumeView extends ValueView<Float> {
                 imperialUsText = ((EditableTextView)findViewById(R.id.imperial_us)),
                 imperialUkText = ((EditableTextView)findViewById(R.id.imperial_uk)),
                 imperialSimpText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
-        metricText.addCallback(_metricWatch);
-        imperialUsText.addCallback(_imperialUsWatch);
-        imperialUkText.addCallback(_imperialUkWatch);
-        imperialSimpText.addCallback(_imperialSimpsonsWatch);
+        metricText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Util.parseFloat(s)); }
+        });
+        imperialUsText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Converter.galUsToLitres(Util.parseFloat(s))); }
+        });
+        imperialUkText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Converter.galUKToLitres(Util.parseFloat(s))); }
+        });
+        imperialSimpText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Converter.hogsheadToLitres(Util.parseFloat(s))); }
+        });
 
         ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         ((EditText)imperialUsText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);

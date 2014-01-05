@@ -55,7 +55,7 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
              final CorrectableData<String> data = (CorrectableData<String>) getChild(groupPosition, childPosition);
              assert(data != null);
 
-             TextView elementView = ((TextView)convertView.findViewById(R.id.element)),
+             final TextView elementView = ((TextView)convertView.findViewById(R.id.element)),
                      originalView = ((TextView)convertView.findViewById(R.id.original)),
                      correctedView = ((TextView)convertView.findViewById(R.id.corrected));
 
@@ -78,7 +78,9 @@ public class CorrectionAdapter extends BaseExpandableListAdapter {
                      switch (actionId) {
                          case EditorInfo.IME_ACTION_DONE: /* FALLTHROUGH */
                          case EditorInfo.IME_ACTION_NEXT:
-                             // TODO
+                             String newValue = correctedView.getText().toString();
+                             car.correct(data.tag, newValue);
+                             data.setCorrected(newValue);
                              break;
                      }
 

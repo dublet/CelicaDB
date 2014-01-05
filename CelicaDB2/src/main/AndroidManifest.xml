@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dublet.celicadb2"
-    android:versionCode="8"
+    android:versionCode="9"
     android:versionName="1.0" >
 
     <!--<uses-permission android:name="android.permission.INTERNET" /> -->
@@ -17,7 +17,7 @@
         android:logo="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:debuggable="false">
+        android:debuggable="true">
         <activity
             android:name="com.dublet.celicadb2.CarListActivity"
             android:label="@string/app_name" >

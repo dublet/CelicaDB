@@ -17,14 +17,6 @@ import java.text.NumberFormat;
  * Created by dublet on 23/12/13.
  */
 public class SpeedView extends ValueView<Float> {
-    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
-    };
-    private final BaseTextWatcher _imperialWatch = new BaseTextWatcher() { public void textChanged(String s) { setValue(Converter.mphToKmph(Util.parseFloat(s.toString()))); }};
-    private final BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.furlongPerFortnightToKmph(Util.parseFloat(s.toString()))); }
-    };
-
     public SpeedView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.speed_view);
 
@@ -32,9 +24,13 @@ public class SpeedView extends ValueView<Float> {
                 imperialText = ((EditableTextView)findViewById(R.id.imperial)),
                 simpsonsText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
-        metricText.addCallback(_metricWatch);
-        imperialText.addCallback(_imperialWatch);
-        simpsonsText.addCallback(_imperialSimpsonsWatch);
+        metricText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Util.parseFloat(s)); }
+        });
+        imperialText.addCallback(new BaseTextWatcher() { public void textChanged(String s) { setValue(Converter.mphToKmph(Util.parseFloat(s))); }});
+        simpsonsText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Converter.furlongPerFortnightToKmph(Util.parseFloat(s))); }
+        });
 
         ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         ((EditText)imperialText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);

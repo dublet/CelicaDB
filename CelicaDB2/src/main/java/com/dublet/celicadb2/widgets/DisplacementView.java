@@ -17,20 +17,22 @@ import java.text.NumberFormat;
  * Created by dublet on 01/01/14.
  */
 public class DisplacementView extends ValueView<Float> {
-    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s)); }
-    };
-    private final BaseTextWatcher _imperialWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.cubicInchToCubicCm(Util.parseFloat(s))); }
-    };
 
     public DisplacementView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.displacement_view);
 
         EditableTextView metricText = ((EditableTextView)findViewById(R.id.metric)),
                 imperialText = ((EditableTextView)findViewById(R.id.imperial));
-        metricText.addCallback(_metricWatch);
-        imperialText.addCallback(_imperialWatch);
+        metricText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) {
+                setValue(Util.parseFloat(s));
+            }
+        });
+        imperialText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) {
+                setValue(Converter.cubicInchToCubicCm(Util.parseFloat(s)));
+            }
+        });
 
         ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         ((EditText)imperialText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);

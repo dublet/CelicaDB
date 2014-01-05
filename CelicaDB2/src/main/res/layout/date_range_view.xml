@@ -12,7 +12,7 @@
               android:id="@+id/car_detail_dates_dash"
               android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
-              android:textIsSelectable="true" android:text="-"/>
+              android:textIsSelectable="true" android:text="@string/date_range_dash"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/car_detail_decease_date" 
               android:layout_width="wrap_content" android:layout_height="wrap_content"

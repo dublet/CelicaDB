@@ -97,15 +97,6 @@ public class CarDetailFragment extends Fragment {
         catch (Exception e) { Log.e("Exception", e.getMessage()); }
     }
 
-    private void setFloatField(View rootView, int resourceId, Float value) {
-        String stringVal = "?";
-
-        if (!value.isNaN()) {
-            stringVal = "" + value;
-        }
-        setTextOfField(rootView, resourceId, stringVal);
-    }
-
     private void setFieldVisibility(View rootView, int resourceId, boolean isVisible) {
         rootView.findViewById(resourceId).setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
@@ -145,6 +136,7 @@ public class CarDetailFragment extends Fragment {
         setFieldsVisibility(rootView, visibilitySet, stringValue.orig != null);
     }
 
+    @SuppressWarnings("unchecked")
     private void updateCorrectableIntViewFields(View rootView, List<Integer> visibilitySet, final CorrectableData<Integer> intData) {
         assert(!visibilitySet.isEmpty());
 
@@ -168,6 +160,7 @@ public class CarDetailFragment extends Fragment {
         setFieldsVisibility(rootView, visibilitySet, intData.getValue() > -1);
     }
 
+    @SuppressWarnings("unchecked")
     private void updateFloatViewFields(View rootView, List<Integer> visibilitySet, Float floatValue) {
         assert(!visibilitySet.isEmpty());
 
@@ -181,6 +174,7 @@ public class CarDetailFragment extends Fragment {
         setFieldsVisibility(rootView, visibilitySet, !floatValue.isNaN());
     }
 
+    @SuppressWarnings("unchecked")
     private void updateCorrectableFloatViewFields(View rootView, List<Integer> visibilitySet, final CorrectableData<Float> floatData) {
         assert(!visibilitySet.isEmpty());
         assert(floatData != null);

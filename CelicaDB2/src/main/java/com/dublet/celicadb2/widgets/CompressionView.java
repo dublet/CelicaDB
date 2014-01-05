@@ -16,14 +16,15 @@ import java.text.NumberFormat;
  * Created by dublet on 01/01/14.
  */
 public class CompressionView extends ValueView<Float> {
-    private final BaseTextWatcher _compressionRatioWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
-    };
     public CompressionView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.compression_view);
 
         EditableTextView compressionRatioText = ((EditableTextView)findViewById(R.id.car_detail_engine_compression_ratio));
-        compressionRatioText.addCallback(_compressionRatioWatch);
+        compressionRatioText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) {
+                setValue(Util.parseFloat(s));
+            }
+        });
 
         ((EditText)compressionRatioText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }

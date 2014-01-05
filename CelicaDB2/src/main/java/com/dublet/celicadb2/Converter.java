@@ -34,7 +34,7 @@ public class Converter {
     }
 
     public static Float lPer100kmToRodsPerHogstead(Float lPer100Km) {
-        return lPer100kmToMpgUS(lPer100Km) / 1 * (63f / 1f) * (320f / 1f);
+        return lPer100kmToMpgUK(lPer100Km) / 63f * 320f;
     }
 
     public static Float mpgUkTolPer100km(Float mpgUk) {
@@ -43,6 +43,10 @@ public class Converter {
 
     public static Float mpgUSTolPer100km(Float mpgUs) {
         return lPer100kmToMphUsMultiplier / mpgUs;
+    }
+
+    public static Float rodsPerHogsteadToLPer100km(Float rodsPerHogsHead) {
+        return mpgUkTolPer100km(rodsPerHogsHead / 320f * 63f);
     }
 
     public static Float metresToFeet(Float metres) {

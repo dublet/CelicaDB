@@ -17,12 +17,6 @@ import java.text.NumberFormat;
  * Created by dublet on 01/01/14.
  */
 public class SmallLengthView extends ValueView<Float> {
-    private final BaseTextWatcher _metricWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
-    };
-    private final BaseTextWatcher _imperialWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Converter.inchToMm(Util.parseFloat(s.toString()))); }
-    };
     /*private BaseTextWatcher _imperialSimpsonsWatch = new BaseTextWatcher() {
         public void textChanged(String s) { setValue(Converter.rodsToMetres(Util.parseFloat(s.toString()))); }
     };*/
@@ -34,8 +28,12 @@ public class SmallLengthView extends ValueView<Float> {
                 imperialText = ((EditableTextView)findViewById(R.id.imperial)),
                 simpsonsText = ((EditableTextView)findViewById(R.id.imperial_simpsons));
 
-        metricText.addCallback(_metricWatch);
-        imperialText.addCallback(_imperialWatch);
+        metricText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Util.parseFloat(s)); }
+        });
+        imperialText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Converter.inchToMm(Util.parseFloat(s))); }
+        });
         //((EditText)findViewById(R.id.imperial_simpsons)).addTextChangedListener(_imperialSimpsonsWatch);
 
         ((EditText)metricText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);

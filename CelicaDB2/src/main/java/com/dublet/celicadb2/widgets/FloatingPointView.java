@@ -16,15 +16,14 @@ import java.text.NumberFormat;
  * Created by dublet on 30/12/13.
  */
 public class FloatingPointView extends ValueView<Float> {
-    private final BaseTextWatcher _floatWatch = new BaseTextWatcher() {
-        public void textChanged(String s) { setValue(Util.parseFloat(s.toString())); }
-    };
     public FloatingPointView(Context context, AttributeSet attrs) {
         super(context, attrs, R.layout.number_view);
 
         EditableTextView floatText = ((EditableTextView)findViewById(R.id.number_value));
         ((EditText)findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        floatText.addCallback(_floatWatch);
+        floatText.addCallback(new BaseTextWatcher() {
+            public void textChanged(String s) { setValue(Util.parseFloat(s)); }
+        });
     }
 
     public void applyPreferences() {

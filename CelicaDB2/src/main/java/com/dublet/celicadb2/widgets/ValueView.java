@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.dublet.celicadb2.Preferences;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
  */
 public class ValueView<T> extends LinearLayout  {
     private class ForEachEditableText { public void doSomething(EditableTextView editText) { } }
-    private class ForEachEditText { public void doSomething(EditText editText) { } }
 
     final ArrayList<ValueChangeListener> _listeners = new ArrayList<ValueChangeListener>();
 
@@ -35,6 +33,7 @@ public class ValueView<T> extends LinearLayout  {
     public  void applyPreferences() {
     }
 
+    @SuppressWarnings("unchecked")
     public  void setValue(T newValue) {
         for (ValueChangeListener listener : _listeners) {
             listener.valueChanged(newValue);
@@ -53,16 +52,6 @@ public class ValueView<T> extends LinearLayout  {
     }
 
     public void setEditMode(final boolean newEditMode) {
-        /*doJobForEachEditText(new ForEachEditText() {
-            @Override
-            public void doSomething(EditText editText) {
-                int disabledType = InputType.TYPE_NULL;
-                int enabledType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                int newInputType = newEditMode ? enabledType : disabledType;
-                editText.setInputType(newInputType);
-            }
-        });*/
-
         doJobForEachEditableTextField(new ForEachEditableText() {
             @Override
             public void doSomething(EditableTextView editText) {
@@ -84,23 +73,6 @@ public class ValueView<T> extends LinearLayout  {
         _listeners.add(newListener);
     }
 
-   /* private void doJobForEachEditText(ForEachEditText feet) {
-        if (getChildCount() != 1)
-            return;
-
-        ViewGroup layout = (ViewGroup)getChildAt(0);
-        if (layout == null)
-            return;
-
-        for (int i = 0; i < layout.getChildCount(); ++i) {
-            View child = layout.getChildAt(i);
-            if (child instanceof EditText)
-            {
-                EditText editText = (EditText) child;
-                feet.doSomething(editText);
-            }
-        }
-    }*/
     private void doJobForEachEditableTextField(ForEachEditableText feet) {
         if (getChildCount() != 1)
             return;
@@ -126,11 +98,5 @@ public class ValueView<T> extends LinearLayout  {
                 editText.setCorrected(isCorrected);
             }
         });
-        /*doJobForEachEditText(new ForEachEditText() {
-            @Override
-            public void doSomething(EditText editText) {
-                editText.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-            }
-        });*/
     }
 }

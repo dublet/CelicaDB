@@ -106,6 +106,8 @@ Changes in build 4:\n
     <string name="engine_fuel">Fuel</string>
     <string name="engine_alternator">Alternator</string>
     <string name="engine_battery">Battery</string>
+    <string name="date_range_dash">-</string>
+    <string name="at">\@</string>
 
 
     <string name="menu_settings">Settings</string>
@@ -115,6 +117,7 @@ Changes in build 4:\n
     <string name="menu_edit">Edit</string>
     <string name="menu_edit_done">Done</string>
     <string name="menu_corrections">Corrections</string>
+    <string name="menu_tyre_size">Tyre size</string>
 
     <string name="menu_corrections_clear">Clear</string>
     <string name="menu_corrections_submit">Submit</string>
@@ -150,6 +153,8 @@ Changes in build 4:\n
     <string name="tyres_size">Tyre size</string>
     <string name="tyres_rim_size">Rim size</string>
 
+    <string name="drivetrain_transmission">Transmission</string>
+    <string name="drivetrain_gears">gears</string>
     <string name="drivetrain_1">1</string>
     <string name="drivetrain_2">2</string>
     <string name="drivetrain_3">3</string>
@@ -159,6 +164,24 @@ Changes in build 4:\n
     <string name="drivetrain_R">R</string>
     <string name="drivetrain_final">Final</string>
 
+    <string name="measurement_length">Length</string>
+    <string name="measurement_width">Width</string>
+    <string name="measurement_height">Height</string>
+    <string name="measurement_wheel_base">Wheel base</string>
+    <string name="measurement_tw_front">Track width front</string>
+    <string name="measurement_tw_rear">Track width rear</string>
+    <string name="measurement_weight">Mass</string>
+    <string name="measurement_fuel_cap">Fuel capacity</string>
+    <string name="measurement_oil_cap">Oil capacity</string>
+    <string name="measurement_coolant_cap">Coolant capacity</string>
+    <string name="measurement_cd">Drag coefficient (Cd)</string>
+    <string name="measurement_steering_rot">Steering wheel rotations</string>
+
+    <string name="tyre_size_stock">Stock:</string>
+    <string name="tyre_size_width_delim">/</string>
+    <string name="tyre_size_radial_delim">R</string>
+    <string name="tyre_size_max_dev">Max deviation:</string>
+    <string name="tyre_size_percent">%</string>
 
     <string name="default_zero">0</string>
     <string name="default_string">Test string</string>
