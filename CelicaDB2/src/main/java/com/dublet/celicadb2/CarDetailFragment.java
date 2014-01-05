@@ -197,6 +197,29 @@ public class CarDetailFragment extends Fragment {
 
         setFieldsVisibility(rootView, visibilitySet, !floatData.getValue().isNaN());
     }
+    @SuppressWarnings("unchecked")
+    private void updateCorrectableTyreSizeFields(View rootView, List<Integer> visibilitySet, final CorrectableData<TyreSize> tyreSizeData) {
+        assert(!visibilitySet.isEmpty());
+        assert(tyreSizeData != null);
+
+        try {
+            final ValueView<TyreSize> tyreSizeView = (ValueView<TyreSize>) rootView.findViewById(visibilitySet.get(0));
+            tyreSizeView.setCorrected(tyreSizeData.isCorrected());
+            tyreSizeView.setValue(tyreSizeData.getValue());
+            tyreSizeView.setChangeListener(new ValueChangeListener<TyreSize>() {
+                final ValueView listenerFloatView = tyreSizeView;
+                @Override
+                public void valueChanged(TyreSize newValue) {
+                    tyreSizeData.setCorrected(newValue);
+                    listenerFloatView.setCorrected(tyreSizeData.isCorrected());
+                }
+            });
+        }
+        catch (Resources.NotFoundException e) { Log.e("RESOURCE NOT FOUND!!", e.getMessage()); }
+        // catch (Exception e) { Log.e("Exception", e.getMessage()); }
+
+        setFieldsVisibility(rootView, visibilitySet, tyreSizeData.getValue() != null);
+    }
 
     private void updateDateRangeFields(View rootView, List<Integer> visibilitySet, Integer fromValue, Integer toValue) {
         assert(!visibilitySet.isEmpty());
@@ -296,7 +319,7 @@ public class CarDetailFragment extends Fragment {
             updateCorrectableFloatViewFields(rootView, Arrays.asList(R.id.car_detail_economy_motorway, R.id.car_detail_economy_motorway_label), mItem.eco_motorway());
             /* Tyres */
             updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_rim_size_label), mItem.rim_size());
-            updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_tyres_size, R.id.car_detail_tyres_size_label), mItem.tyre_size());
+            updateCorrectableTyreSizeFields(rootView, Arrays.asList(R.id.car_detail_tyres_size, R.id.car_detail_tyres_size_label), mItem.tyre_size());
             /* Brakes */
             updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_front, R.id.car_detail_brakes_front_label), mItem.brakes_front());
             updateCorrectableStringFields(rootView, Arrays.asList(R.id.car_detail_brakes_rear, R.id.car_detail_brakes_rear_label), mItem.brakes_rear());
@@ -327,11 +350,14 @@ public class CarDetailFragment extends Fragment {
     public void setEditMode(boolean newEditMode) {
         View rootView = getView();
         /* Value Views */
-        for (Integer i : Arrays.asList(R.id.car_detail_economy_overall, R.id.car_detail_economy_city, R.id.car_detail_economy_motorway,
-                R.id.car_detail_measurement_length, R.id.car_detail_measurement_width, R.id.car_detail_measurement_height,
-                R.id.car_detail_measurement_wheel_base, R.id.car_detail_measurement_track_width_front, R.id.car_detail_measurement_track_width_rear,
-                R.id.car_detail_measurement_mass, R.id.car_detail_measurement_fuel_capacity, R.id.car_detail_measurement_oil_capacity,
-                R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_drag_coefficient, R.id.car_detail_measurement_steering_wheel_rotations,
+        for (Integer i : Arrays.asList(R.id.car_detail_economy_overall, R.id.car_detail_economy_city,
+                R.id.car_detail_economy_motorway, R.id.car_detail_measurement_height,
+                R.id.car_detail_measurement_length, R.id.car_detail_measurement_width,
+                R.id.car_detail_measurement_wheel_base, R.id.car_detail_measurement_track_width_front,
+                R.id.car_detail_measurement_track_width_rear, R.id.car_detail_measurement_mass,
+                R.id.car_detail_measurement_fuel_capacity, R.id.car_detail_measurement_oil_capacity,
+                R.id.car_detail_measurement_coolant_capacity, R.id.car_detail_measurement_drag_coefficient,
+                R.id.car_detail_measurement_steering_wheel_rotations, R.id.car_detail_tyres_size,
                 R.id.car_detail_performance_top_speed, R.id.car_detail_performance_zero2hundred,
                 R.id.car_detail_engine_displacement, R.id.car_detail_engine_bore,
                 R.id.car_detail_engine_stroke, R.id.car_detail_engine_compression_view,
@@ -346,7 +372,7 @@ public class CarDetailFragment extends Fragment {
         }
 
         /* EditableTextView fields */
-        for (Integer i : Arrays.asList(R.id.car_detail_tyres_rim_size, R.id.car_detail_tyres_size,
+        for (Integer i : Arrays.asList(R.id.car_detail_tyres_rim_size,
                 R.id.car_detail_brakes_front,  R.id.car_detail_brakes_rear, R.id.car_detail_brakes_additional,
                 R.id.car_detail_suspension_front_mount, R.id.car_detail_suspension_rear_mount,
                 R.id.car_detail_suspension_shock,  R.id.car_detail_suspension_stabilisers,

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal"
+              android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/tyre_width"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:text="@string/tyre_size_width_delim"
+              android:textSize="14sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/profile"
+              android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView android:text="@string/tyre_size_radial_delim"
+              android:textSize="14sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/alloy_diameter" android:layout_marginRight="8dp"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/load_index"
+                                                   android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.dublet.celicadb2.widgets.EditableTextView android:id="@+id/speed_rating"
+                                                   android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

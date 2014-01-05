@@ -15,29 +15,11 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by dublet on 31/12/13.
  */
 public class TyreSizeAdapter extends BaseExpandableListAdapter {
-    private class TyreSize {
-        public int alloySize;
-        public int profileSize;
-        public int tyreWidth;
-        public TyreSize() { alloySize = -1; profileSize = -1; tyreWidth = -1; }
-        public TyreSize(int alloy, int profile, int width) { alloySize = alloy; profileSize = profile; tyreWidth = width; }
-        public String toString() { return "" + tyreWidth + "/" + profileSize + "R" + alloySize; }
-
-        /**
-         * Wheel diameter is the alloy size in mm plus twice the sidewall.
-         */
-        public float totalWheelDiameter() { return (alloySize * 25.4f)  + ((tyreWidth * (profileSize / 100f)) * 2); }
-        public float circumference() { return (float)(totalWheelDiameter() * Math.PI); }
-        public float differenceTo(TyreSize rhs) { return (1f - (circumference() / rhs.circumference())); }
-    }
-
     private class RimSize {
         public final float rimSize;
         public final float minSize;
@@ -137,21 +119,14 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
     final RimSizeList _rimSizeList = new RimSizeList();
     TyreSize _stockSize = new TyreSize();
 
-    public TyreSizeAdapter(Context c, String tyreSize) {
+    public TyreSizeAdapter(Context c, TyreSize tyreSize) {
         _context = c;
+        _stockSize = tyreSize;
 
-        String pattern = "(\\d{3})/(\\d{2})[A-Z]+(\\d{2}).*";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(tyreSize);
-
-        if (m.matches()) {
-            _stockSize.alloySize = Integer.parseInt(m.group(3));
-            _stockSize.profileSize = Integer.parseInt(m.group(2));
-            _stockSize.tyreWidth = Integer.parseInt(m.group(1));
-
+        if (_stockSize != null) {
             generate(_stockSize);
         } else {
-            Log.e("Uh-uh", tyreSize);
+            Log.e("Uh-uh", tyreSize.toString());
             return;
         }
 
@@ -181,15 +156,15 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
     private TyreSize getStockTyre() {
         Activity a = (Activity)_context;
         if (a instanceof TyreSizeActivity) {
-            EditText  compareTyreWidthView = ((EditText)a.findViewById(R.id.compare_tyre_width)),
-                    compareProfileView = ((EditText)a.findViewById(R.id.compare_profile)),
-                    compareAlloyView = ((EditText)a.findViewById(R.id.compare_alloy_diameter));
+            EditText compareTyreWidthView = ((EditText)a.findViewById(R.id.tyre_width)),
+                    compareProfileView = ((EditText)a.findViewById(R.id.profile)),
+                    compareAlloyView = ((EditText)a.findViewById(R.id.alloy_diameter));
             try {
                 return new TyreSize(
-                        Integer.parseInt(compareAlloyView.getText().toString()),
+                        Integer.parseInt(compareTyreWidthView.getText().toString()),
                         Integer.parseInt(compareProfileView.getText().toString()),
-                        Integer.parseInt(compareTyreWidthView.getText().toString())
-                );
+                        Integer.parseInt(compareAlloyView.getText().toString()),
+                        -1, null);
             }
             catch (NumberFormatException e) { Log.e("NFE", e.getMessage()); }
             catch (NullPointerException e) { Log.e("NPE", e.getMessage()); }
@@ -230,7 +205,7 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
                 for (int suggestedProfile = 25; suggestedProfile < 80; suggestedProfile += 5) {
                     if (_suggestedTyreSizes.get(suggestedAlloySize).size() > limit)
                         break;
-                    TyreSize guess = new TyreSize(suggestedAlloySize, suggestedProfile, suggestedWidth);
+                    TyreSize guess = new TyreSize(suggestedWidth, suggestedProfile, suggestedAlloySize, -1 , null);
                     float diff = Math.abs(tyre.differenceTo(guess));
                     float absDiff = Math.abs(diff);
                     if (previousDiff.isNaN() && absDiff > softMax && diff > previousDiff) {

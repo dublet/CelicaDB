@@ -109,7 +109,8 @@ public class CarFactory {
             }
         }
 
-        loadCorrections();
+        if (!_Cars.isEmpty())
+            loadCorrections();
     }
 
     HashMap<String, Car> getCarMap() {

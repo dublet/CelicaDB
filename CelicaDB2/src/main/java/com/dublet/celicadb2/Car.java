@@ -60,6 +60,7 @@ public class Car implements Comparable<Car> {
     final HashMap<String, CorrectableData<Float>> floatValues = new HashMap<String, CorrectableData<Float>>();
     final HashMap<String, CorrectableData<Integer>> intValues = new HashMap<String, CorrectableData<Integer>>();
     final HashMap<String, CorrectableData<String>> stringValues = new HashMap<String, CorrectableData<String>>();
+    CorrectableData<TyreSize> tyreSizeCorrectableData = new CorrectableData<TyreSize>(TYRES_SIZE, null);
 
     Car(Element d) {
         NodeList children = d.getChildNodes();
@@ -171,6 +172,13 @@ public class Car implements Comparable<Car> {
         String[] elements = { TYRES_RIM_SIZE, TYRES_SIZE };
         NodeList nl = e.getElementsByTagName("tyres");
         readStringElements(nl, elements);
+        try {
+            tyreSizeCorrectableData.orig = TyreSize.fromString(stringValues.get(TYRES_SIZE).orig);
+            tyreSizeCorrectableData.corrected = TyreSize.fromString(stringValues.get(TYRES_SIZE).corrected);
+        } catch (Exception ex) {
+            Log.e("Tyre format exception, could not parse" + stringValues.get(TYRES_SIZE).orig, ex.getMessage());
+        }
+        stringValues.remove(TYRES_SIZE);
     }
 
     private void readFloatElements(NodeList nl, String[] elements) {
@@ -315,6 +323,10 @@ public class Car implements Comparable<Car> {
                 sb.append(value.toXML(key));
             }
         }
+        if (tyreSizeCorrectableData.orig != null && tyreSizeCorrectableData.isCorrected()) {
+            sb.append(tyreSizeCorrectableData.toXML(tyreSizeCorrectableData.tag));
+
+        }
         if (hasCorrections) {
             String output = "<correction_of_model>";
             output += "<modelcode>" +  code + "</modelcode>";
@@ -327,18 +339,22 @@ public class Car implements Comparable<Car> {
 
     public void correct(String element, String newValue) {
         try {
-        if (floatValues.containsKey(element)) {
-            floatValues.get(element).setCorrected(Util.parseFloat(newValue));
-        } else if (intValues.containsKey(element)) {
-            intValues.get(element).setCorrected(Integer.parseInt(newValue));
-        } else if (stringValues.containsKey(element)) {
-            stringValues.get(element).setCorrected(newValue);
-        }
+            if (floatValues.containsKey(element)) {
+                floatValues.get(element).setCorrected(Util.parseFloat(newValue));
+            } else if (intValues.containsKey(element)) {
+                intValues.get(element).setCorrected(Integer.parseInt(newValue));
+            } else if (stringValues.containsKey(element)) {
+                stringValues.get(element).setCorrected(newValue);
+            } else {
+                TyreSize tyreSize = TyreSize.fromString(newValue);
+                if (tyreSize != null) {
+                    tyreSizeCorrectableData.setCorrected(tyreSize);
+                }
+            }
         } catch (NumberFormatException e) {
             int i =0;
 
         }
-        assert(false);
     }
 
     public void loadCorrection(String element, String orig, String corrected) {
@@ -348,6 +364,8 @@ public class Car implements Comparable<Car> {
             intValues.get(element).setCorrected(Integer.parseInt(corrected));
         } else if (stringValues.containsKey(element)) {
             stringValues.get(element).setCorrected(corrected);
+        } else if (tyreSizeCorrectableData.tag == element) {
+            tyreSizeCorrectableData.setCorrected(TyreSize.fromString(corrected));
         } else {
             stringValues.put(element, new CorrectableData<String>(element, orig, corrected));
         }
@@ -367,6 +385,8 @@ public class Car implements Comparable<Car> {
             if (floatData.orig != Float.NaN && floatData.isCorrected())
                 list.add(new CorrectableData<String>(floatData.tag, "" + floatData.orig, "" + floatData.corrected));
         }
+        if (tyreSizeCorrectableData.orig != null && tyreSizeCorrectableData.isCorrected())
+            list.add(new CorrectableData<String>(tyreSizeCorrectableData.tag, "" + tyreSizeCorrectableData.orig.toString(), "" + tyreSizeCorrectableData.corrected.toString()));
         return list;
     }
 
@@ -423,7 +443,7 @@ public class Car implements Comparable<Car> {
     public CorrectableData<Float> steering_wheel_rotations() { return floatValues.get(MEASURE_STEERING_ROT); }
 
     public CorrectableData<String> rim_size() { return stringValues.get(TYRES_RIM_SIZE); }
-    public CorrectableData<String> tyre_size() { return stringValues.get(TYRES_SIZE); }
+    public CorrectableData<TyreSize> tyre_size() { return tyreSizeCorrectableData; }
 
     public CorrectableData<String> brakes_additional() { return stringValues.get(BRAKES_ADDITIONAL); }
     public CorrectableData<String> brakes_front() { return stringValues.get(BRAKES_FRONT); }

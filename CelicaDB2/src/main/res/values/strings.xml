@@ -54,6 +54,7 @@ Changes in build 4:\n
     <string name="got_it">Got it!</string>
     <string name="oh_no">Oh no!</string>
     <string name="bigger">TAP FOR BIGGER</string>
+    <string name="tyre_disclaimer">Sizes below are a suggestion only and based on mathematics. Sizes may not exist, be inappropriate or not fit. Check suitability before purchase.</string>
 
     <!-- Headers -->
     <string name="header_brakes">Brakes</string>
