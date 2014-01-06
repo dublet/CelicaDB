@@ -3,8 +3,6 @@ package com.dublet.celicadb2.widgets;
 import android.content.Context;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 
 import com.dublet.celicadb2.R;
@@ -20,18 +18,15 @@ public class FloatingPointView extends ValueView<Float> {
         super(context, attrs, R.layout.number_view);
 
         EditableTextView floatText = ((EditableTextView)findViewById(R.id.number_value));
-        ((EditText)findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        ((EditText)floatText.findViewById(R.id.edit_view)).setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         floatText.addCallback(new BaseTextWatcher() {
-            public void textChanged(String s) { setValue(Util.parseFloat(s)); }
+            public void textChanged(String s) {
+                setValue(Util.parseFloat(s));
+            }
         });
     }
 
     public void applyPreferences() {
-        try {
-            int visibility = showImperial() ? View.VISIBLE : View.GONE;
-            findViewById(R.id.number_value).setVisibility(visibility);
-        }
-        catch (NullPointerException e) { Log.e("NPE", e.getMessage()); }
     }
 
     public void setValue(Float metres) {

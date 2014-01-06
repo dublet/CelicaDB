@@ -3,8 +3,6 @@ package com.dublet.celicadb2.widgets;
 import android.content.Context;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 
 import com.dublet.celicadb2.R;
@@ -30,12 +28,6 @@ public class CompressionView extends ValueView<Float> {
     }
 
     public void applyPreferences() {
-        try {
-            int visibility = showImperial() ? View.VISIBLE : View.GONE;
-            findViewById(R.id.car_detail_engine_compression_ratio).setVisibility(visibility);
-            findViewById(R.id.car_detail_engine_compression_ratio_to1).setVisibility(visibility);
-        }
-        catch (NullPointerException e) { Log.e("NPE", e.getMessage()); }
     }
 
     public void setValue(Float litres) {
