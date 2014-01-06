@@ -41,10 +41,10 @@ public class ValueView<T> extends LinearLayout  {
     }
 
     public int getMaxDecimalPlaces() {
-        int maxDecimalPlaces = 12;
+        int maxDecimalPlaces = 3;
         try {
             SharedPreferences settings = getContext().getSharedPreferences(Preferences.PREFS_NAME, 0);
-            maxDecimalPlaces = Integer.parseInt(settings.getString("decimal_places", "12"));
+            maxDecimalPlaces = Integer.parseInt(settings.getString("decimal_places", "3"));
         }
         catch (ClassCastException e) { }
         catch (Exception e) { Log.e("NPE", e.getMessage()); }
