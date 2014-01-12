@@ -156,9 +156,9 @@ public class TyreSizeAdapter extends BaseExpandableListAdapter {
     private TyreSize getStockTyre() {
         Activity a = (Activity)_context;
         if (a instanceof TyreSizeActivity) {
-            EditText compareTyreWidthView = ((EditText)a.findViewById(R.id.tyre_width)),
-                    compareProfileView = ((EditText)a.findViewById(R.id.profile)),
-                    compareAlloyView = ((EditText)a.findViewById(R.id.alloy_diameter));
+            EditText compareTyreWidthView = ((EditText)a.findViewById(R.id.compare_tyre_width)),
+                    compareProfileView = ((EditText)a.findViewById(R.id.compare_profile)),
+                    compareAlloyView = ((EditText)a.findViewById(R.id.compare_alloy_diameter));
             try {
                 return new TyreSize(
                         Integer.parseInt(compareTyreWidthView.getText().toString()),

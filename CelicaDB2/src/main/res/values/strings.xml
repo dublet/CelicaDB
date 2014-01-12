@@ -21,7 +21,12 @@ While every effort is made to ensure correctness of data, no liability will be a
 
 Some images taken from Toyota brochures and are used under the Fair use clause of the local copyright legislation. </string>
     <string name="build_number_label">Build number:</string>
-    <string name="changelog">Changes in build 9:\n
+    <string name="changelog">Changes in build 10:\n
+- Fix crash on switching editing modes on mobiles.\n
+- Fix crash in tyre size suggester.\n
+- Add icon\n\n
+
+Changes in build 9:\n
 - Fix the layout for small screens.\n\n
 
 Changes in build 8:\n

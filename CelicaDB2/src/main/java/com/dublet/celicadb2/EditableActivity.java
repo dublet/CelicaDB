@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,8 +78,10 @@ public class EditableActivity extends FragmentActivity {
                     listView.setVisibility(mEditMode ? View.GONE : View.VISIBLE);
                 item.setTitle(mEditMode ? R.string.menu_edit_done : R.string.menu_edit);
 
+                try {
                 ((CarDetailFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.car_detail_container)).setEditMode(mEditMode);
+                } catch (NullPointerException npe) { Log.e("NPE", npe.getMessage()); }
 
                 if (!mEditMode) {
                     /* Hide keyboard */
